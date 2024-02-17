@@ -131,3 +131,9 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+.vs/LMusic/v17/.suo
+.vs/ProjectEvaluation/lmusic.metadata.v7.bin
+.vs/LMusic/v17/.suo
+.vs/ProjectEvaluation/lmusic.projects.v7.bin
+LMusic/obj/Debug/net6.0/LMusic.csproj.AssemblyReference.cache
+LMusic/obj/Debug/net6.0/LMusic.GeneratedMSBuildEditorConfig.editorconfig
