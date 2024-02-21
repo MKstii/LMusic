@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Mikhail\\.nuget\\packages\\": {},
-    "C:\\Users\\Mikhail\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
+    "C:\\Users\\masha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mikhail\\source\\repos\\LMusic\\LMusic\\LMusic.csproj",
+      "projectUniqueName": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
       "projectName": "LMusic",
-      "projectPath": "C:\\Users\\Mikhail\\source\\repos\\LMusic\\LMusic\\LMusic.csproj",
-      "packagesPath": "C:\\Users\\Mikhail\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mikhail\\source\\repos\\LMusic\\LMusic\\obj\\",
+      "projectPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+      "packagesPath": "C:\\Users\\masha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Users\\Mikhail\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Mikhail\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Users\\Mikhail\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
+        "C:\\Users\\masha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -69,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

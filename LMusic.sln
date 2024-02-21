@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMusic", "LMusic\LMusic.csproj", "{61683FFF-18EE-4EE9-96D3-97880FE01600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMusic", "LMusic\LMusic.csproj", "{61683FFF-18EE-4EE9-96D3-97880FE01600}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{D6F5197D-00CF-4C3E-89F3-9424A20DB7D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{61683FFF-18EE-4EE9-96D3-97880FE01600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61683FFF-18EE-4EE9-96D3-97880FE01600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61683FFF-18EE-4EE9-96D3-97880FE01600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F5197D-00CF-4C3E-89F3-9424A20DB7D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F5197D-00CF-4C3E-89F3-9424A20DB7D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F5197D-00CF-4C3E-89F3-9424A20DB7D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F5197D-00CF-4C3E-89F3-9424A20DB7D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
