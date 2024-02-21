@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {}
+    "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {}
   },
   "projects": {
-    "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {
+    "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+        "projectUniqueName": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
         "projectName": "LMusic",
-        "projectPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
-        "packagesPath": "C:\\Users\\masha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
+        "projectPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+        "packagesPath": "C:\\Users\\Пользователь\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\masha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Пользователь\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
