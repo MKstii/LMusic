@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "CZ7sgBafCqpx5FUG2YUeufW3yu/hsH6Ydx9DWUMf+zcAFY6roqR66CYLpYA48Yb/Ra622SG8IivUuI3m/bVtdA==",
+  "dgSpecHash": "N5SfPP/8nAAz5zG8ep6VxYQQj5qGwWnV+RJIFUqJHBR8uXQz9jy4oIZKvlql/W0ldpnJtvxQiEklGK+P3xw73w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MKs\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\MKs\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\MKs\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\MKs\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\MKs\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\MKs\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
