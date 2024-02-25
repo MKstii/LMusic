@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {}
+    "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {
+    "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+        "projectUniqueName": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
         "projectName": "LMusic",
-        "projectPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
-        "packagesPath": "C:\\Users\\Пользователь\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
+        "projectPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+        "packagesPath": "C:\\Users\\masha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Пользователь\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\masha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -42,9 +47,6 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-<<<<<<< Updated upstream
-              "version": "[7.0.0, )"
-=======
               "version": "[8.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
@@ -56,7 +58,6 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.2, )"
->>>>>>> Stashed changes
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -82,11 +83,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< Updated upstream
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
->>>>>>> Stashed changes
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

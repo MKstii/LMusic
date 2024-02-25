@@ -1,33 +1,15 @@
 {
   "version": 3,
   "targets": {
-<<<<<<< Updated upstream
-    "net6.0": {
-      "Microsoft.EntityFrameworkCore/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.0",
-          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.0",
-          "Microsoft.Extensions.Caching.Memory": "7.0.0",
-          "Microsoft.Extensions.DependencyInjection": "7.0.0",
-          "Microsoft.Extensions.Logging": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.EntityFrameworkCore.dll": {
-=======
     "net8.0": {
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/_._": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.EntityFrameworkCore.dll": {
-=======
           "lib/net6.0/Humanizer.dll": {
             "related": ".xml"
           }
@@ -307,20 +289,10 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "build": {
-<<<<<<< Updated upstream
-          "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props": {}
-        }
-      },
-      "Microsoft.EntityFrameworkCore.Abstractions/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-=======
           "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
@@ -328,25 +300,16 @@
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-=======
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.EntityFrameworkCore.Analyzers/7.0.0": {
-=======
       "Microsoft.EntityFrameworkCore.Analyzers/8.0.2": {
->>>>>>> Stashed changes
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -355,8 +318,6 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-<<<<<<< Updated upstream
-=======
       "Microsoft.EntityFrameworkCore.Design/8.0.2": {
         "type": "package",
         "dependencies": {
@@ -409,7 +370,6 @@
           "lib/net8.0/_._": {}
         }
       },
->>>>>>> Stashed changes
       "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
         "type": "package",
         "build": {
@@ -421,15 +381,6 @@
           "buildMultiTargeting/Microsoft.Extensions.ApiDescription.Server.targets": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.Caching.Abstractions/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Caching.Abstractions.dll": {
-=======
       "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -437,16 +388,11 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Caching.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.Caching.Abstractions.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.Caching.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -454,19 +400,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.Caching.Memory/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "7.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Options": "7.0.0",
-          "Microsoft.Extensions.Primitives": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Caching.Memory.dll": {
-=======
       "Microsoft.Extensions.Caching.Memory/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -478,16 +411,11 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Caching.Memory.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.Caching.Memory.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.Caching.Memory.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -495,15 +423,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.DependencyInjection/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
-=======
       "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -511,16 +430,11 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -528,34 +442,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Extensions.Logging/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "7.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Options": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Logging.dll": {
-=======
       "Microsoft.Extensions.DependencyInjection/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -563,16 +449,11 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.Logging.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -580,24 +461,14 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.Logging.Abstractions/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-=======
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "related": ".xml"
           }
@@ -659,7 +530,6 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -667,16 +537,6 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-<<<<<<< Updated upstream
-      "Microsoft.Extensions.Options/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Primitives": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Options.dll": {
-=======
       "Microsoft.Extensions.Options/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -685,33 +545,10 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Options.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< Updated upstream
-          "lib/net6.0/Microsoft.Extensions.Options.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Extensions.Primitives/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
-=======
           "lib/net8.0/Microsoft.Extensions.Options.dll": {
             "related": ".xml"
           }
@@ -729,7 +566,6 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -860,12 +696,6 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-<<<<<<< Updated upstream
-      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
-=======
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -1039,7 +869,6 @@
         "type": "package",
         "compile": {
           "lib/net6.0/_._": {
->>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -1051,8 +880,6 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
-<<<<<<< Updated upstream
-=======
       },
       "System.Text.Encoding.CodePages/6.0.0": {
         "type": "package",
@@ -1135,17 +962,10 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
->>>>>>> Stashed changes
       }
     }
   },
   "libraries": {
-<<<<<<< Updated upstream
-    "Microsoft.EntityFrameworkCore/7.0.0": {
-      "sha512": "9W+IfmAzMrp2ZpKZLhgTlWljSBM9Erldis1us61DAGi+L7Q6vilTbe1G2zDxtYO8F2H0I0Qnupdx5Cp4s2xoZw==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore/7.0.0",
-=======
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -1168,24 +988,10 @@
       "sha512": "UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
       "type": "package",
       "path": "microsoft.bcl.asyncinterfaces/6.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-<<<<<<< Updated upstream
-        "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props",
-        "lib/net6.0/Microsoft.EntityFrameworkCore.dll",
-        "lib/net6.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.7.0.0.nupkg.sha512",
-        "microsoft.entityframeworkcore.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Abstractions/7.0.0": {
-      "sha512": "Pfu3Zjj5+d2Gt27oE9dpGiF/VobBB+s5ogrfI9sBsXQE1SG49RqVz5+IyeNnzhyejFrPIQsPDRMchhcojy4Hbw==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/7.0.0",
-=======
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net461/Microsoft.Bcl.AsyncInterfaces.dll",
@@ -1649,23 +1455,10 @@
       "sha512": "DjDKp++BTKFZmX+xLTow7grQTY+pImKfhGW68Zf8myiL3zyJ3b8RZbnLsWGNCqKQIF6hJIz/zA/zmERobFwV0A==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.abstractions/8.0.2",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-<<<<<<< Updated upstream
-        "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
-        "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.7.0.0.nupkg.sha512",
-        "microsoft.entityframeworkcore.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Analyzers/7.0.0": {
-      "sha512": "Qkd2H+jLe37o5ku+LjT6qf7kAHY75Yfn2bBDQgqr13DTOLYpEy1Mt93KPFjaZvIu/srEcbfGGMRL7urKm5zN8Q==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/7.0.0",
-=======
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
         "microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",
@@ -1676,19 +1469,12 @@
       "sha512": "LI7awhc0fiAKvcUemsqxXUWqzAH9ywTSyM1rpC1un4p5SE1bhr5nRLvyRVbKRzKakmnNNY3to8NPDnoySEkxVw==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.analyzers/8.0.2",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "lib/netstandard2.0/_._",
-<<<<<<< Updated upstream
-        "microsoft.entityframeworkcore.analyzers.7.0.0.nupkg.sha512",
-        "microsoft.entityframeworkcore.analyzers.nuspec"
-      ]
-    },
-=======
         "microsoft.entityframeworkcore.analyzers.8.0.2.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
@@ -1747,7 +1533,6 @@
         "tools/netcoreapp2.0/any/ef.runtimeconfig.json"
       ]
     },
->>>>>>> Stashed changes
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "sha512": "Ckb5EDBUNJdFWyajfXzUIMRkhf52fHZOQuuZg/oiu8y7zDCVwD0iHhew6MnThjHmevanpxL3f5ci2TtHQEN6bw==",
       "type": "package",
@@ -1979,26 +1764,16 @@
         "tools/netcoreapp2.1/System.Diagnostics.DiagnosticSource.dll"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Caching.Abstractions/7.0.0": {
-      "sha512": "IeimUd0TNbhB4ded3AbgBLQv2SnsiVugDyGV1MvspQFVlA07nDC7Zul7kcwH5jWN3JiTcp/ySE83AIJo8yfKjg==",
-      "type": "package",
-      "path": "microsoft.extensions.caching.abstractions/7.0.0",
-=======
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
       "sha512": "3KuSxeHoNYdxVYfg2IRZCThcrlJ1XJqIXkAWikCsbm5C/bCjv7G0WoKDyuR98Q+T607QT2Zl5GsbGRkENcV2yQ==",
       "type": "package",
       "path": "microsoft.extensions.caching.abstractions/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.Caching.Abstractions.targets",
         "buildTransitive/net462/_._",
@@ -2010,41 +1785,25 @@
         "lib/net6.0/Microsoft.Extensions.Caching.Abstractions.xml",
         "lib/net7.0/Microsoft.Extensions.Caching.Abstractions.dll",
         "lib/net7.0/Microsoft.Extensions.Caching.Abstractions.xml",
-<<<<<<< Updated upstream
-        "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.xml",
-        "microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
-=======
         "lib/net8.0/Microsoft.Extensions.Caching.Abstractions.dll",
         "lib/net8.0/Microsoft.Extensions.Caching.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.xml",
         "microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.caching.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Caching.Memory/7.0.0": {
-      "sha512": "xpidBs2KCE2gw1JrD0quHE72kvCaI3xFql5/Peb2GRtUuZX+dYPoK/NTdVMiM67Svym0M0Df9A3xyU0FbMQhHw==",
-      "type": "package",
-      "path": "microsoft.extensions.caching.memory/7.0.0",
-=======
     "Microsoft.Extensions.Caching.Memory/8.0.0": {
       "sha512": "7pqivmrZDzo1ADPkRwjy+8jtRKWRCPag9qPI+p7sgu7Q4QreWhcvbiWXsbhP+yY8XSiDvZpu2/LWdBv7PnmOpQ==",
       "type": "package",
       "path": "microsoft.extensions.caching.memory/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.Caching.Memory.targets",
         "buildTransitive/net462/_._",
@@ -2056,39 +1815,24 @@
         "lib/net6.0/Microsoft.Extensions.Caching.Memory.xml",
         "lib/net7.0/Microsoft.Extensions.Caching.Memory.dll",
         "lib/net7.0/Microsoft.Extensions.Caching.Memory.xml",
-<<<<<<< Updated upstream
-        "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
-        "microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
-=======
         "lib/net8.0/Microsoft.Extensions.Caching.Memory.dll",
         "lib/net8.0/Microsoft.Extensions.Caching.Memory.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
         "microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.caching.memory.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.DependencyInjection/7.0.0": {
-      "sha512": "elNeOmkeX3eDVG6pYVeV82p29hr+UKDaBhrZyWvWLw/EVZSYEkZlQdkp0V39k/Xehs2Qa0mvoCvkVj3eQxNQ1Q==",
-      "type": "package",
-      "path": "microsoft.extensions.dependencyinjection/7.0.0",
-=======
     "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
       "sha512": "3lE/iLSutpgX1CC0NOW70FJoGARRHbyKmG7dc0klnUZ9Dd9hS6N/POPWhKhMLCEuNN5nXEY5agmlFtH562vqhQ==",
       "type": "package",
       "path": "microsoft.extensions.configuration.abstractions/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.Configuration.Abstractions.targets",
@@ -2120,7 +1864,6 @@
         "Icon.png",
         "LICENSE.TXT",
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.targets",
         "buildTransitive/net462/_._",
@@ -2132,44 +1875,27 @@
         "lib/net6.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/net7.0/Microsoft.Extensions.DependencyInjection.dll",
         "lib/net7.0/Microsoft.Extensions.DependencyInjection.xml",
-<<<<<<< Updated upstream
-=======
         "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll",
         "lib/net8.0/Microsoft.Extensions.DependencyInjection.xml",
->>>>>>> Stashed changes
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.xml",
-<<<<<<< Updated upstream
-        "microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
-=======
         "microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.dependencyinjection.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
-      "sha512": "h3j/QfmFN4S0w4C2A6X7arXij/M/OVw3uQHSOFxnND4DyAzO1F9eMX7Eti7lU/OkSthEE0WzRsfT/Dmx86jzCw==",
-      "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/7.0.0",
-=======
     "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
       "sha512": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
       "type": "package",
       "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
         "buildTransitive/net462/_._",
@@ -2181,42 +1907,26 @@
         "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-<<<<<<< Updated upstream
-=======
         "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
->>>>>>> Stashed changes
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-<<<<<<< Updated upstream
-        "microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
-=======
         "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Logging/7.0.0": {
-      "sha512": "Nw2muoNrOG5U5qa2ZekXwudUn2BJcD41e65zwmDHb1fQegTX66UokLWZkJRpqSSHXDOWZ5V0iqhbxOEky91atA==",
-      "type": "package",
-      "path": "microsoft.extensions.logging/7.0.0",
-=======
     "Microsoft.Extensions.DependencyModel/8.0.0": {
       "sha512": "NSmDw3K0ozNDgShSIpsZcbFIzBX4w28nDag+TfaQujkXGazBm+lid5onlWoCBy4VsLxqnnKjEBbGSJVWJMf43g==",
       "type": "package",
       "path": "microsoft.extensions.dependencymodel/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.DependencyModel.targets",
@@ -2248,7 +1958,6 @@
         "Icon.png",
         "LICENSE.TXT",
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.Logging.targets",
         "buildTransitive/net462/_._",
@@ -2260,44 +1969,27 @@
         "lib/net6.0/Microsoft.Extensions.Logging.xml",
         "lib/net7.0/Microsoft.Extensions.Logging.dll",
         "lib/net7.0/Microsoft.Extensions.Logging.xml",
-<<<<<<< Updated upstream
-=======
         "lib/net8.0/Microsoft.Extensions.Logging.dll",
         "lib/net8.0/Microsoft.Extensions.Logging.xml",
->>>>>>> Stashed changes
         "lib/netstandard2.0/Microsoft.Extensions.Logging.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Logging.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Logging.xml",
-<<<<<<< Updated upstream
-        "microsoft.extensions.logging.7.0.0.nupkg.sha512",
-=======
         "microsoft.extensions.logging.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.logging.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Logging.Abstractions/7.0.0": {
-      "sha512": "kmn78+LPVMOWeITUjIlfxUPDsI0R6G0RkeAMBmQxAJ7vBJn4q2dTva7pWi65ceN5vPGjJ9q/Uae2WKgvfktJAw==",
-      "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/7.0.0",
-=======
     "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
       "sha512": "arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
       "type": "package",
       "path": "microsoft.extensions.logging.abstractions/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "analyzers/dotnet/roslyn3.11/cs/Microsoft.Extensions.Logging.Generators.dll",
         "analyzers/dotnet/roslyn3.11/cs/cs/Microsoft.Extensions.Logging.Generators.resources.dll",
@@ -2352,44 +2044,24 @@
         "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.xml",
-<<<<<<< Updated upstream
-        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-=======
         "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Options/7.0.0": {
-      "sha512": "lP1yBnTTU42cKpMozuafbvNtQ7QcBjr/CcK3bYOGEMH55Fjt+iecXjT6chR7vbgCMqy3PG3aNQSZgo/EuY/9qQ==",
-      "type": "package",
-      "path": "microsoft.extensions.options/7.0.0",
-=======
     "Microsoft.Extensions.Options/8.0.0": {
       "sha512": "JOVOfqpnqlVLUzINQ2fox8evY2SKLYJ3BV8QDe/Jyp21u1T7r45x/R/5QdteURMR5r01GxeJSBBUOCOyaNXA3g==",
       "type": "package",
       "path": "microsoft.extensions.options/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Extensions.Options.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Options.targets",
-=======
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Options.SourceGeneration.dll",
@@ -2411,51 +2083,33 @@
         "buildTransitive/net6.0/Microsoft.Extensions.Options.targets",
         "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Options.targets",
         "buildTransitive/netstandard2.0/Microsoft.Extensions.Options.targets",
->>>>>>> Stashed changes
         "lib/net462/Microsoft.Extensions.Options.dll",
         "lib/net462/Microsoft.Extensions.Options.xml",
         "lib/net6.0/Microsoft.Extensions.Options.dll",
         "lib/net6.0/Microsoft.Extensions.Options.xml",
         "lib/net7.0/Microsoft.Extensions.Options.dll",
         "lib/net7.0/Microsoft.Extensions.Options.xml",
-<<<<<<< Updated upstream
-=======
         "lib/net8.0/Microsoft.Extensions.Options.dll",
         "lib/net8.0/Microsoft.Extensions.Options.xml",
->>>>>>> Stashed changes
         "lib/netstandard2.0/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-<<<<<<< Updated upstream
-        "microsoft.extensions.options.7.0.0.nupkg.sha512",
-=======
         "microsoft.extensions.options.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< Updated upstream
-    "Microsoft.Extensions.Primitives/7.0.0": {
-      "sha512": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
-      "type": "package",
-      "path": "microsoft.extensions.primitives/7.0.0",
-=======
     "Microsoft.Extensions.Primitives/8.0.0": {
       "sha512": "bXJEZrW9ny8vjMF1JV253WeLhpEVzFo1lyaZu1vQ4ZxWUlVvknZ/+ftFgVheLubb4eZPSwwxBeqS1JkCOjxd8g==",
       "type": "package",
       "path": "microsoft.extensions.primitives/8.0.0",
->>>>>>> Stashed changes
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
-<<<<<<< Updated upstream
-=======
         "PACKAGE.md",
->>>>>>> Stashed changes
         "THIRD-PARTY-NOTICES.TXT",
         "buildTransitive/net461/Microsoft.Extensions.Primitives.targets",
         "buildTransitive/net462/_._",
@@ -2467,17 +2121,11 @@
         "lib/net6.0/Microsoft.Extensions.Primitives.xml",
         "lib/net7.0/Microsoft.Extensions.Primitives.dll",
         "lib/net7.0/Microsoft.Extensions.Primitives.xml",
-<<<<<<< Updated upstream
-        "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
-        "microsoft.extensions.primitives.7.0.0.nupkg.sha512",
-=======
         "lib/net8.0/Microsoft.Extensions.Primitives.dll",
         "lib/net8.0/Microsoft.Extensions.Primitives.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
         "microsoft.extensions.primitives.8.0.0.nupkg.sha512",
->>>>>>> Stashed changes
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -2640,8 +2288,6 @@
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
-<<<<<<< Updated upstream
-=======
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -2866,7 +2512,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
->>>>>>> Stashed changes
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "type": "package",
@@ -2891,13 +2536,6 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
-<<<<<<< Updated upstream
-    }
-  },
-  "projectFileDependencyGroups": {
-    "net6.0": [
-      "Microsoft.EntityFrameworkCore >= 7.0.0",
-=======
     },
     "System.Text.Encoding.CodePages/6.0.0": {
       "sha512": "ZFCILZuOvtKPauZ/j/swhvw68ZRi9ATCfvGbk1QfydmcXBkIWecWKn/250UH7rahZ5OoDBaiAudJtPvLwzw85A==",
@@ -3079,24 +2717,23 @@
       "Microsoft.EntityFrameworkCore >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.2",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.2",
->>>>>>> Stashed changes
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Пользователь\\.nuget\\packages\\": {}
+    "C:\\Users\\masha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+      "projectUniqueName": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
       "projectName": "LMusic",
-      "projectPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
-      "packagesPath": "C:\\Users\\Пользователь\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
+      "projectPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+      "packagesPath": "C:\\Users\\masha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Пользователь\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\masha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3116,6 +2753,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3124,9 +2766,6 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
-<<<<<<< Updated upstream
-            "version": "[7.0.0, )"
-=======
             "version": "[8.0.2, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
@@ -3138,7 +2777,6 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[8.0.2, )"
->>>>>>> Stashed changes
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -3164,11 +2802,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< Updated upstream
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
->>>>>>> Stashed changes
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
