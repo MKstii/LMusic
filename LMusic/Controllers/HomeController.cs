@@ -28,6 +28,21 @@ namespace LMusic.Controllers
             return View();
         }
 
+        public IActionResult Music()
+        {
+            return View();
+        }
+
+        public IActionResult Friends()
+        {
+            return View();
+        }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
