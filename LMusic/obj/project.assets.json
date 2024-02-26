@@ -2714,26 +2714,25 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Microsoft.EntityFrameworkCore >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.2",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.2",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Пользователь\\.nuget\\packages\\": {}
+    "C:\\Users\\masha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+      "projectUniqueName": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
       "projectName": "LMusic",
-      "projectPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
-      "packagesPath": "C:\\Users\\Пользователь\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Пользователь\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
+      "projectPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\LMusic.csproj",
+      "packagesPath": "C:\\Users\\masha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Пользователь\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\masha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2764,10 +2763,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[8.0.2, )"
-          },
           "Microsoft.EntityFrameworkCore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
