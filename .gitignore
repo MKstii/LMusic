@@ -139,3 +139,4 @@ LMusic/obj/Debug/net6.0/LMusic.csproj.AssemblyReference.cache
 LMusic/obj/Debug/net6.0/LMusic.GeneratedMSBuildEditorConfig.editorconfig
 *.vsidx
 .vs/LMusic/v17/DocumentLayout.json
+*.v2
