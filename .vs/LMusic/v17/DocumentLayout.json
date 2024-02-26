@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\",
+  "WorkspaceRootPath": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|c:\\users\\masha\\documents\\github\\lmusic\\lmusic\\views\\home\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|c:\\users\\\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\documents\\github\\lmusic\\lmusic\\views\\home\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|solutionrelative:lmusic\\views\\home\\users.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|c:\\users\\masha\\documents\\github\\lmusic\\lmusic\\views\\home\\friends.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\lmusic\\views\\home\\friends.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|solutionrelative:lmusic\\views\\home\\friends.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|c:\\users\\masha\\documents\\github\\lmusic\\lmusic\\wwwroot\\css\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\lmusic\\wwwroot\\css\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|solutionrelative:lmusic\\wwwroot\\css\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|c:\\users\\masha\\documents\\github\\lmusic\\lmusic\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\lmusic\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{06513547-7F57-4D64-9868-FC2FE4BA4C62}|LMusic\\LMusic.csproj|solutionrelative:lmusic\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -40,9 +40,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Users.cshtml",
-              "DocumentMoniker": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Users.cshtml",
+              "DocumentMoniker": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Users.cshtml",
               "RelativeDocumentMoniker": "LMusic\\Views\\Home\\Users.cshtml",
-              "ToolTip": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Users.cshtml",
+              "ToolTip": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Users.cshtml",
               "RelativeToolTip": "LMusic\\Views\\Home\\Users.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -53,40 +53,37 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "main.css",
-              "DocumentMoniker": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\wwwroot\\css\\main.css",
+              "DocumentMoniker": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\wwwroot\\css\\main.css",
               "RelativeDocumentMoniker": "LMusic\\wwwroot\\css\\main.css",
-              "ToolTip": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\wwwroot\\css\\main.css",
+              "ToolTip": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\wwwroot\\css\\main.css",
               "RelativeToolTip": "LMusic\\wwwroot\\css\\main.css",
               "ViewState": "AQIAAMwAAAAAAAAAAAAAANYAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-02-25T19:06:37.097Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-25T19:06:37.097Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Friends.cshtml",
-              "DocumentMoniker": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Friends.cshtml",
+              "DocumentMoniker": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Friends.cshtml",
               "RelativeDocumentMoniker": "LMusic\\Views\\Home\\Friends.cshtml",
-              "ToolTip": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Friends.cshtml",
+              "ToolTip": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Friends.cshtml",
               "RelativeToolTip": "LMusic\\Views\\Home\\Friends.cshtml",
               "ViewState": "AQIAAAYAAAAAAAAAAADwvw0AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-02-25T19:02:33.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-25T19:02:33.673Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Profile.cshtml",
               "RelativeDocumentMoniker": "LMusic\\Views\\Home\\Profile.cshtml",
-              "ToolTip": "C:\\Users\\masha\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\\Documents\\GitHub\\LMusic\\LMusic\\Views\\Home\\Profile.cshtml",
               "RelativeToolTip": "LMusic\\Views\\Home\\Profile.cshtml",
               "ViewState": "AQIAACQAAAAAAAAAAADwvyYAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-02-25T18:50:06.76Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-25T18:50:06.76Z"
             }
           ]
         }
