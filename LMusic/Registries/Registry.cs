@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LMusic.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LMusic.Registries
 {
-    public abstract class Registry<Model> where Model : class
+    public abstract class Registry<Model> where Model : class, IEntity
     {
         virtual public void Add(Model entity)
         {
@@ -20,7 +21,7 @@ namespace LMusic.Registries
                 db.SaveChanges();
             }
         }
-        public void Delete(Model entity)
+        virtual public void Delete(Model entity)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
@@ -28,7 +29,7 @@ namespace LMusic.Registries
                 db.SaveChanges();
             }
         }
-        public Model Find(int id)
+        virtual public Model Find(int id)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
