@@ -13,6 +13,7 @@
         public int Duration { get; set; }
         public double Weight { get; set; }
         public string AlbumName { get; set; }
+        public bool IsDelited { get; set; }
         public List<PlaylistMusic> Playlists { get; set; }
 
         public int GetId()
