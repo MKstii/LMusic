@@ -1,6 +1,8 @@
-﻿namespace LMusic.Registries
+﻿using LMusic.Models;
+
+namespace LMusic.Registries
 {
-    public class PlaylistRegistry
+    public class PlaylistRegistry : Registry<Playlist>
     {
     }
 }

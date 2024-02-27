@@ -1,6 +1,6 @@
 ﻿namespace LMusic.Models
 {
-    public class Music
+    public class Music : IEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -14,5 +14,10 @@
         public double Weight { get; set; }
         public string AlbumName { get; set; }
         public List<PlaylistMusic> Playlists { get; set; }
+
+        public int GetId()
+        {
+            return Id;
+        }
     }
 }

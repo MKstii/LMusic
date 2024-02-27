@@ -1,6 +1,6 @@
 ﻿namespace LMusic.Models
 {
-    public class Playlist
+    public class Playlist : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -10,5 +10,10 @@
         public int PictureId { get; set; }
         public Picture Picture { get; set; }
         public List<PlaylistMusic> Musics { get; set; }
+
+        public int GetId()
+        {
+            return Id;
+        }
     }
 }

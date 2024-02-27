@@ -1,6 +1,9 @@
-﻿namespace LMusic.Registries
+﻿using LMusic.Models;
+using Microsoft.Win32;
+
+namespace LMusic.Registries
 {
-    public class UserRegistry
+    public class UserRegistry : Registry<User>
     {
     }
 }

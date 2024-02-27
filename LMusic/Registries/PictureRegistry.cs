@@ -1,6 +1,8 @@
-﻿namespace LMusic.Registries
+﻿using LMusic.Models;
+
+namespace LMusic.Registries
 {
-    public class PictureRegistry
+    public class PictureRegistry : Registry<Picture>
     {
     }
 }
