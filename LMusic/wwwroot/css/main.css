@@ -1,5 +1,5 @@
 ﻿.page-sidebar {
-    background-color: #373A36;
+    background-color: #002F55;
     height: 100%;
     width: 70px;
     position: fixed;
@@ -21,18 +21,10 @@
     font-size: 17px;
 }
 
-.icon-arrow {
-    width: 20px;
-    height: 20px;
-    
-}
-
-.open-icon {
-    margin-left: 30%;
-}
-
-.close-icon {
-    margin-left: 90%;
+.icon-menu {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
 }
 
 .side-menu {
@@ -50,7 +42,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
 }
 

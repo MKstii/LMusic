@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LMusic.styles.css" asp-append-version="true" />
-    <link href="~/css/main.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
 </head>
 <body class="fixed-navbar">
     <div class="page-wrapper">
         <!-- Левая панель -->
         <nav class="page-sidebar" id="sidebar">
             <div class="page-sidebar-box" id="sidebar-collapse">
-                <img class="icon-arrow close-icon hidden" src="~/img/icon-arrow-close.png" />
-                <img class="icon-arrow open-icon" src="/img/icon-arrow-open.png" />
+                <img class="icon-menu" src="~/img/menu-lines.png" />
                 <ul class="side-menu">
                     <li class="side-menu-item">
                         <a class="menu-link" href="/home/profile">
@@ -26,19 +25,13 @@
                     <li class="side-menu-item">
                         <a class="menu-link" href="/home/music">
                             <img class="menu-item-icon" src="/img/icon-music.png" />
-                            <span class="hidden">Моя музыка</span>
+                            <span class="hidden">Музыка</span>
                         </a>
                     </li>
                     <li class="side-menu-item">
                         <a class="menu-link" href="/home/friends">
                             <img class="menu-item-icon" src="/img/icon-friends.png" />
                             <span class="hidden">Друзья</span>
-                        </a>
-                    </li>
-                    <li class="side-menu-item">
-                        <a class="menu-link" href="/home/users">
-                            <img class="menu-item-icon" src="/img/icon-all-users.png" />
-                            <span class="hidden">Пользователи</span>
                         </a>
                     </li>
                 </ul>
