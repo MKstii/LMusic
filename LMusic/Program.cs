@@ -1,3 +1,4 @@
+using LMusic.Additional;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
     {
         x.SwaggerEndpoint("/swagger/v1/swagger.json", "LMusic v1");
     });
+    var data = new DatabaseData();
+    data.Init();
 }
 
 app.UseHttpsRedirection();
