@@ -40,7 +40,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://mks-server.tplinkdns.com:3000/:80",
+      "applicationUrl": "http://mks-server.tplinkdns.com:80",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -49,7 +49,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://mks-server.tplinkdns.com:3000/:443",
+      "applicationUrl": "https://mks-server.tplinkdns.com:443",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
