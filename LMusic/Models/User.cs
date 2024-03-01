@@ -1,4 +1,6 @@
-﻿namespace LMusic.Models
+﻿using LMusic.Models.Requests;
+
+namespace LMusic.Models
 {
     public class User : IEntity
     {
@@ -15,6 +17,13 @@
         public List<FriendsList> FriendsList { get; set; }
         public List<FriendRequest> FriendRequestsList { get; set; }
 
+        public User(TelegrammUser request)
+        {
+            TelegramId = request.Id;
+            Login = request.Username;
+            FreeSpace = 51200;
+            PictureId = 1;
+        } 
         public int GetId()
         {
             return Id;
