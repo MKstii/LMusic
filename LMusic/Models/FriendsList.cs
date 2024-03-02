@@ -7,7 +7,16 @@
         public User User { get; set; }
         public int FriendId {  get; set; }
         public User Friend { get; set; }
-    
+
+        public FriendsList() { }
+
+        public FriendsList(int id, int userId, int friendId)
+        {
+            Id = id;
+            UserId = userId;
+            FriendId = friendId;
+        }
+
         public int GetId()
         {
             return Id;
