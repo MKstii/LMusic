@@ -37,7 +37,7 @@ namespace LMusic
 
             modelBuilder.Entity<FriendsList>()
                 .HasOne(x => x.Friend)
-                .WithMany(x => x.FriendsList)
+                .WithMany(x => x.FriendsListAsFriend)
                 .HasForeignKey(x => x.FriendId);
 
             modelBuilder.Entity<User>()

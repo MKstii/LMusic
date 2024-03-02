@@ -15,6 +15,7 @@ namespace LMusic.Models
         public List<Playlist> PlaylistArray { get; set; }
         public List<Music> MusicArray { get; set; }
         public List<FriendsList> FriendsList { get; set; }
+        public List<FriendsList> FriendsListAsFriend { get; set; }
         public List<FriendRequest> FriendRequestsListAsAddressee { get; set; }
         public List<FriendRequest> FriendRequestsListAsRequester { get; set; }
 
