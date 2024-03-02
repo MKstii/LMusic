@@ -1,4 +1,5 @@
 ﻿using LMusic.Models.Requests;
+using LMusic.Registries;
 
 namespace LMusic.Models
 {
