@@ -1,65 +1,254 @@
 ﻿<div class="content-wrapper">
     <div class="block-profile">
+        <div class="background"></div>
+        <div class="block-settings">
+            <form class="form-settings">
+                <div class="main-info-change">
+                    <div class="image-profile-change">
+                        <label for="image">Изменить фото профиля</label>
+                        <input class="file-image" type="file" id="image"/>
+                    </div>
+                    <div class="nickname-profile-change">
+                        <label for="nickname">Изменить никнейм:</label>
+                        <input class="current-nickname-profile" type="text" id="nickname" />
+                    </div>
+                </div>
+                <div class="settings-privacy">
+                    <span>Настройки приватности</span>
+                    <div class="settings settings-friend">
+                        <label for="friends">Друзья:</label>
+                        <select class="select select-friends" id="friends">
+                            <option value="2">Только для меня</option>
+                            <option value="1">Только для друзей</option>
+                            <option value="0">Для всех</option>
+                        </select>
+                    </div>
+                    <div class="settings settings-music">
+                        <label for="music">Музыка:</label>
+                        <select class="select select-music" id="music">
+                            <option value="2">Только для меня</option>
+                            <option value="1">Только для друзей</option>
+                            <option value="0">Для всех</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="button button-settings">Сохранить</button>
+            </form>
+        </div>
         <div class="block-information-profile">
             <div class="block-avatar">
-                <img class="avatar-image" src="/img/profile-avatar.png" />
+                <img class="avatar-image" src="/img/avatar.jpg" />
             </div>
             <div class="information-profile">
                 <div class="block-nickname">
                     <span>n78goodbye</span>
                 </div>
+                <hr />
                 <div class="block-number-space">
                     <div class="block-telephone">
-                        <span>Номер телефона: 89566677890</span>
+                        <span>@@idnicname</span>
                     </div>
-                    <div class="block-free-space">
-                        <span>Свободного места: 49ГБ</span>
+                    @if (bool.Parse(ViewData["myprofile"].ToString()))
+                    {
+                        <div class="block-free-space show">
+                            <span>Свободного места: 49ГБ</span>
+                        </div>
+                    }
+                    @if (bool.Parse(ViewData["friendprofile"].ToString()))
+                    {
+                        <button class="button button-remove-friend">
+                            <span>Удалить из друзей</span>
+                        </button>
+                    }
+                    @if (bool.Parse(ViewData["friendprofile"].ToString()))
+                    {
+                        <button class="button button-add-friend">
+                            <span>Отправить заявку в друзья</span>
+                        </button>
+                    }
+                </div>
+            </div>
+            <img class="settings-profile" src="~/img/icon-settings-profile.png" />
+        </div>
+
+        <div class="block-music block-music-user">
+            <div class="user-playlist">
+                <div class="block-your-music">
+                    <span class="your-music-header">Плейлисты</span>
+                </div>
+                <div class="block-playlist">
+                    <div class="playlist">
+                        <img class="playlist-avatar" src="/img/playlist-avatar.jpg" />
+                        <span>Избранное</span>
+                    </div>
+                    <div class="playlist">
+                        <img class="playlist-avatar" src="/img/playlist-avatar.jpg" />
+                        <span>Избранное</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-music">
+                <div class="block-your-music">
+                    <span class="your-music-header">Музыка</span>
+                </div>
+                <div class="block-shuffle">
+                    <button class="shuffle">
+                        <img class="shuffle-icon" src="/img/icon-shuffle.png" />
+                        Перемешать
+                    </button>
+                </div>
+                <div class="block-one-music">
+                    <div class="music">
+                        <div class="info-music">
+                            <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                            <div class="block-name-music">
+                                <span>Название (Альбом)</span>
+                                <span>Исполнитель</span>
+                            </div>
+                        </div>
+                        <div class="block-control">
+                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="block-one-music">
+                    <div class="music">
+                        <div class="info-music">
+                            <audio class="audio" src="~/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
+                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                            <div class="block-name-music">
+                                <span>Название (Альбом)</span>
+                                <span>Исполнитель</span>
+                            </div>
+                        </div>
+                        <div class="block-control">
+                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="block-one-music">
+                    <div class="music">
+                        <div class="info-music">
+                            <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                            <div class="block-name-music">
+                                <span>Название (Альбом)</span>
+                                <span>Исполнитель</span>
+                            </div>
+                        </div>
+                        <div class="block-control">
+                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="block-one-music">
+                    <div class="music">
+                        <div class="info-music">
+                            <audio class="audio" src="~/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
+                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                            <div class="block-name-music">
+                                <span>Название (Альбом)</span>
+                                <span>Исполнитель</span>
+                            </div>
+                        </div>
+                        <div class="block-control">
+                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="block-music block-music-user">
-            <div class="user-playlist">
-                <div class="playlist">
-                    <img class="playlist-avatar" src="/img/playlist-avatar.jpg"/>
-                    <span>Избранное</span>
-                </div>
-                <div class="playlist">
-                    <img class="playlist-avatar" src="/img/playlist-avatar.jpg" />
-                    <span>Избранное</span>
+        <div class="block-current-music">
+        </div>
+
+        <div class="current-playlist">
+            <span class="header-current-playlist">Текущий плейлист</span>
+            <button class="shuffle current-playlist-shuffle">
+                <img class="shuffle-icon" src="/img/icon-shuffle.png" />
+                Перемешать
+            </button>
+            <div class="block-one-music">
+                <div class="music">
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
                 </div>
             </div>
-            <hr />
-            <div class="user-music">
-                <div class="block-your-music">
-                    <span class="your-music-header">Ваша музыка</span>
-                </div>
+            <div class="block-one-music">
                 <div class="music">
-                    <figure class="music-figure">
-                        <figcaption class="name-music">Седая ночь</figcaption>
-                        <audio class="audio" controls src="/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
-                    </figure>
-                </div>
-                <div class="music">
-                    <figure class="music-figure">
-                        <figcaption class="name-music">Седая ночь</figcaption>
-                        <audio class="audio" controls src="/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
-                    </figure>
-                </div>
-                <div class="music">
-                    <figure class="music-figure">
-                        <figcaption class="name-music">Седая ночь</figcaption>
-                        <audio class="audio" controls src="/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
-                    </figure>
-                </div>
-                <div class="music">
-                    <figure class="music-figure">
-                        <figcaption class="name-music">Седая ночь</figcaption>
-                        <audio class="audio" controls src="/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
-                    </figure>
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
                 </div>
             </div>
+            <div class="block-one-music">
+                <div class="music">
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-change-mymusic">
+            <button class="popup-button button-delete-music">
+                <img class="popup-image" src="~/img/icon-delete.png" />
+                Удалить
+            </button>
+            <button class="popup-button button-delete-music-favorite">
+                <img class="popup-image" src="~/img/icon-krestic.png" />
+                Убрать из избранного
+            </button>
+            <button class="popup-button button-show-addinplaylist">
+                <img class="popup-image" src="~/img/icon-plus.png" />
+                Добавить в плейлист
+            </button>
+        </div>
+
+        <div class="block-add-in-playlist">
+            <form class="form-addin-playlist">
+                <div class="block-checkbox">
+                    <input id="playlist1" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist1">Плейлист 1</label>
+                </div>
+                <div class="block-checkbox">
+                    <input id="playlist2" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist2">Плейлист 2</label>
+                </div>
+                <div class="block-checkbox">
+                    <input id="playlist3" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist3">Плейлист 3</label>
+                </div>
+                <button class="button button-add-inplaylist">Добавить</button>
+            </form>
         </div>
     </div>
 </div>

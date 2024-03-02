@@ -1,5 +1,6 @@
 using LMusic.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Diagnostics;
 
 namespace LMusic.Controllers
@@ -23,8 +24,13 @@ namespace LMusic.Controllers
             return View();
         }
 
-        public IActionResult Profile()
+        [HttpGet]
+        [Route("/home/profile/{my}/{friend}/{user}")]
+        public IActionResult Profile(string my, string friend, string user)
         {
+            ViewData["myprofile"] = int.Parse(my) == 0 ? false : true;
+            ViewData["friendprofile"] = int.Parse(friend) == 0 ? false : true;
+            ViewData["userprofile"] = int.Parse(user) == 0 ? false : true;
             return View();
         }
 
