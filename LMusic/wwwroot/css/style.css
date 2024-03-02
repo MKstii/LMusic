@@ -332,7 +332,7 @@
     position: fixed;
     background-color: #fff;
     width: 1401px;
-    top: 685px;
+    bottom: 0;
     box-shadow: 0px 0px 10px 3px #002F55;
     gap: 5px;
     padding: 5px;
@@ -394,6 +394,10 @@
     left: 20%;
 }
 
+.current-playlist .current-playlist-shuffle {
+    margin: 10px 0;
+}
+
 .current-playlist-show {
     display: flex;
 }
@@ -425,7 +429,6 @@
 .music-contol {
     width: 20px;
     height: 20px;
-    margin-top: 7px;
 }
 
 .popup-change-mymusic, .block-add-in-playlist {
@@ -437,6 +440,8 @@
     padding: 10px;
     border-radius: 14px;
     box-shadow: 0px 0px 10px 3px #002F55;
+    position: absolute;
+    display: none;  
 }
 
 .popup-button {
@@ -447,6 +452,7 @@
     text-align: left;
     display: flex;
     gap: 15px;
+    width: 100%;
 }
 
 .popup-button:hover {

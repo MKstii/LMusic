@@ -31,14 +31,14 @@ function showSettingsProfile() {
         background.style.height = `${document.documentElement.offsetHeight}px`;
     });
 
-    background.addEventListener('click', closeSettings);
+    background.addEventListener('click', (e) => closeSettings(e));
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape') {
-            closeSettings();
+            closeSettings(e);
         }
     });
 
-    function closeSettings() {
+    function closeSettings(e) {
         const formSettings = document.querySelector('.block-settings'),
             blockPlaylist = document.querySelector('.current-playlist');
 
@@ -46,7 +46,7 @@ function showSettingsProfile() {
 
         if (formSettings.classList.contains('show')) formSettingProfile.classList.remove('show');
 
-        if (blockPlaylist.classList.contains('display-flex')) blockPlaylist.classList.remove('display-flex');
+        if (blockPlaylist.classList.contains('show')) blockPlaylist.classList.remove('show');
     }
 }
 
@@ -56,19 +56,23 @@ function playMusicAndShowLine() {
     const blockMusic = document.querySelectorAll('.block-one-music');
 
     blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
-        const currentAudio = mus.querySelector('.audio'),
-            currentAvatar = mus.querySelector('.avatar-music'),
-            blockCurrentMusic = document.querySelector('.block-current-music');
+        const threePoint = mus.querySelector('.music-contol');
 
-        blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${currentAvatar.src}" />
+        if (e.target != threePoint) {
+            const currentAudio = mus.querySelector('.audio'),
+                currentAvatar = mus.querySelector('.avatar-music'),
+                blockCurrentMusic = document.querySelector('.block-current-music');
+
+            blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${currentAvatar.src}" />
         <audio class="current-audio" src="${currentAudio.src}" controls controlsList="nodownload noplaybackrate"></audio>
         <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
         <button><img class="icon-control icon-shuffle-music" src="/img/icon-shuffle.png" /></button>
         <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
         <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
-        console.log('AAA');
-        blockCurrentMusic.querySelector('.current-audio').play();
-        blockCurrentMusic.classList.add('display-flex');
+            console.log('AAA');
+            blockCurrentMusic.querySelector('.current-audio').play();
+            blockCurrentMusic.classList.add('display-flex');
+        }
     }));
 }
 
@@ -83,9 +87,29 @@ function showCurrentPlaylist() {
         background.classList.add('show');
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
         background.style.height = `${document.documentElement.offsetHeight}px`;
-        blockPlaylist.classList.add('display-flex');
+        blockPlaylist.classList.add('show');
     });
 }
 
 showCurrentPlaylist();
 
+const buttonOpenPopupinProfile = document.querySelectorAll('.block-control'),
+    popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
+    blockAddInPLaylist = document.querySelector('.block-add-in-playlist'),
+    buttonaddInPlaylist = popupBlockChangeMusic.querySelector('.button-show-addinplaylist');
+
+buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    popupBlockChangeMusic.classList.toggle('show');
+    popupBlockChangeMusic.style.top = e.pageY - 50 + 'px';
+    popupBlockChangeMusic.style.left = e.pageX - 280 + 'px';
+}));
+
+popupBlockChangeMusic.addEventListener('click', (e) => {
+    if (e.target == buttonaddInPlaylist) {
+        blockAddInPLaylist.classList.toggle('show');
+        blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
+        blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
+    }
+})
