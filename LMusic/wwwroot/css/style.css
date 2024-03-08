@@ -225,7 +225,6 @@
     padding: 5px;
     margin-right: auto;
     margin: 0;
-    display: none;
 }
 
 .block-music-user {
@@ -268,6 +267,112 @@
     gap: 5px;
     text-align: center;
     font-weight: 500;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.playlist span {
+    margin: 0 auto;
+}
+
+.block-form-add-playlist, .block-form-add-music {
+    position: fixed;
+    top: 15%;
+    left: 35%;
+    z-index: 2004;
+    background-color: #fff;
+    width: 500px;
+    padding: 25px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
+
+.form-add-music {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.block-form-add-music {
+    width: 650px;
+    left: 30%;
+}
+
+.block-input-name {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.block-file-music {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.block-form-add-playlist span, .block-form-add-music span {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.input-name-playlist, .input-name-music,
+.input-albom-music, .input-songs-music {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #002F55;
+}
+
+.input-name-music, .input-albom-music, .input-songs-music {
+    width: 250px;
+
+}
+
+.form-add-playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.block-checkbox-music {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #c0c0c0;
+    padding: 10px;
+    border-radius: 14px;
+    max-height: 400px;
+}
+
+.header-checkbox-playlists {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.block-button-add-playlist, .block-button-add-music {
+    border: none;
+    outline: none;
+    background: none;
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+    padding: 0;
+}
+
+.image-add-playlist, .image-add-music {
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
 }
 
 .user-music {
@@ -276,7 +381,12 @@
     gap: 10px;
 }
 
-.shuffle {
+.block-shuffle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shuffle, .block-mymusic-favorite {
     border: none;
     background-color: #fff;
     box-shadow: 0px 0px 5px 2px #002F55;
@@ -286,6 +396,18 @@
     font-weight: 500;
     display: flex;
     gap: 10px;
+}
+
+.my-music-filter, .favor-music-filter {
+    border: none;
+    outline: none;
+    background-color: #fff;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.current-filter {
+    box-shadow: 0px 0px 5px 2px #002F55;
 }
 
 .shuffle-icon {
@@ -298,6 +420,11 @@
     width: 150px;
     height: 150px;
     border-radius: 15px;
+}
+
+.block-your-music {
+    display: flex;
+    gap: 10px;
 }
 
 .block-one-music {
@@ -412,7 +539,7 @@
     width: 150px;
 }
 
-.block-control {
+.block-control, .block-music-other-user-control {
     width: 35px;
     height: 35px;
     border: none;
@@ -421,17 +548,18 @@
     margin: auto 0;
 }
 
+
 .icon-remove-iz-playlist {
     width: 35px;
     height: 35px;
 }
 
-.music-contol {
+.music-contol, .music-other-user-control {
     width: 20px;
     height: 20px;
 }
 
-.popup-change-mymusic, .block-add-in-playlist {
+.popup-change-mymusic, .block-add-in-playlist, .popup-change-friendmusic {
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -441,7 +569,7 @@
     border-radius: 14px;
     box-shadow: 0px 0px 10px 3px #002F55;
     position: absolute;
-    display: none;  
+    display: none;
 }
 
 .popup-button {
@@ -540,9 +668,27 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 40px 80px;
 }
 
 .block-header-friend {
+    display: flex;
+    gap: 50px;
+}
+
+.block-search-friend {
+    margin: auto 0;
+}
+
+.form-search-friend input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+}
+
+.form-search-friend img {
+    width: 30px;
+    height: 30px;
 }
 
 .header-friend {
@@ -554,7 +700,7 @@
 .friends {
     background-color: #fff;
     border-radius: 20px;
-    padding: 30px 60px;
+    padding: 0;
 }
 
 .list-friends {
@@ -567,23 +713,55 @@
 }
 
 .list-friends-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
 }
 
-    .list-friends-item a {
-        display: flex;
-        gap: 40px;
-        text-decoration: none;
-        color: #000;
-        font-weight: 500;
-    }
+.list-friends-item:hover {
+    background-color: rgba(0, 47, 85, 0.3);
+    border-radius: 5px;
+}
+
+.button-remove-friend-list {
+    width: 200px;
+    height: 30px;
+    margin: auto 0;
+}
+
+.list-friends-item a {
+    display: flex;
+    gap: 40px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.user-search-result {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.button-add-friend-list {
+    width: 250px;
+    height: 35px;
+}
+
+.header-search-user {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+}
 
 .name-friend {
     margin: auto 0;
 }
 
 .avatar-friend-image {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
 }
 
 .show {

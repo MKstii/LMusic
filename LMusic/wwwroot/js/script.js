@@ -24,7 +24,7 @@ function showSettingsProfile() {
         formSettingProfile = document.querySelector('.block-settings'),
         background = document.querySelector('.background');
 
-    buttonSettings.addEventListener('click', () => {
+    buttonSettings?.addEventListener('click', () => {
         formSettingProfile.classList.add('show');
         background.classList.add('show');
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
@@ -56,9 +56,10 @@ function playMusicAndShowLine() {
     const blockMusic = document.querySelectorAll('.block-one-music');
 
     blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
-        const threePoint = mus.querySelector('.music-contol');
-
-        if (e.target != threePoint) {
+        const threePoint = mus.querySelector('.music-contol'),
+            threePointOther = mus.querySelector('.music-other-user-control');
+            
+        if (e.target != threePoint && e.target != threePointOther) {
             const currentAudio = mus.querySelector('.audio'),
                 currentAvatar = mus.querySelector('.avatar-music'),
                 blockCurrentMusic = document.querySelector('.block-current-music');
@@ -69,7 +70,7 @@ function playMusicAndShowLine() {
         <button><img class="icon-control icon-shuffle-music" src="/img/icon-shuffle.png" /></button>
         <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
         <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
-            console.log('AAA');
+
             blockCurrentMusic.querySelector('.current-audio').play();
             blockCurrentMusic.classList.add('display-flex');
         }
@@ -96,7 +97,7 @@ showCurrentPlaylist();
 const buttonOpenPopupinProfile = document.querySelectorAll('.block-control'),
     popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
     blockAddInPLaylist = document.querySelector('.block-add-in-playlist'),
-    buttonaddInPlaylist = popupBlockChangeMusic.querySelector('.button-show-addinplaylist');
+    buttonaddInPlaylist = popupBlockChangeMusic?.querySelector('.button-show-addinplaylist');
 
 buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
     e.preventDefault();
@@ -106,10 +107,92 @@ buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
     popupBlockChangeMusic.style.left = e.pageX - 280 + 'px';
 }));
 
-popupBlockChangeMusic.addEventListener('click', (e) => {
+popupBlockChangeMusic?.addEventListener('click', (e) => {
     if (e.target == buttonaddInPlaylist) {
         blockAddInPLaylist.classList.toggle('show');
         blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
         blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
     }
-})
+});
+
+const buttonOpenPopupOtherMusic = document.querySelectorAll('.block-music-other-user-control'),
+    popupOtherMusicChange = document.querySelector('.popup-change-friendmusic'),
+    buttonAddInPlayListOther = popupOtherMusicChange?.querySelector('.button-show-addinplaylist');
+    
+buttonOpenPopupOtherMusic.forEach(item => item.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    popupOtherMusicChange.classList.toggle('show');
+    popupOtherMusicChange.style.top = e.pageY - 50 + 'px';
+    popupOtherMusicChange.style.left = e.pageX - 280 + 'px';
+}));
+
+popupOtherMusicChange?.addEventListener('click', (e) => {
+    if (e.target == buttonAddInPlayListOther) {
+        blockAddInPLaylist.classList.toggle('show');
+        blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
+        blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
+    }
+});
+
+
+
+const blockFilterMusic = document.querySelector('.block-mymusic-favorite'),
+    filterMyMusic = document.querySelector('.my-music-filter'),
+    filetFavoriteMusic = document.querySelector('.favor-music-filter');
+
+blockFilterMusic.addEventListener('click', (e) => {
+    if (e.target == filterMyMusic) {
+        filterMyMusic.classList.add('current-filter');
+        filetFavoriteMusic.classList.remove('current-filter');
+    }
+    else if (e.target == filetFavoriteMusic) {
+        filetFavoriteMusic.classList.add('current-filter');
+        filterMyMusic.classList.remove('current-filter');
+    }
+});
+
+const formAddPlaylist = document.querySelector('.block-form-add-playlist'),
+    buttonOpenFornAddPlaylist = document.querySelector('.block-button-add-playlist'),
+    background = document.querySelector('.background');
+
+buttonOpenFornAddPlaylist?.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    formAddPlaylist.classList.add('show');
+    background.classList.add('show');
+    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+    background.style.height = `${document.documentElement.offsetHeight}px`;
+});
+
+const formAddMusic = document.querySelector('.block-form-add-music'),
+    buttonOpenFormAddMusic = document.querySelector('.block-button-add-music');
+
+buttonOpenFormAddMusic?.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    formAddMusic.classList.add('show');
+    background.classList.add('show');
+    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+    background.style.height = `${document.documentElement.offsetHeight}px`;
+});
+
+const playlists = document.querySelectorAll('.playlist'),
+    playlistOpen = document.querySelector('.current-playlist');
+
+playlists.forEach(item => item.addEventListener('click', () => {
+    e.preventDefault();
+
+    playlistOpen.classList.add('show');
+    background.classList.add('show');
+    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+    background.style.height = `${document.documentElement.offsetHeight}px`;
+}));
+
+background.addEventListener('click', () => {
+    formAddPlaylist.classList.remove('show');
+
+    if (formAddMusic.classList.contains('show')) formAddMusic.classList.remove('show');
+
+    if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
+});

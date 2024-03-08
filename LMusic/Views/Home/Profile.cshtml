@@ -1,8 +1,10 @@
 ﻿<div class="content-wrapper">
     <div class="block-profile">
         <div class="background"></div>
-        <div class="block-settings">
-            <form class="form-settings">
+        @if (bool.Parse(ViewData["myprofile"].ToString()))
+        {
+            <div class="block-settings">
+                <form class="form-settings">
                 <div class="main-info-change">
                     <div class="image-profile-change">
                         <label for="image">Изменить фото профиля</label>
@@ -35,6 +37,65 @@
                 <button class="button button-settings">Сохранить</button>
             </form>
         </div>
+        }
+
+        @if (bool.Parse(ViewData["myprofile"].ToString()))
+        {
+            <div class="block-form-add-playlist">
+                <span>Добавить плейлист</span>
+            <form class="form-add-playlist">
+                <div class="block-input-name">
+                    <input class="input-name-playlist" type="text" placeholder="Название" />
+                </div>
+                <div class="block-checkbox-music">
+                    <label class="header-checkbox-playlists">Добавьте музыку в плейлист</label>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="Playlist1" />
+                        <label for="Playlist1">Музыка 1</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="Playlist2" />
+                            <label for="Playlist2">Музыка 2</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="Playlist3" />
+                            <label for="Playlist3">Музыка 3</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="Playlist4" />
+                            <label for="Playlist4">Музыка 4</label>
+                    </div>
+                </div>
+                <button class="button button-add-new-playlist">Добавить</button>
+            </form>
+        </div>
+        }
+
+        @if (bool.Parse(ViewData["myprofile"].ToString()))
+        {
+            <div class="block-form-add-music">
+                <span>Добавить музыку</span>
+                <form class="form-add-music">
+                    <div class="block-input-name">
+                        <input class="input-name-music" type="text" placeholder="Название" />
+                        <input class="input-albom-music" type="text" placeholder="Альбом" />
+                        <input class="input-songs-music" type="text" placeholder="Исполнитель" />
+                    </div>
+                    <div class="block-file-music">
+                        <div class="file-item">
+                            <label for="file-photo">Выберите фото трека</label>
+                            <input type="file" name="file-photo" value="" />
+                        </div>
+                        <div class="file-item">
+                            <label for="file-music">Выберите файл трека</label>
+                            <input type="file" name="file-music" value="" />
+                        </div>
+                    </div>
+                    <button class="button button-add-new-music">Добавить</button>
+                </form>
+            </div>
+        }
+
         <div class="block-information-profile">
             <div class="block-avatar">
                 <img class="avatar-image" src="/img/avatar.jpg" />
@@ -60,7 +121,7 @@
                             <span>Удалить из друзей</span>
                         </button>
                     }
-                    @if (bool.Parse(ViewData["friendprofile"].ToString()))
+                    @if (bool.Parse(ViewData["userprofile"].ToString()))
                     {
                         <button class="button button-add-friend">
                             <span>Отправить заявку в друзья</span>
@@ -68,7 +129,10 @@
                     }
                 </div>
             </div>
-            <img class="settings-profile" src="~/img/icon-settings-profile.png" />
+            @if (bool.Parse(ViewData["myprofile"].ToString()))
+            {
+                <img class="settings-profile" src="~/img/icon-settings-profile.png" />
+            }
         </div>
 
         <div class="block-music block-music-user">
@@ -77,41 +141,69 @@
                     <span class="your-music-header">Плейлисты</span>
                 </div>
                 <div class="block-playlist">
-                    <div class="playlist">
+                    <button class="playlist">
                         <img class="playlist-avatar" src="/img/playlist-avatar.jpg" />
                         <span>Избранное</span>
-                    </div>
-                    <div class="playlist">
+                    </button>
+                    <button class="playlist">
                         <img class="playlist-avatar" src="/img/playlist-avatar.jpg" />
                         <span>Избранное</span>
-                    </div>
+                    </button>
+                    @if (bool.Parse(ViewData["myprofile"].ToString()))
+                    {
+                        <button class="block-button-add-playlist">
+                            <img class="image-add-playlist" src="~/img/icon-add-new.png" />
+                        </button>
+                    }
                 </div>
             </div>
 
             <div class="user-music">
                 <div class="block-your-music">
                     <span class="your-music-header">Музыка</span>
+                    @if (bool.Parse(ViewData["myprofile"].ToString()))
+                    {
+                        <button class="block-button-add-music">
+                            <img class="image-add-music" src="~/img/icon-add-new.png" />
+                        </button>
+                    }
                 </div>
                 <div class="block-shuffle">
                     <button class="shuffle">
                         <img class="shuffle-icon" src="/img/icon-shuffle.png" />
                         Перемешать
                     </button>
+                    <div class="block-mymusic-favorite">
+                        <button class="current-filter my-music-filter">
+                            Моя музыка
+                        </button>
+                        <button class="favor-music-filter">
+                            Избранное
+                        </button>
+                    </div>
                 </div>
                 <div class="block-one-music">
                     <div class="music">
                         <div class="info-music">
                             <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                            <div class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></div>
                             <div class="block-name-music">
                                 <span>Название (Альбом)</span>
                                 <span>Исполнитель</span>
                             </div>
                         </div>
-                        <button class="block-control">
-                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                        </button>
-
+                        @if (bool.Parse(ViewData["myprofile"].ToString()))
+                        {
+                            <button class="block-control">
+                                <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
+                        @if (bool.Parse(ViewData["friendprofile"].ToString()) || bool.Parse(ViewData["userprofile"].ToString()))
+                        {
+                            <button class="block-music-other-user-control">
+                                <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        } 
                     </div>
                 </div>
                 <div class="block-one-music">
@@ -124,9 +216,18 @@
                                 <span>Исполнитель</span>
                             </div>
                         </div>
-                        <button class="block-control">
-                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                        </button>
+                        @if (bool.Parse(ViewData["myprofile"].ToString()))
+                        {
+                            <button class="block-control">
+                                <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
+                        @if (bool.Parse(ViewData["friendprofile"].ToString()) || bool.Parse(ViewData["userprofile"].ToString()))
+                        {
+                            <button class="block-music-other-user-control">
+                                <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
                     </div>
                 </div>
                 <div class="block-one-music">
@@ -139,9 +240,18 @@
                                 <span>Исполнитель</span>
                             </div>
                         </div>
-                        <button class="block-control">
-                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                        </button>
+                        @if (bool.Parse(ViewData["myprofile"].ToString()))
+                        {
+                            <button class="block-control">
+                                <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
+                        @if (bool.Parse(ViewData["friendprofile"].ToString()) || bool.Parse(ViewData["userprofile"].ToString()))
+                        {
+                            <button class="block-music-other-user-control">
+                                <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
                     </div>
                 </div>
                 <div class="block-one-music">
@@ -154,9 +264,18 @@
                                 <span>Исполнитель</span>
                             </div>
                         </div>
-                        <button class="block-control">
-                            <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                        </button>
+                        @if (bool.Parse(ViewData["myprofile"].ToString()))
+                        {
+                                <button class="block-control">
+                                    <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                                </button>
+                        }
+                        @if (bool.Parse(ViewData["friendprofile"].ToString()) || bool.Parse(ViewData["userprofile"].ToString()))
+                        {
+                            <button class="block-music-other-user-control">
+                                <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
+                            </button>
+                        }
                     </div>
                 </div>
             </div>
@@ -218,8 +337,10 @@
             </div>
         </div>
 
-        <div class="popup-change-mymusic">
-            <button class="popup-button button-delete-music">
+        @if (bool.Parse(ViewData["myprofile"].ToString()))
+        {
+            <div class="popup-change-mymusic">
+                <button class="popup-button button-delete-music">
                 <img class="popup-image" src="~/img/icon-delete.png" />
                 Удалить
             </button>
@@ -232,23 +353,38 @@
                 Добавить в плейлист
             </button>
         </div>
+        }
 
         <div class="block-add-in-playlist">
-            <form class="form-addin-playlist">
+                <form class="form-addin-playlist">
                 <div class="block-checkbox">
                     <input id="playlist1" type="radio" name="playlist" value="playlist" />
                     <label for="playlist1">Плейлист 1</label>
                 </div>
                 <div class="block-checkbox">
                     <input id="playlist2" type="radio" name="playlist" value="playlist" />
-                    <label for="playlist2">Плейлист 2</label>
+                        <label for="playlist2">Плейлист 2</label>
                 </div>
                 <div class="block-checkbox">
                     <input id="playlist3" type="radio" name="playlist" value="playlist" />
-                    <label for="playlist3">Плейлист 3</label>
+                        <label for="playlist3">Плейлист 3</label>
                 </div>
                 <button class="button button-add-inplaylist">Добавить</button>
             </form>
         </div>
+
+        @if (bool.Parse(ViewData["friendprofile"].ToString()) || bool.Parse(ViewData["userprofile"].ToString()))
+        {
+            <div class="popup-change-friendmusic">
+                <button class="popup-button button-addin-mymusic">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить себе
+                </button>
+                <button class="popup-button button-show-addinplaylist">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить в плейлист
+                </button>
+            </div>
+        }
     </div>
 </div>
