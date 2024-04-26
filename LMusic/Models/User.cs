@@ -22,8 +22,8 @@ namespace LMusic.Models
 
         public User(TelegrammUser request)
         {
-            TelegramId = request.Id;
-            Login = request.Username;
+            TelegramId = request.id;
+            Login = request.username;
             FreeSpace = 51200;
             PictureId = 1;
         } 

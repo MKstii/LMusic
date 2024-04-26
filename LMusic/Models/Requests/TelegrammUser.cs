@@ -4,13 +4,13 @@ namespace LMusic.Models.Requests
 {
     public class TelegrammUser 
     {
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Username { get; set; }
-        public string PhotoUrl { get; set; }
-        public string AuthDate { get; set; }
-        public string Hash { get; set; }
+        public string id { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string username { get; set; }
+        public string photo_url { get; set; }
+        public string auth_date { get; set; }
+        public string hash { get; set; }
 
         public override string ToString()
         {
@@ -25,12 +25,12 @@ namespace LMusic.Models.Requests
         {
             var res = new List<string>
             {
-                $"id={Id}",
-                $"first_name={FirstName}",
-                $"last_name={LastName}",
-                $"username={Username}",
-                $"photo_url={PhotoUrl}",
-                $"auth_date={AuthDate}",
+                $"id={id}",
+                $"first_name={first_name}",
+                $"last_name={last_name}",
+                $"username={username}",
+                $"photo_url={photo_url}",
+                $"auth_date={auth_date}",
             };
             return res;
         }

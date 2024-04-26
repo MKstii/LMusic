@@ -23,7 +23,7 @@ namespace LMusic.Services
         }
         private TelegrammUser AuthUser(TelegrammUser user)
         {
-            var hash = user.Hash;
+            var hash = user.hash;
             string dataString = user.ToString();
             using SHA256 hash256 = SHA256.Create();
             string secret_key = Convert.ToHexString(hash256.ComputeHash(Encoding.UTF8.GetBytes(hash)));
@@ -36,7 +36,7 @@ namespace LMusic.Services
             {
                 throw new MemberAccessException("Data Is Invalid!");
             }
-            if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.AuthDate) > 259200)
+            if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.auth_date) > 259200)
             {
                 throw new DataException("Data is outdated");
             }
@@ -47,7 +47,7 @@ namespace LMusic.Services
 
         public TelegrammUser LoginUser(TelegrammUser user) 
         {
-            if (UserReg.FindTelgrammId(user.Id) == null)
+            if (UserReg.FindTelgrammId(user.id) == null)
             {
                 AuthUser(user);
                 User newUser = new User(user);

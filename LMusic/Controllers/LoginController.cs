@@ -25,7 +25,7 @@ namespace LMusic.Controllers
                     {
                         var us = service.LoginUser(user);
                     }
-                    return null; // а че возвращать?
+                    return Ok("ДА"); // а че возвращать?
                 };
             }
             catch (Exception ex)
