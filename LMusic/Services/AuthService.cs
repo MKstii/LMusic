@@ -1,12 +1,13 @@
 ﻿using LMusic.Models;
 using LMusic.Models.Requests;
 using LMusic.Registries;
+using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace LMusic.Services
 {
-    public class AuthService : IService
+    public class AuthService : IService, IDisposable
     {
         public string BotToken = "7049955807:AAGn7hBC4HfL7e3cHtQeFvtuOhW9zR13un0";
         public UserRegistry UserReg = new UserRegistry();
@@ -17,10 +18,10 @@ namespace LMusic.Services
         {
             string sbinary = "";
             for (int i = 0; i < buff.Length; i++)
-                sbinary += buff[i].ToString("X2"); /* hex format */
+                sbinary += buff[i].ToString("X2"); // hex format
             return sbinary;
         }
-        public TelegrammUser AuthUser(TelegrammUser user)
+        private TelegrammUser AuthUser(TelegrammUser user)
         {
             var hash = user.Hash;
             string dataString = user.ToString();
@@ -37,22 +38,24 @@ namespace LMusic.Services
             }
             if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.AuthDate) > 259200)
             {
-                throw new InvalidTimeZoneException("Data is outdated");
+                throw new DataException("Data is outdated");
             }
             return user;
         }
 
+        public void Dispose() {}
 
         public TelegrammUser LoginUser(TelegrammUser user) 
         {
             if (UserReg.FindTelgrammId(user.Id) == null)
             {
+                AuthUser(user);
                 User newUser = new User(user);
                 UserReg.Add(newUser);
             }
             else
             {
-
+                AuthUser(user);
             }
             return user;
         }
