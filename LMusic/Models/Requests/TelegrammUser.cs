@@ -14,11 +14,9 @@ namespace LMusic.Models.Requests
 
         public override string ToString()
         {
-            string res = "";
             var list = GetList();
             list.Sort();
-            res = String.Join("\n", list);
-            return res;
+            return String.Join("\n", list); 
         }
 
         public List<string> GetList()
@@ -30,7 +28,7 @@ namespace LMusic.Models.Requests
                 $"last_name={last_name}",
                 $"username={username}",
                 $"photo_url={photo_url}",
-                $"auth_date={auth_date}",
+                $"auth_date={auth_date}"
             };
             return res;
         }

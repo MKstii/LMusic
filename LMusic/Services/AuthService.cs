@@ -16,19 +16,23 @@ namespace LMusic.Services
 
         static string ByteToString(byte[] buff)
         {
-            string sbinary = "";
-            for (int i = 0; i < buff.Length; i++)
-                sbinary += buff[i].ToString("X2"); // hex format
-            return sbinary;
+            //string sbinary = "";
+            //for (int i = 0; i < buff.Length; i++)
+            //    sbinary += buff[i].ToString("x2"); // hex format
+            //return sbinary;
+            var result = Convert.ToHexString(buff).ToLower();
+                //BitConverter.ToString(buff).Replace("-", string.Empty).ToLower();
+            return result;
+
         }
         private TelegrammUser AuthUser(TelegrammUser user)
         {
             var hash = user.hash;
             string dataString = user.ToString();
             using SHA256 hash256 = SHA256.Create();
-            string secret_key = Convert.ToHexString(hash256.ComputeHash(Encoding.UTF8.GetBytes(hash)));
+            var secret_key = hash256.ComputeHash(Encoding.UTF8.GetBytes(BotToken));
             string res_hash = "";
-            using (HMACSHA256 hmachash256 = new HMACSHA256(Encoding.UTF8.GetBytes(secret_key)))
+            using (HMACSHA256 hmachash256 = new HMACSHA256(secret_key))
             {
                 res_hash = ByteToString(hmachash256.ComputeHash(Encoding.UTF8.GetBytes(dataString)));
             }
@@ -36,10 +40,10 @@ namespace LMusic.Services
             {
                 throw new MemberAccessException("Data Is Invalid!");
             }
-            if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.auth_date) > 259200)
-            {
-                throw new DataException("Data is outdated");
-            }
+  //          if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.auth_date) > 259200)
+  //          {
+  //              throw new DataException("Data is outdated");
+  //          }
             return user;
         }
 
