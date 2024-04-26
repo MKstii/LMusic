@@ -276,7 +276,14 @@
     margin: 0 auto;
 }
 
-.block-form-add-playlist, .block-form-add-music {
+.info-my-playlist {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.block-form-add-playlist, .block-form-add-music, .block-form-change-playlist,
+.block-form-change-music {
     position: fixed;
     top: 15%;
     left: 35%;
@@ -291,7 +298,97 @@
     display: none;
 }
 
-.form-add-music {
+.block-open-playlist {
+    position: fixed;
+    background-color: #fff;
+    border-radius: 14px;
+    width: 1000px;
+    max-height: 600px;
+    padding: 20px;
+    z-index: 2002;
+    top: 10%;
+    left: 18%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
+
+.avatar-playlist {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.block-left-top-playlist {
+    display: flex;
+    gap: 20px;
+}
+
+.block-left-top-playlist span {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.block-top-playlist {
+    display: flex;
+    justify-content: space-between;
+}
+
+.block-form-change-music {
+    left: 30%;
+    width: 600px;
+}
+
+.block-change-my-playlist, .block-change-music-playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 190px;
+    padding: 7px;
+    box-shadow: 0px 0px 5px 3px #002F55;
+    border-radius: 10px;
+    position: absolute;
+    background-color: #fff;
+    display: none;
+}
+
+.block-change-music-playlist {
+    width: 250px;
+    z-index: 3000;
+}
+
+.button-playlist-delete, .button-playlist-change,
+.button-music-delete-from-playlist, .button-music-add-in-playlist {
+    display: flex;
+    gap: 20px;
+    border: none;
+    background-color: #fff;
+    padding: 0px 5px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.button-playlist-delete:hover, .button-playlist-change:hover,
+.button-music-delete-from-playlist:hover, .button-music-add-in-playlist:hover{
+    background-color: rgba(0, 47, 85, 0.3);
+    border-radius: 5px;
+}
+
+.icon-change-playlist {
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+}
+
+.form-change-playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-add-music, .form-change-music {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
@@ -302,32 +399,34 @@
     left: 30%;
 }
 
-.block-input-name {
+.block-input-name, .block-input-change-name {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.block-file-music {
+.block-file-music, .block-file-playlist {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.file-item {
+.file-item, .file-item-playlist, .file-change-item-music {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.block-form-add-playlist span, .block-form-add-music span {
+.block-form-add-playlist span, .block-form-add-music span, .block-form-change-playlist span,
+.block-form-change-music  span{
     text-transform: uppercase;
     font-weight: 700;
     font-size: 20px;
 }
 
 .input-name-playlist, .input-name-music,
-.input-albom-music, .input-songs-music {
+.input-albom-music, .input-songs-music, .input-name-change-playlist,
+.input-name-change-music, .input-albom-change-music, .input-songs-change-music {
     outline: none;
     border: none;
     border-bottom: 2px solid #002F55;
@@ -389,13 +488,17 @@
 .shuffle, .block-mymusic-favorite {
     border: none;
     background-color: #fff;
-    box-shadow: 0px 0px 5px 2px #002F55;
+    border: 1px solid #002F55;
     border-radius: 5px;
     text-transform: uppercase;
     color: #002F55;
     font-weight: 500;
     display: flex;
     gap: 10px;
+}
+
+.shuffle:hover {
+    box-shadow: 0px 0px 5px 2px #002F55;
 }
 
 .my-music-filter, .favor-music-filter {
@@ -539,7 +642,7 @@
     width: 150px;
 }
 
-.block-control, .block-music-other-user-control {
+.block-control, .block-music-other-user-control, .block-control-music-playlist {
     width: 35px;
     height: 35px;
     border: none;
@@ -554,7 +657,7 @@
     height: 35px;
 }
 
-.music-contol, .music-other-user-control {
+.music-contol, .music-other-user-control, .music-contol-my-playlist {
     width: 20px;
     height: 20px;
 }
@@ -570,6 +673,10 @@
     box-shadow: 0px 0px 10px 3px #002F55;
     position: absolute;
     display: none;
+}
+
+.block-add-in-playlist {
+    z-index: 3000;
 }
 
 .popup-button {

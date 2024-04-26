@@ -40,13 +40,22 @@ function showSettingsProfile() {
 
     function closeSettings(e) {
         const formSettings = document.querySelector('.block-settings'),
-            blockPlaylist = document.querySelector('.current-playlist');
+            blockPlaylist = document.querySelector('.current-playlist'),
+            blockChangePlaylist = document.querySelector('.block-form-change-playlist'),
+            blockChangeMusic = document.querySelector('.block-form-change-music'),
+            blockOpenPlaylist = document.querySelector('.block-open-playlist');
 
         background.classList.remove('show');
 
         if (formSettings.classList.contains('show')) formSettingProfile.classList.remove('show');
 
         if (blockPlaylist.classList.contains('show')) blockPlaylist.classList.remove('show');
+
+        if (blockChangePlaylist.classList.contains('show')) blockChangePlaylist.classList.remove('show');
+
+        if (blockChangeMusic.classList.contains('show')) blockChangeMusic.classList.remove('show');
+
+        if (blockOpenPlaylist.classList.contains('show')) blockOpenPlaylist.classList.remove('show');
     }
 }
 
@@ -57,9 +66,10 @@ function playMusicAndShowLine() {
 
     blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         const threePoint = mus.querySelector('.music-contol'),
-            threePointOther = mus.querySelector('.music-other-user-control');
-            
-        if (e.target != threePoint && e.target != threePointOther) {
+            threePointOther = mus.querySelector('.music-other-user-control'),
+            threePointPlaylist = mus.querySelector('.block-control-music-playlist');
+
+        if (e.target != threePoint && e.target != threePointOther && e.target != threePointPlaylist) {
             const currentAudio = mus.querySelector('.audio'),
                 currentAvatar = mus.querySelector('.avatar-music'),
                 blockCurrentMusic = document.querySelector('.block-current-music');
@@ -195,4 +205,73 @@ background.addEventListener('click', () => {
     if (formAddMusic.classList.contains('show')) formAddMusic.classList.remove('show');
 
     if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
+});
+
+const buttonOpenChangePlaylist = document.querySelectorAll('.button-for-my-playlist'),
+    divChangePlaylist = document.querySelector('.block-change-my-playlist'),
+    blockChangePLaylist = document.querySelector('.block-form-change-playlist'),
+    buttonChangePlaylist = divChangePlaylist?.querySelector('.button-playlist-change');
+
+buttonOpenChangePlaylist.forEach(item => item.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    divChangePlaylist.classList.toggle('show');
+    divChangePlaylist.style.top = e.pageY - 40 + 'px';
+    divChangePlaylist.style.left = e.pageX + 25 + 'px';
+}));
+
+buttonChangePlaylist?.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    blockChangePLaylist.classList.add('show');
+    background.classList.add('show');
+    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+    background.style.height = `${document.documentElement.offsetHeight}px`;
+});
+
+const buttonChangeMusic = popupBlockChangeMusic?.querySelector('.button-change-music'),
+    blockChangeMusic = document.querySelector('.block-form-change-music');
+
+buttonChangeMusic?.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    blockChangeMusic.classList.add('show');
+    background.classList.add('show');
+    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+    background.style.height = `${document.documentElement.offsetHeight}px`;
+});
+
+const buttonImageOpenPlaylist = document.querySelectorAll('.playlist'),
+    blockOpenPlaylist = document.querySelector('.block-open-playlist');
+
+buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const threePoint = item.querySelector('.button-for-my-playlist');
+
+    if (e.target != threePoint) {
+        blockOpenPlaylist.classList.add('show');
+        background.classList.add('show');
+        background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+        background.style.height = `${document.documentElement.offsetHeight}px`;
+    }
+}));
+
+const buttonChangeMusicPlaylist = blockOpenPlaylist?.querySelectorAll('.block-control-music-playlist'),
+    blockChangeMusicPlaylist = document.querySelector('.block-change-music-playlist');
+
+buttonChangeMusicPlaylist.forEach(item => item.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    blockChangeMusicPlaylist.classList.toggle('show');
+    blockChangeMusicPlaylist.style.top = e.pageY - 40 + 'px';
+    blockChangeMusicPlaylist.style.left = e.pageX - 270 + 'px';
+}));
+
+const blockOpenMusicInPlaylist = document.querySelector('.block-change-music-playlist'),
+    buttonAddInPlaylistAA = blockOpenMusicInPlaylist?.querySelector('.button-music-add-in-playlist');
+
+buttonAddInPlaylistAA?.addEventListener('click', (e) => {
+    blockAddInPLaylist.classList.toggle('show');
+    blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
+    blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
 });
