@@ -6,7 +6,7 @@ namespace LMusic.Registries
 {
     public class UserRegistry : Registry<User>
     {
-        public User FindTelgrammId(string id)
+        public User GetUserByTgId(int id)
         {
             using (ContextDataBase db = new ContextDataBase())
             {

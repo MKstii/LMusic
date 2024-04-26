@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LMusic.Services
 {
-    public class AuthService : IService, IDisposable
+    public class AuthService : IService
     {
         public string BotToken = "7049955807:AAGn7hBC4HfL7e3cHtQeFvtuOhW9zR13un0";
         public UserRegistry UserReg = new UserRegistry();
@@ -16,16 +16,11 @@ namespace LMusic.Services
 
         static string ByteToString(byte[] buff)
         {
-            //string sbinary = "";
-            //for (int i = 0; i < buff.Length; i++)
-            //    sbinary += buff[i].ToString("x2"); // hex format
-            //return sbinary;
             var result = Convert.ToHexString(buff).ToLower();
-                //BitConverter.ToString(buff).Replace("-", string.Empty).ToLower();
             return result;
 
         }
-        private TelegrammUser AuthUser(TelegrammUser user)
+        public bool ValidUser(TelegrammUser user)
         {
             var hash = user.hash;
             string dataString = user.ToString();
@@ -40,30 +35,12 @@ namespace LMusic.Services
             {
                 throw new MemberAccessException("Data Is Invalid!");
             }
-  //          if (long.Parse(DateTimeOffset.UtcNow.ToString()) - long.Parse(user.auth_date) > 259200)
-  //          {
-  //              throw new DataException("Data is outdated");
-  //          }
-            return user;
-        }
-
-        public void Dispose() {}
-
-        public TelegrammUser LoginUser(TelegrammUser user) 
-        {
-            if (UserReg.FindTelgrammId(user.id) == null)
+            if(DateTimeOffset.UtcNow.ToUnixTimeSeconds() - user.auth_date > 259200)
             {
-                AuthUser(user);
-                User newUser = new User(user);
-                UserReg.Add(newUser);
+                throw new DataException("Data is outdated");
             }
-            else
-            {
-                AuthUser(user);
-            }
-            return user;
-        }
-        
+            return true;
+        }        
     }
 
 }

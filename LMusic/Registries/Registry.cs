@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMusic.Registries
 {
-    public abstract class Registry<Model> : IDisposable where Model : class, IEntity
+    public abstract class Registry<Model> where Model : class, IEntity
     {
         //private ContextDataBase db = new ContextDataBase();
         virtual public void Add(Model entity)
@@ -47,11 +47,6 @@ namespace LMusic.Registries
                 var entity = dbSet.Find(id);
                 return entity;
             }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LMusic.Models.Requests;
 using LMusic.Registries;
+using LMusic.Services;
 
 namespace LMusic.Models
 {
@@ -7,7 +8,7 @@ namespace LMusic.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string TelegramId { get; set; }
+        public int TelegramId { get; set; }
         public string Login { get; set; }
         public Privacy Privacy { get; set; }
         public double FreeSpace { get; set; }
@@ -26,12 +27,12 @@ namespace LMusic.Models
             Login = request.username;
             Name = request.first_name + " " + request.last_name;
             Privacy = Privacy.ForAll;
-            FreeSpace = 51200;
-            PictureId = 1;
+            FreeSpace = 50;
+            PictureId = new PictureService().GetDefaulAvatarPicture().Id;
         } 
         public User() { }
 
-        public User(int id, string name, string tgId, string login, Privacy privacy, double freeSpace, int pictureId)
+        public User(int id, string name, int tgId, string login, Privacy privacy, double freeSpace, int pictureId)
         {
             Id = id;
             Name = name;

@@ -19,15 +19,5 @@ namespace LMusic.Controllers
         {
             return 5;
         }
-
-
-        [HttpGet("GetUsers")]
-        public IEnumerable<User> GetUsers()
-        {
-            using (ContextDataBase db = new ContextDataBase())
-            {
-                return db.Users.ToArray();
-            }
-        }
     }
 }
