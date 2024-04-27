@@ -1,4 +1,8 @@
-﻿<div class="content-wrapper">
+﻿@{
+    ViewData["Title"] = "Профиль";
+}
+
+<div class="content-wrapper">
     <div class="block-profile">
         <div class="background"></div>
         @if (bool.Parse(ViewData["myprofile"].ToString()))
