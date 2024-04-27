@@ -43,7 +43,9 @@ function showSettingsProfile() {
             blockPlaylist = document.querySelector('.current-playlist'),
             blockChangePlaylist = document.querySelector('.block-form-change-playlist'),
             blockChangeMusic = document.querySelector('.block-form-change-music'),
-            blockOpenPlaylist = document.querySelector('.block-open-playlist');
+            blockOpenPlaylist = document.querySelector('.block-open-playlist'),
+            blockOpenMusicInPlaylist = document.querySelector('.block-change-music-playlist'),
+            blockAddInPLaylist = document.querySelector('.block-add-in-playlist');
 
         background.classList.remove('show');
 
@@ -56,6 +58,10 @@ function showSettingsProfile() {
         if (blockChangeMusic.classList.contains('show')) blockChangeMusic.classList.remove('show');
 
         if (blockOpenPlaylist.classList.contains('show')) blockOpenPlaylist.classList.remove('show');
+
+        if (blockOpenMusicInPlaylist.classList.contains('show')) blockOpenMusicInPlaylist.classList.remove('show');
+
+        if (blockAddInPLaylist.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
     }
 }
 
@@ -67,7 +73,7 @@ function playMusicAndShowLine() {
     blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         const threePoint = mus.querySelector('.music-contol'),
             threePointOther = mus.querySelector('.music-other-user-control'),
-            threePointPlaylist = mus.querySelector('.block-control-music-playlist');
+            threePointPlaylist = mus.querySelector('.music-contol-my-playlist');
 
         if (e.target != threePoint && e.target != threePointOther && e.target != threePointPlaylist) {
             const currentAudio = mus.querySelector('.audio'),
@@ -115,6 +121,8 @@ buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
     popupBlockChangeMusic.classList.toggle('show');
     popupBlockChangeMusic.style.top = e.pageY - 50 + 'px';
     popupBlockChangeMusic.style.left = e.pageX - 280 + 'px';
+
+    if (blockAddInPLaylist.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
 }));
 
 popupBlockChangeMusic?.addEventListener('click', (e) => {
@@ -265,12 +273,15 @@ buttonChangeMusicPlaylist.forEach(item => item.addEventListener('click', (e) => 
     blockChangeMusicPlaylist.classList.toggle('show');
     blockChangeMusicPlaylist.style.top = e.pageY - 40 + 'px';
     blockChangeMusicPlaylist.style.left = e.pageX - 270 + 'px';
+
+    if (blockAddInPLaylist.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
 }));
 
 const blockOpenMusicInPlaylist = document.querySelector('.block-change-music-playlist'),
     buttonAddInPlaylistAA = blockOpenMusicInPlaylist?.querySelector('.button-music-add-in-playlist');
 
 buttonAddInPlaylistAA?.addEventListener('click', (e) => {
+
     blockAddInPLaylist.classList.toggle('show');
     blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
     blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
