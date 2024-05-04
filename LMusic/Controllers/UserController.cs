@@ -4,6 +4,7 @@ using LMusic.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace LMusic.Controllers
 {
@@ -14,11 +15,38 @@ namespace LMusic.Controllers
         private PlaylistService _playlistService = new PlaylistService();
         private PictureService _pictureService = new PictureService();
         private MusicService _musicService = new MusicService();
+        private AuthService _authService = new AuthService();
         private IWebHostEnvironment _appEnvironment;
 
         public UserController(IWebHostEnvironment appEnvironment)
         {
             _appEnvironment = appEnvironment;
+        }
+
+        [HttpGet]
+        [Route("/user/{id}")]
+        public IActionResult Index(int id)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                var userViewModel = _userService.GetUserViewModel(id, user);
+                return View(userViewModel);
+            }
+            else
+            {
+                return Redirect("/home");
+            }
+            
+        }
+
+        public IActionResult Index()
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            return Index(tgUser.id);
         }
 
         [HttpGet("GetUsers")]
@@ -39,29 +67,30 @@ namespace LMusic.Controllers
         }
 
         [HttpPost("ChangeAvatar")]
-        public async Task<IActionResult> ChangeAvatar(int userId, IFormFile file)
+        public async Task<IActionResult> ChangeAvatar(int userId, IFormFile pictureFile)
         {
-            if (file.ContentType.Contains("image") && file != null)
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
             {
-                var pic = new Picture();
-                pic.FileName = file.FileName;
-                pic.Type = PictureType.Avatar;
-                pic.IsDefault = false;
-                pic.IsDeleted = false;
-                var user = _userService.Find(userId);
-                pic.Path = _pictureService.CreatePath(pic, user);
-                Directory.CreateDirectory(_appEnvironment.WebRootPath + pic.Path);
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pic.GetFullPath(), FileMode.Create))
+                if (pictureFile.ContentType.Contains("image") && pictureFile != null)
                 {
-                    await file.CopyToAsync(fileStream);
+                    var user = _userService.GetUserByTg(tgUser);
+                    var pic = _pictureService.CreatePicture(user, pictureFile, PictureType.Avatar, _appEnvironment.WebRootPath);
+                    user.PictureId = pic.Id;
+
+                    _userService.Update(user);
+                    return Ok();
                 }
-                _pictureService.Add(pic);
-                user.PictureId = pic.Id;
-                _userService.Update(user);
-                return Ok();
+                return BadRequest();
             }
-            return BadRequest();
+            else
+            {
+                return Unauthorized("Ошибка проверки пользователя");
+            }
+
         }
+
 
         [HttpGet("GetUserPlaylists")]
         public IActionResult GetUserPlaylists(int userId)
@@ -73,38 +102,32 @@ namespace LMusic.Controllers
             }
             else
             {
-                var playlists = _playlistService.GetPlaylistsByUserId(userId);
+                var playlists = _playlistService.GetPlaylistsByUser(user, UserAccess.My);
                 return Ok(playlists);
             }
             
         }
 
+        // ДОДЕЛАТЬ
         [HttpPost("AddMusic")]
-        public async Task<IActionResult> AddMusic(int userId, string title,string musician, IFormFile file)
+        public async Task<IActionResult> AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
         {
-            //return Ok(file.ContentType);
-            if (file.ContentType.Contains("audio") && file != null)
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
             {
-                var music = new Music();
-                music.FileName = file.FileName;
-                music.IsDeleted = false;
-                var user = _userService.Find(userId);
-                music.Path = _musicService.CreatePath(user);
-                music.UserId = user.Id;
-                music.PictureId = _pictureService.GetDefaulMusicPicture().Id;
-                music.Musician = musician;
-                music.Title = title;
-
-                Directory.CreateDirectory(_appEnvironment.WebRootPath + music.Path);
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + music.GetFullPath(), FileMode.Create))
+                if (audioFile.ContentType.Contains("audio") && audioFile != null)
                 {
-                    await file.CopyToAsync(fileStream);
+                    var user = _userService.GetUserByTg(tgUser);
+                    var music = _musicService.CreateMusic(user, title, musician, audioFile, musicPicture, _appEnvironment.WebRootPath);
+                    return Ok();
                 }
-                _musicService.Add(music);
-
-                return Ok();
+                return BadRequest();
             }
-            return BadRequest();
+            else
+            {
+                return Unauthorized("Ошибка проверки пользователя");
+            }
         }
 
         [HttpGet("GetUserMusic")]
@@ -114,16 +137,16 @@ namespace LMusic.Controllers
             {
                 return Ok(db.Users.Where(x => x.Id == userId).Include(x => x.MusicArray).FirstOrDefault());
             }
-                var user = _userService.Find(userId);
-            if (user == null || user.Privacy == Privacy.ForMe)
-            {
-                return Forbid();
-            }
-            else
-            {
-                var playlists = _playlistService.GetPlaylistsByUserId(userId);
-                return Ok(playlists);
-            }
+            //    var user = _userService.Find(userId);
+            //if (user == null || user.Privacy == Privacy.ForMe)
+            //{
+            //    return Forbid();
+            //}
+            //else
+            //{
+            //    var playlists = _playlistService.GetPlaylistsByUserId(userId);
+            //    return Ok(playlists);
+            //}
 
         }
     }

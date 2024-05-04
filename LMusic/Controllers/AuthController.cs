@@ -24,20 +24,23 @@ namespace LMusic.Controllers
             {
                 if (_authService.ValidUser(telegramUser))
                 {
-                    var user = _userService.GetUserByTg(telegramUser, true);
+                    var user = _userService.GetUserByTg(telegramUser);
+
+                    if(user == null)
+                    {
+                        user = _userService.CreateUserByTg(telegramUser);
+                    }
 
                     var tgUserJson = JsonSerializer.Serialize(telegramUser);
-                    var userJson = JsonSerializer.Serialize(user);
                     Response.Cookies.Append("TelegramUserHash", tgUserJson);
-                    Response.Cookies.Append("User", userJson);
 
-                    return Ok(user);
+                    // поменять на страницу юзера
+                    return Redirect("/user");
                 }
                 else
                 {
                     return BadRequest("Auth error");
                 }
-                //_authService.LoginUser(telegramUser);
             }
             catch (Exception ex)
             {

@@ -26,5 +26,37 @@ namespace LMusic.Services
         {
             return _pictureRegistry.GetDefaultPicture(PictureType.Music);
         }
+
+        public Picture CreatePicture(User user, IFormFile pictureFile, PictureType type, string webRootPath)
+        {
+            var pic = new Picture();
+            pic.FileName = pictureFile.FileName;
+            pic.Type = type;
+            pic.IsDefault = false;
+            pic.IsDeleted = false;
+            pic.Path = CreatePath(pic, user);
+            Directory.CreateDirectory(webRootPath + pic.Path);
+            using (var fileStream = new FileStream(webRootPath + pic.GetFullPath(), FileMode.Create))
+            {
+                pictureFile.CopyTo(fileStream);
+            }
+            Add(pic);
+            return pic;
+        }
+
+        public Picture GetUserAvatar(User user)
+        {
+            return _pictureRegistry.GetUserAvatar(user);
+        }
+
+        public Picture GetPlaylistAvatar(Playlist playlist)
+        {
+            return _pictureRegistry.GetPlaylistAvatar(playlist);
+        }
+
+        public Picture GetMusicAvatar(Music music)
+        {
+            return _pictureRegistry.GetMusicAvatar(music);
+        }
     }
 }

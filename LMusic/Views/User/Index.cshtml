@@ -1,0 +1,41 @@
+﻿@using LMusic.Models;
+@using LMusic.ViewModels;
+@model UserProfileViewModel;
+
+<div>
+    <h1>Имя: @Model.UserName</h1>
+    <h2>Фотка путь: @Model.PhotoPath</h2>
+    <img src="@Model.PhotoPath" alt="Alternate Text" />
+    <h3>Свободное место: @Model.FreeSpace</h3>
+    <p></p>
+    <p></p>
+    <p></p>
+</div>
+
+<div>
+    <h2>Плейлисты</h2>
+    @foreach (var playlist in Model.Playlists)
+    {
+        <p>Id: @playlist.Id</p>
+        <p>Имя: @playlist.Name</p>
+        <p>Путь картинки: @playlist.PhotoPath</p>
+        <img src="@playlist.PhotoPath" alt="Alternate Text" />
+        <p></p>
+    }
+</div>
+
+<div>
+    <h2>Песни</h2>
+    @foreach (var music in Model.FavoriteMusic)
+    {
+        <p>Id: @music.Id</p>
+        <p>Имя: @music.Musician</p>
+        <p>Название: @music.Title</p>
+        <p>Путь картинки: @music.PhotoPath</p>
+        <img src="@music.PhotoPath" alt="Alternate Text" />
+        <p>Путь песни: @music.MusicPath</p>
+        <audio class="current-audio" src="@music.MusicPath" controls="" controlslist="nodownload noplaybackrate"></audio>
+        <p></p>
+    }
+</div>
+

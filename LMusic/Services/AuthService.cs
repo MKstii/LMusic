@@ -4,13 +4,13 @@ using LMusic.Registries;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 namespace LMusic.Services
 {
     public class AuthService : IService
     {
-        public string BotToken = "7049955807:AAGn7hBC4HfL7e3cHtQeFvtuOhW9zR13un0";
-        public UserRegistry UserReg = new UserRegistry();
+        private string BotToken = "7049955807:AAGn7hBC4HfL7e3cHtQeFvtuOhW9zR13un0";
 
         public AuthService() { }
 
@@ -20,10 +20,11 @@ namespace LMusic.Services
             return result;
 
         }
-        public bool ValidUser(TelegrammUser user)
+        public bool ValidUser(TelegrammUser? tgUser)
         {
-            var hash = user.hash;
-            string dataString = user.ToString();
+            if(tgUser == null) return false;
+            var hash = tgUser.hash;
+            string dataString = tgUser.ToString();
             using SHA256 hash256 = SHA256.Create();
             var secret_key = hash256.ComputeHash(Encoding.UTF8.GetBytes(BotToken));
             string res_hash = "";
@@ -35,12 +36,24 @@ namespace LMusic.Services
             {
                 throw new MemberAccessException("Data Is Invalid!");
             }
-            if(DateTimeOffset.UtcNow.ToUnixTimeSeconds() - user.auth_date > 259200)
+            if(DateTimeOffset.UtcNow.ToUnixTimeSeconds() - tgUser.auth_date > 259200)
             {
                 throw new DataException("Data is outdated");
             }
             return true;
-        }        
+        }
+
+        //public User? ValidUser(string userJson, bool createIfNull)
+        //{
+        //    if(userJson == "" || userJson == null) return null;
+        //    var user = JsonSerializer.Deserialize<TelegrammUser>(userJson);
+        //    return ValidUser(user, createIfNull);
+        //}
+
+        public TelegrammUser? ConvertJson(string userJson)
+        {
+            return JsonSerializer.Deserialize<TelegrammUser>(userJson);
+        }
     }
 
 }
