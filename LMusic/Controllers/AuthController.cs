@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace LMusic.Controllers
 {
-    
+
     public class AuthController : Controller
     {
         private AuthService _authService = new AuthService();

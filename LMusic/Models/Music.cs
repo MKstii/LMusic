@@ -9,6 +9,7 @@
         public Picture Picture { get; set; }
         public string Title { get; set; }
         public string Musician { get; set; }
+        public string FileName { get; set; }
         public string Path { get; set; }
         public List<PlaylistMusic> Playlists { get; set; }
         public Privacy Privacy { get; set; }
@@ -17,7 +18,7 @@
         public Music() { }
 
         public Music(int id, int userId, int pictureId, string title, 
-            string musician, string path, Privacy privacy)
+            string musician, string path, string fileName, Privacy privacy)
         {
             Id = id;
             UserId = userId;
@@ -25,6 +26,7 @@
             Title = title;
             Musician = musician;
             Path = path;
+            FileName = fileName;
             Privacy = privacy;
             IsDeleted = false;
         }
@@ -32,6 +34,11 @@
         public int GetId()
         {
             return Id;
+        }
+
+        public string GetFullPath()
+        {
+            return Path + "/" + FileName;
         }
     }
 }

@@ -65,9 +65,9 @@ namespace LMusic.Additional
 
         public List<Music> Musics { get; } = new List<Music>()
         {
-            new Music(1, 4, 7, "Царица", "ANNA ASTI", "ANNAASTIЦарица.mp3", Privacy.ForAll),
-            new Music(2, 4, 8, "Знаешь ли ты", "МакSим", "МакSимЗнаешьлиты.mp3", Privacy.ForAll),
-            new Music(3, 4, 9, "Нервы", "Нервы", "НервыНервы.mp3", Privacy.ForAll),
+            new Music(1, 4, 7, "Царица", "ANNA ASTI", "/audio/730925826","ANNAASTIЦарица.mp3", Privacy.ForAll),
+            new Music(2, 4, 8, "Знаешь ли ты", "МакSим", "/audio/730925826", "МакSимЗнаешьлиты.mp3", Privacy.ForAll),
+            new Music(3, 4, 9, "Нервы", "Нервы", "/audio/730925826", "НервыНервы.mp3", Privacy.ForAll),
         };
         public List<Playlist> Playlists { get; } = new List<Playlist>()
         {

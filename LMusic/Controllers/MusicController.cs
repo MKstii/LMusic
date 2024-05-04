@@ -10,7 +10,12 @@ namespace LMusic.Controllers
         // GET: MusicController
         public ActionResult Index()
         {
-            return View();
+            Music music;
+            using (var db = new ContextDataBase())
+            {
+                music = db.Musics.Where(x => x.User.Id == 5).FirstOrDefault();
+            }
+            return View(music);
         }
 
         // GET: MusicController/Edit/5
@@ -19,5 +24,6 @@ namespace LMusic.Controllers
         {
             return 5;
         }
+
     }
 }
