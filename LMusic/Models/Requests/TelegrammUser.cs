@@ -25,16 +25,11 @@ namespace LMusic.Models.Requests
             {
                 $"id={id}",
                 $"first_name={first_name}",
+                $"last_name={last_name}",
                 $"username={username}",
                 $"photo_url={photo_url}",
                 $"auth_date={auth_date}"
             };
-            if (last_name == null) res.Add($"last_name=");
-            else res.Add($"last_name={last_name}");
-
-            if (photo_url == null) res.Add($"photo_url=");
-            else res.Add($"photo_url={photo_url}");
-
             return res;
         }
     }
