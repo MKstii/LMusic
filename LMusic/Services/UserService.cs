@@ -43,6 +43,11 @@ namespace LMusic.Services
             return GetUserByTg(tgUser);
         }
 
+        public User? GetUserByTgId(int tgId)
+        {
+            return _userRegisty.GetUserByTgId(tgId);
+        }
+
         public TelegrammUser? ConvertJsonToTgUser(string? tgUserJson)
         {
             if (tgUserJson == null || tgUserJson == "") return null;

@@ -21,4 +21,11 @@
             return Id;
         }
     }
+
+    public enum FriendRequestStatus
+    {
+        WaitResponse,
+        Accepted,
+        Denied
+    }
 }

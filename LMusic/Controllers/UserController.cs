@@ -75,7 +75,7 @@ namespace LMusic.Controllers
         }
 
         [HttpPost("ChangeAvatar")]
-        public async Task<IActionResult> ChangeAvatar(int userId, IFormFile pictureFile)
+        public IActionResult ChangeAvatar(int userId, IFormFile pictureFile)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
@@ -116,9 +116,10 @@ namespace LMusic.Controllers
             
         }
 
-        // ДОДЕЛАТЬ
+        // ДОДЕЛАТЬ.
+        // ЧТО ДОДЕЛАТЬ ТО??!?!?!?!? ВСЕ РАБОТАЕТ
         [HttpPost("AddMusic")]
-        public async Task<IActionResult> AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
+        public IActionResult AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
