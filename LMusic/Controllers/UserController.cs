@@ -33,6 +33,10 @@ namespace LMusic.Controllers
             {
                 var user = _userService.GetUserByTg(tgUser);
                 var userViewModel = _userService.GetUserViewModel(id, user);
+                if(userViewModel == null)
+                {
+                    return View("NotFound");
+                }
                 return View(userViewModel);
             }
             else
@@ -46,6 +50,10 @@ namespace LMusic.Controllers
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if(tgUser == null)
+            {
+                return Redirect("/Home");
+            }
             return Index(tgUser.id);
         }
 

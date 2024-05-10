@@ -50,9 +50,9 @@ namespace LMusic.Services
             return tgUser;
         }
 
-        public UserProfileViewModel GetUserViewModel(int userTgId, User requestSender)
+        public UserProfileViewModel? GetUserViewModel(int userTgId, User requestSender)
         {
-            User user;
+            User? user;
             UserAccess access;
             var viewmodel = new UserProfileViewModel();
             if (userTgId == requestSender.TelegramId)
@@ -69,6 +69,11 @@ namespace LMusic.Services
                 user = _userRegisty.GetUserByTgId(userTgId);
             }
             
+            if(user == null)
+            {
+                return null;
+            }
+
             viewmodel.UserProfileAccess = access;
             viewmodel.UserName = user.Name;
             viewmodel.PhotoPath = _pictureService.GetUserAvatar(user).GetFullPath();
