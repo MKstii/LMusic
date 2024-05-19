@@ -32,6 +32,10 @@ namespace LMusic.Controllers
             if (_authService.ValidUser(tgUser))
             {
                 var user = _userService.GetUserByTg(tgUser);
+                if(user == null)
+                {
+                    return Redirect("/home");
+                }
                 var userViewModel = _userService.GetUserViewModel(id, user);
                 if(userViewModel == null)
                 {
