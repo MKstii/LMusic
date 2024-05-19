@@ -191,23 +191,23 @@
         {
             <div class="block-form-add-music">
                 <span>Добавить музыку</span>
-                <form class="form-add-music">
+                <div class="error-valid-music">Заполните все обязательные<br>поля</div>
+                <form class="form-add-music" asp-action="AddMusic" asp-controller="User" method="post" enctype="multipart/form-data">
                     <div class="block-input-name">
-                        <input class="input-name-music" type="text" placeholder="Название" />
-                        <input class="input-albom-music" type="text" placeholder="Альбом" />
-                        <input class="input-songs-music" type="text" placeholder="Исполнитель" />
+                        <input class="input-name-music" type="text" placeholder="Название*" name="title" />
+                        <input class="input-songs-music" type="text" placeholder="Исполнитель*" name="musician" />
                     </div>
                     <div class="block-file-music">
                         <div class="file-item">
-                            <label for="file-photo">Выберите фото трека</label>
-                            <input type="file" name="file-photo" value="" />
+                            <label for="musicPicture">Выберите фото трека</label>
+                            <input type="file" name="musicPicture" value="" />
                         </div>
                         <div class="file-item">
-                            <label for="file-music">Выберите файл трека</label>
-                            <input type="file" name="file-music" value="" />
+                            <label for="audioFile">Выберите файл трека*</label>
+                            <input class="fileMusicAdd" type="file" name="audioFile" value="" />
                         </div>
                     </div>
-                    <button class="button button-add-new-music">Добавить</button>
+                    <button type="submit" class="button button-add-new-music">Добавить</button>
                 </form>
             </div>
         }
@@ -376,18 +376,6 @@
 
                 @foreach (var music in Model.FavoriteMusic)
                 {
-                    <p>Id: @music.Id</p>
-                    <p>Имя: @music.Musician</p>
-                    <p>Название: @music.Title</p>
-                    <p>Путь картинки: @music.PhotoPath</p>
-                    <img src="@music.PhotoPath" alt="Alternate Text" />
-                    <p>Путь песни: @music.MusicPath</p>
-                    <audio class="current-audio" src="@music.MusicPath" controls="" controlslist="nodownload noplaybackrate"></audio>
-                    <p></p>
-                }
-
-                @foreach (var music in Model.FavoriteMusic)
-                {
                     <div class="block-one-music">
                         <div class="music">
                             <div class="info-music">
@@ -415,31 +403,6 @@
                         </div>
                     </div>
                 }
-                
-                <div class="block-one-music">
-                    <div class="music">
-                        <div class="info-music">
-                            <audio class="audio" src="~/audio/YUrijj_SHatunov_-_Sedaya_noch_50310007.mp3"></audio>
-                            <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                            <div class="block-name-music">
-                                <span>Название (Альбом)</span>
-                                <span>Исполнитель</span>
-                            </div>
-                        </div>
-                        @if (Model.UserProfileAccess == UserAccess.My)
-                        {
-                            <button class="block-control">
-                                <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                            </button>
-                        }
-                        @if (Model.UserProfileAccess == UserAccess.Friend || Model.UserProfileAccess == UserAccess.User)
-                        {
-                            <button class="block-music-other-user-control">
-                                <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
-                            </button>
-                        }
-                    </div>
-                </div> 
             </div>
         </div>
 

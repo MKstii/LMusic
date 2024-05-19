@@ -1,4 +1,6 @@
-﻿namespace LMusic.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LMusic.Models
 {
     public class Music : IEntity
     {

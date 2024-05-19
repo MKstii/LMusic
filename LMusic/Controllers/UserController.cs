@@ -118,14 +118,14 @@ namespace LMusic.Controllers
 
         // ДОДЕЛАТЬ.
         // ЧТО ДОДЕЛАТЬ ТО??!?!?!?!? ВСЕ РАБОТАЕТ
-        [HttpPost("AddMusic")]
+        [HttpPost]
         public IActionResult AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
             if (_authService.ValidUser(tgUser))
             {
-                if (audioFile.ContentType.Contains("audio") && audioFile != null)
+                if (audioFile != null && audioFile.ContentType.Contains("audio"))
                 {
                     var user = _userService.GetUserByTg(tgUser);
                     var music = _musicService.CreateMusic(user, title, musician, audioFile, musicPicture, _appEnvironment.WebRootPath);

@@ -286,3 +286,18 @@ buttonAddInPlaylistAA?.addEventListener('click', (e) => {
     blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
     blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
 });
+
+const formAddMusicForm = document.querySelector('.form-add-music');
+let oldSubmit = formAddMusicForm.onsubmit || function () { };
+formAddMusicForm.onsubmit = function () {
+    const title = formAddMusicForm.querySelector('.input-name-music'),
+        musician = formAddMusicForm.querySelector('.input-songs-music'),
+        music = formAddMusicForm.querySelector('.fileMusicAdd');
+
+    if (title == "" || musician == "" || music.files.length == 0) {
+        const divError = document.querySelector('.error-valid-music');
+        divError.classList.add('show');
+        return false;
+    }
+    oldSubmit();
+}

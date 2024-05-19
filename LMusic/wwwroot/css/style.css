@@ -873,6 +873,21 @@
     border-radius: 5px;
 }
 
+.error-valid-music {
+    color: red;
+    display: none;
+}
+
 .show {
     display: block;
+}
+
+.text-center {
+    width: 100%;
+}
+
+.block-button-telegram {
+    text-align: right;
+    width: 100%;
+    padding: 20px 40px;
 }
