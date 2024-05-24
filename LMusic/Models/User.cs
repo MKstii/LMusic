@@ -14,7 +14,7 @@ namespace LMusic.Models
         public double FreeSpace { get; set; }
         public int PictureId { get; set; }
         public Picture Picture { get; set; }
-        public List<Playlist> PlaylistArray { get; set; }
+        public List<PlaylistUser> PlaylistArray { get; set; }
         public List<Music> MusicArray { get; set; }
         public List<FriendsList> FriendsList { get; set; }
         public List<FriendsList> FriendsListAsFriend { get; set; }
@@ -50,12 +50,6 @@ namespace LMusic.Models
         {
             var userRegister = new UserRegistry();
             userRegister.Update(this);
-        }
-
-        public void AddPlaylist(Playlist playlist)
-        {
-            PlaylistArray.Add(playlist);
-            Update();
         }
 
         public void AddMusic(Music music)
