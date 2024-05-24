@@ -37,6 +37,7 @@ namespace LMusic.Services
             viewmodel.Id = playlist.Id;
             viewmodel.Name = playlist.Name;
             viewmodel.PhotoPath = _pictureService.GetPlaylistAvatar(playlist).GetFullPath();
+            viewmodel.IsDefault = playlist.IsDefault;
             return viewmodel;
         }
 
