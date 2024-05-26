@@ -25,7 +25,7 @@ namespace LMusic.Services
         {
             var user = new User(tgUser);
             _userRegisty.Add(user);
-            new PlaylistService().CreateDefaultPlaylistByUser(user);
+            _playlistService.CreateDefaultPlaylistByUser(user);
 
             return user;
         }

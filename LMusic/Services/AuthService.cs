@@ -5,6 +5,7 @@ using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Web;
 
 namespace LMusic.Services
 {
@@ -34,6 +35,7 @@ namespace LMusic.Services
             }
             if (String.Compare(res_hash, hash) != 0)
             {
+
                 throw new MemberAccessException("Data Is Invalid!");
             }
             if(DateTimeOffset.UtcNow.ToUnixTimeSeconds() - tgUser.auth_date > 259200)
@@ -54,6 +56,13 @@ namespace LMusic.Services
         {
             return JsonSerializer.Deserialize<TelegrammUser>(userJson);
         }
+
+        //public void ClearCookie(HttpRequest request, string cookieName)
+        //{
+        //    HttpCookie myCookie = new HttpCookie(cookieName);
+        //    myCookie.Expires = DateTime.Now.AddDays(-1d);
+        //    request.Cookies.Add(myCookie);
+        //}
     }
 
 }

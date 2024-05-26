@@ -57,5 +57,6 @@ namespace LMusic
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<FriendsList> FriendsLists { get; set; }
         public DbSet<PlaylistMusic> PlaylistMusics { get; set; }
+        public DbSet<PlaylistUser> PlaylistUser { get; set; }
     }
 }

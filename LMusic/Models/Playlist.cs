@@ -7,8 +7,7 @@ namespace LMusic.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public List<PlaylistUser> PlaylistUser { get; set; }
         public int PictureId { get; set; }
         public Picture Picture { get; set; }
         public List<PlaylistMusic> Musics { get; set; }
@@ -17,22 +16,22 @@ namespace LMusic.Models
 
         public Playlist() { }
 
-        public Playlist(int id, string name, int userId, int pictureId, Privacy privacy)
+        public Playlist(int id, string name, int playlistUserId, int pictureId, Privacy privacy)
         {
             Id = id;
             Name = name;
-            UserId = userId;
             PictureId = pictureId;
             Privacy = privacy;
         }
 
-        public Playlist(User user)
+        public static Playlist CreateDefault(Picture pict)
         {
-            Name = "Любимое";
-            UserId = user.Id;
-            PictureId = new PictureService().GetDefaulPlaylistPicture().Id;
-            Privacy = Privacy.ForAll;
-            IsDefault = true;
+            var result = new Playlist();
+            result.Name = "Избранное";
+            result.PictureId = pict.Id;
+            result.Privacy = Privacy.ForAll;
+            result.IsDefault = true;
+            return result;
         }
 
         public int GetId()

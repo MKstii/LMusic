@@ -11,21 +11,23 @@ namespace LMusic.Registries
             [UserAccess.User] = (x) => { return x.Privacy == Privacy.ForAll; }
 
         };
-        public IEnumerable<Playlist> GetPlaylistsByUser(User user, UserAccess access) 
+        public IEnumerable<Playlist> GetPlaylists(List<int> playlistUserIds, UserAccess access)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
-                var playlists = db.Playlists.Where(x => x.UserId == user.Id).Where(_getAccess[access]).ToList();
+                var playlists = db.Playlists.Where(x => playlistUserIds.Contains(x.Id)).Where(_getAccess[access]).ToList();
                 return playlists;
             }
         }
-        public Playlist GetDefaultUserPlaylist(User user)
-        {
-            using (ContextDataBase db = new ContextDataBase())
-            {
-                var playlist = db.Playlists.Where(x => x.UserId == user.Id).Where(x => x.IsDefault == true).FirstOrDefault();
-                return playlist;
-            }
-        }
+        //public Playlist GetDefaultUserPlaylist(User user)
+        //{
+        //    using (ContextDataBase db = new ContextDataBase())
+        //    {
+        //        var playlist = db.Playlists.Where(x => x.UserId == user.Id).Where(x => x.IsDefault == true).FirstOrDefault();
+        //        return playlist;
+        //    }
+        //}
+
+
     }
 }

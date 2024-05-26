@@ -10,24 +10,37 @@ namespace LMusic.Services
         PlaylistRegistry _playlistRegistry;
         PlaylistMusicRegistry _playlistMusicRegistry;
         PictureService _pictureService;
+        PlaylistUserRegistry _playlistUserRegistry;
         public PlaylistService() : base(new PlaylistRegistry())
         {
             _playlistRegistry = (PlaylistRegistry)_registry;
             _playlistMusicRegistry = new PlaylistMusicRegistry();
             _pictureService = new PictureService();
+            _playlistUserRegistry = new PlaylistUserRegistry();
         }
 
         public IEnumerable<Playlist> GetPlaylistsByUser(User user, UserAccess access)
         {
             if(user.Privacy == Privacy.ForMe) return new List<Playlist>();
             if(user.Privacy == Privacy.ForFriends && access == UserAccess.User) return new List<Playlist>();
-            return _playlistRegistry.GetPlaylistsByUser(user, access);
+            var playlistsUsers = _playlistUserRegistry.GetByUser(user);
+            var playlistsUsersIds = playlistsUsers.Select(x => x.Id).ToList();
+            return _playlistRegistry.GetPlaylists(playlistsUsersIds, access);
         }
 
         public Playlist CreateDefaultPlaylistByUser(User user)
         {
-            var newPlaylist = new Playlist(user);
+            var DefaultPict = _pictureService.GetDefaulPlaylistPicture();
+            var newPlaylist = Playlist.CreateDefault(DefaultPict);
             _playlistRegistry.Add(newPlaylist);
+            var playlistUser = new PlaylistUser() {
+                UserId = user.Id,
+                PlaylistId = newPlaylist.Id,
+                IsCreater = true,
+                isDefault = true
+            };
+            _playlistUserRegistry.Add(playlistUser);
+
             return newPlaylist;
         }
 
@@ -37,12 +50,15 @@ namespace LMusic.Services
             viewmodel.Id = playlist.Id;
             viewmodel.Name = playlist.Name;
             viewmodel.PhotoPath = _pictureService.GetPlaylistAvatar(playlist).GetFullPath();
+            viewmodel.IsDefault = playlist.IsDefault;
             return viewmodel;
         }
+        
 
         public Playlist GetDefaultUserPlaylist(User user)
         {
-            return _playlistRegistry.GetDefaultUserPlaylist(user);
+            var userPlaylist = _playlistUserRegistry.GetByUserCreater(user);
+            return _playlistRegistry.Find(userPlaylist.PlaylistId);
         }
     }
 
