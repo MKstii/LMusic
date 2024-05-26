@@ -5,6 +5,8 @@
     left: 0px;
     z-index: 2000;
     display: none;
+    height: 2000px;
+    width: 100%;
 }
 
 .page-sidebar {
@@ -74,8 +76,9 @@
     margin-left: auto;
     letter-spacing: 1px;
     background-color: #fff;
-    min-height: 750px;
+    min-height: 100%;
     font-family: 'Century Gothic';
+    padding-bottom: 20px;
 }
 
 .block-information-profile {
@@ -883,11 +886,23 @@
 }
 
 .text-center {
-    width: 100%;
+    width: 400px;
+
 }
 
 .block-button-telegram {
     text-align: right;
     width: 100%;
     padding: 20px 40px;
+}
+
+.block-home-music {
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.not-found {
+    font-size: 16px;
+    margin: 0 auto;
 }

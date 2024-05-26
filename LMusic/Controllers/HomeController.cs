@@ -8,6 +8,7 @@ namespace LMusic.Controllers
 {
     public class HomeController : Controller
     {
+        private UserService _userService = new UserService();
         private readonly ILogger<HomeController> _logger;
 
 
@@ -18,6 +19,16 @@ namespace LMusic.Controllers
 
         public IActionResult Index()
         {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+
+            if (tgUser == null)
+            {
+                ViewData["autorization"] = "block";
+            } else
+            {
+                ViewData["autorization"] = "none";
+            }
             return View();
         }
 
