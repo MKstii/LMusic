@@ -25,7 +25,7 @@ namespace LMusic.Controllers
 
         [HttpGet]
         [Route("/user/{id}")]
-        public IActionResult Index(int id)
+        public IActionResult Index(string id)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
@@ -45,6 +45,7 @@ namespace LMusic.Controllers
             }
             else
             {
+                Response.Cookies.Delete("TelegramUserHash");
                 return Redirect("/home");
             }
             
@@ -58,7 +59,7 @@ namespace LMusic.Controllers
             {
                 return Redirect("/Home");
             }
-            return Index(tgUser.id);
+            return Index(tgUser.id.ToString());
         }
 
         [HttpGet("GetUsers")]

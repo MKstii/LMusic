@@ -7,9 +7,8 @@ namespace LMusic.Models
     public class User : IEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int TelegramId { get; set; }
-        public string Login { get; set; }
+        public string UserName { get; set; }
+        public string TelegramId { get; set; }
         public Privacy Privacy { get; set; }
         public double FreeSpace { get; set; }
         public int PictureId { get; set; }
@@ -23,21 +22,18 @@ namespace LMusic.Models
 
         public User(TelegrammUser request)
         {
-            TelegramId = request.id;
-            Login = request.username;
-            Name = request.first_name + " " + request.last_name;
+            TelegramId = request.id.ToString();
+            UserName = request.username;
             Privacy = Privacy.ForAll;
             FreeSpace = 50;
             PictureId = new PictureService().GetDefaulAvatarPicture().Id;
         } 
         public User() { }
 
-        public User(int id, string name, int tgId, string login, Privacy privacy, double freeSpace, int pictureId)
+        public User(int id, int tgId, Privacy privacy, double freeSpace, int pictureId)
         {
             Id = id;
-            Name = name;
-            TelegramId = tgId;
-            Login = login;
+            TelegramId = tgId.ToString();
             Privacy = privacy;
             FreeSpace = freeSpace;
             PictureId = pictureId;

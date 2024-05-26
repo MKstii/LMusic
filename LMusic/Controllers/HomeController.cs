@@ -22,15 +22,21 @@ namespace LMusic.Controllers
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+
             ViewData["IsAuthtorized"] = _authService.ValidUser(tgUser);
 
-            if (tgUser == null)
-            {
-                ViewData["autorization"] = "block";
-            } else
-            {
-                ViewData["autorization"] = "none";
-            }
+            //if (tgUser == null)
+            //{
+            //    ViewData["autorization"] = "block";
+            //} else
+            //{
+            //    ViewData["autorization"] = "none";
+            //}
+
+
+            ViewData["autorization"] = "block";
+            //ViewData["IsAuthtorized"] = false; //_authService.ValidUser(tgUser);
+
             return View();
         }
 

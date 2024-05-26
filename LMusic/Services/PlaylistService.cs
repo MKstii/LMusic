@@ -1,6 +1,6 @@
 ﻿using LMusic.Models;
 using LMusic.Registries;
-using LMusic.ViewModels;
+using LMusic.ViewModels.User;
 using System.Security.Cryptography.X509Certificates;
 
 namespace LMusic.Services

@@ -1,6 +1,6 @@
 ﻿using LMusic.Models;
 using LMusic.Registries;
-using LMusic.ViewModels;
+using LMusic.ViewModels.User;
 
 namespace LMusic.Services
 {

@@ -1,0 +1,14 @@
+﻿@using LMusic.Models;
+@using LMusic.ViewModels.Friends;
+@model FriendsSearchPageViewModel;
+@{
+    ViewData["Title"] = "Друзья";
+}
+
+@foreach (var friend in Model.Friends)
+{
+    <div>
+        @friend.Name
+        @friend.Id
+    </div>
+}

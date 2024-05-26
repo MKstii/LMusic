@@ -1,7 +1,7 @@
 ﻿using LMusic.Models;
 using LMusic.Models.Requests;
 using LMusic.Registries;
-using LMusic.ViewModels;
+using LMusic.ViewModels.User;
 using System.Text.Json;
 
 namespace LMusic.Services
@@ -21,6 +21,16 @@ namespace LMusic.Services
             _musicService = new MusicService();
         }
 
+        public List<User> GetUsers(string filter = "", int page = 1, int limit = 20)
+        {
+            return _userRegisty.GetUsers(filter, page, limit);
+        }
+
+        public List<User> GetFriends(User user, string filter = "", int page = 1, int limit = 20)
+        {
+            return _userRegisty.GetFriends(user, filter, page, limit);
+        }
+
         public User CreateUserByTg(TelegrammUser tgUser)
         {
             var user = new User(tgUser);
@@ -33,7 +43,7 @@ namespace LMusic.Services
         public User? GetUserByTg(TelegrammUser? tgUser)
         {
             if (tgUser == null) return null;
-            var user = _userRegisty.GetUserByTgId(tgUser.id);
+            var user = _userRegisty.GetUserByTgId(tgUser.id.ToString());
             return user;
         }
 
@@ -43,7 +53,7 @@ namespace LMusic.Services
             return GetUserByTg(tgUser);
         }
 
-        public User? GetUserByTgId(int tgId)
+        public User? GetUserByTgId(string tgId)
         {
             return _userRegisty.GetUserByTgId(tgId);
         }
@@ -55,7 +65,7 @@ namespace LMusic.Services
             return tgUser;
         }
 
-        public UserProfileViewModel? GetUserViewModel(int userTgId, User requestSender)
+        public UserProfileViewModel? GetUserViewModel(string userTgId, User requestSender)
         {
             User? user;
             UserAccess access;
@@ -80,7 +90,7 @@ namespace LMusic.Services
             }
 
             viewmodel.UserProfileAccess = access;
-            viewmodel.UserName = user.Name;
+            viewmodel.UserName = user.UserName;
             viewmodel.PhotoPath = _pictureService.GetUserAvatar(user).GetFullPath();
             viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(_playlistService.GetViewModel).ToList();
             viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(_musicService.GetViewModel).ToList();
