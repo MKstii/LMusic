@@ -16,6 +16,16 @@ namespace LMusic.Registries
             }
         }
 
+        public List<User> GetUsersByIds(int[] ids)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<User> dbSet = db.Set<User>();
+                var entity = dbSet.Where(x => ids.Contains(x.Id)).ToList();
+                return entity;
+            }
+        }
+
         public List<User>? GetUsers(string filter, int page, int limit)
         {
             using (ContextDataBase db = new ContextDataBase())

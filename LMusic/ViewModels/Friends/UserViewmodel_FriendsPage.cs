@@ -5,6 +5,5 @@
         public string Name { get; set; }
         public string Id { get; set; }
         public string PicPath { get; set; }
-        public bool IsFriend { get; set; }
     }
 }

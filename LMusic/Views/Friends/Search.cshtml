@@ -5,10 +5,10 @@
     ViewData["Title"] = "Друзья";
 }
 
-@foreach (var friend in Model.Friends)
+@foreach (var user in Model.Users)
 {
     <div>
-        @friend.Name
-        @friend.Id
+        @user.Name
+        @user.Id
     </div>
 }

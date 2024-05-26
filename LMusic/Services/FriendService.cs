@@ -9,6 +9,7 @@ namespace LMusic.Services
     {
         private FriendRequestRegistry _friendRequestRegistry;
         private FriendsListRegistry _friendsListRegistry;
+        private PictureService _pictureService = new PictureService();
 
         public FriendService()
         {
@@ -29,8 +30,8 @@ namespace LMusic.Services
         {
             var userViewmodel = new UserViewmodel_FriendsPage();
             userViewmodel.Id = user.TelegramId;
-            userViewmodel.IsFriend = true;
             userViewmodel.Name = user.UserName;
+            userViewmodel.PicPath = _pictureService.GetPicture(user.PictureId).GetFullPath();
             return userViewmodel;
         }
 
@@ -44,7 +45,7 @@ namespace LMusic.Services
             return _friendRequestRegistry.GetRequest(requester, addressee);
         }
 
-        private void DeleteRequest(FriendRequest request)
+        public void DeleteRequest(FriendRequest request)
         {
             _friendRequestRegistry.Delete(request);
         }
@@ -67,6 +68,11 @@ namespace LMusic.Services
             friendList.UserId = userId;
             friendList.FriendId = friendId;
             return friendList;
+        }
+
+        public List<FriendRequest> GetRequestByAddresser(User user, string filter, int page, int limit)
+        {
+            return _friendRequestRegistry.GetRequestByAddresse(user, filter, page, limit);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LMusic.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.Intrinsics.X86;
 
 namespace LMusic.Registries
@@ -21,6 +22,21 @@ namespace LMusic.Registries
             {
                 var request = db.FriendRequests
                     .Where(x => x.RequesterId == requester.Id && x.AddresseeId == addressee.Id).FirstOrDefault();
+                return request;
+            }
+        }
+
+        public List<FriendRequest> GetRequestByAddresse(User user, string filter, int page, int limit)
+        {
+            using (var db = new ContextDataBase())
+            {
+                var request = db.FriendRequests
+                    .Include(x => x.Requester)
+                    .Where(x => x.AddresseeId == user.Id)
+                    .Where(x => x.Requester.UserName.ToLower().Contains(filter))
+                    .Skip((page-1)*limit)
+                    .Take(limit)
+                    .ToList();
                 return request;
             }
         }

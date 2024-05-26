@@ -2,6 +2,7 @@
 using LMusic.Models.Requests;
 using LMusic.Registries;
 using LMusic.ViewModels.User;
+using System.Net;
 using System.Text.Json;
 
 namespace LMusic.Services
@@ -19,6 +20,11 @@ namespace LMusic.Services
             _pictureService = new PictureService();
             _playlistService = new PlaylistService();
             _musicService = new MusicService();
+        }
+
+        public List<User> GetUsersByIds(int[] ids)
+        {
+            return _userRegisty.GetUsersByIds(ids);
         }
 
         public List<User> GetUsers(string filter = "", int page = 1, int limit = 20)

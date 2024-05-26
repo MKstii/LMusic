@@ -29,7 +29,7 @@ namespace LMusic.Controllers
                 var friends = _userService.GetFriends(user, filter, page, limit);
 
                 var viewmodel = new FriendsSearchPageViewModel();
-                viewmodel.Friends = friends.Select(x => _friendService.GetUserViewmode_FriendsPage(x)).ToList();
+                viewmodel.Users = friends.Select(x => _friendService.GetUserViewmode_FriendsPage(x)).ToList();
 
                 return View(viewmodel);
             }
@@ -56,9 +56,34 @@ namespace LMusic.Controllers
                 var friends = _userService.GetUsers(filter, page, limit);
 
                 var viewmodel = new FriendsSearchPageViewModel();
-                viewmodel.Friends = friends.Select(x => _friendService.GetUserViewmode_FriendsPage(x)).ToList();
+                viewmodel.Users = friends.Select(x => _friendService.GetUserViewmode_FriendsPage(x)).ToList();
 
                 return View(viewmodel);
+            }
+            else
+            {
+                return Redirect("/home");
+            }
+        }
+
+        [HttpGet]
+        [Route("/friends/requests")]
+        public IActionResult Requests(string filter = "", int page = 1, int limit = 20)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                var requests = _friendService.GetRequestByAddresser(user, filter, page, limit);
+                var usersViewmodel = requests.Select(x => _friendService.GetUserViewmode_FriendsPage(x.Requester)).ToList();
+
+                return View(usersViewmodel);
             }
             else
             {
@@ -109,7 +134,11 @@ namespace LMusic.Controllers
         [HttpPost("acceptFriendRequest")]
         public IActionResult AcceptFriendRequest(string tgIdRequester)
         {
-            var acceptAction = _friendService.AcceptRequest;
+            var acceptAction = (FriendRequest request) =>
+            {
+                _friendService.AcceptRequest(request);
+                _friendService.DeleteRequest(request);
+            };
             return AnswerActionOnRequsest(tgIdRequester, acceptAction);
         }
 
@@ -142,7 +171,7 @@ namespace LMusic.Controllers
 
                 work(request);
 
-                return Redirect("/friends");
+                return Redirect("/friends/requests");
             }
             else
             {

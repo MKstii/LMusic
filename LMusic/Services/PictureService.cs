@@ -44,6 +44,11 @@ namespace LMusic.Services
             return pic;
         }
 
+        public Picture GetPicture(int id) 
+        {
+            return _pictureRegistry.Find(id);
+        }
+
         public Picture GetUserAvatar(User user)
         {
             return _pictureRegistry.GetUserAvatar(user);
