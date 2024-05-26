@@ -8,7 +8,6 @@ namespace LMusic.Controllers
 {
     public class HomeController : Controller
     {
-        private UserService _userService = new UserService();
         private readonly ILogger<HomeController> _logger;
         private UserService _userService = new UserService();
         private AuthService _authService = new AuthService();
@@ -21,8 +20,6 @@ namespace LMusic.Controllers
 
         public IActionResult Index()
         {
-            ViewData["IsAuthtorized"] = _authService.ValidUser(tgUser);
-
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
             ViewData["IsAuthtorized"] = _authService.ValidUser(tgUser);
