@@ -98,6 +98,7 @@ namespace LMusic.Services
             viewmodel.UserProfileAccess = access;
             viewmodel.UserName = user.UserName;
             viewmodel.PhotoPath = _pictureService.GetUserAvatar(user).GetFullPath();
+            viewmodel.TgId = user.TelegramId;
             viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(_playlistService.GetViewModel).ToList();
             viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(_musicService.GetViewModel).ToList();
 

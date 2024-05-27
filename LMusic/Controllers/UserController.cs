@@ -8,7 +8,6 @@ using System.Text.Json;
 
 namespace LMusic.Controllers
 {
-    
     public class UserController : Controller
     {
         private UserService _userService =  new UserService();
