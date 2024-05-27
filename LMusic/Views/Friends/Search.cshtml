@@ -2,13 +2,43 @@
 @using LMusic.ViewModels.Friends;
 @model FriendsSearchPageViewModel;
 @{
-    ViewData["Title"] = "Друзья";
+    ViewData["Title"] = "Пользователи";
 }
 
-@foreach (var user in Model.Users)
+
+
+@* @foreach (var user in Model.Users)
 {
     <div>
         @user.Name
         @user.Id
     </div>
-}
+} *@
+
+<div class="content-wrapper">
+    <div class="block-friend">
+        <div class="block-header-friend">
+            <h1 class="header-friend">Пользователи</h1>
+            <div class="block-search-friend">
+                <form class="form-search-friend">
+                    <img src="~/img/icon=search.png" />
+                    <input class="text-search-users" name="filter" type="text" placeholder="Искать пользователя" />
+                    <button class="button-search-friend">Искать</button>
+                </form>
+            </div>
+        </div>
+        <div class="friends">
+            <ul class="list-friends">
+                @foreach (var user in Model.Users)
+                {
+                    <li class="list-friends-item">
+                        <a href="/user/@user.Id">
+                            <img class="avatar-friend-image" src="@user.PicPath" />
+                            <span class="name-friend">@user.Name</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

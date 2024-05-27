@@ -2,7 +2,7 @@
 @using LMusic.ViewModels.Friends;
 @model List<UserViewmodel_FriendsPage>;
 @{
-    ViewData["Title"] = "Друзья";
+    ViewData["Title"] = "Заявки";
 }
 
 @foreach (var user in Model)
@@ -12,3 +12,40 @@
         @user.Id
     </div>
 }
+
+<div class="content-wrapper">
+    <div class="block-friend">
+        <div class="block-header-friend">
+            <h1 class="header-friend">Заявки в друзья</h1>
+        </div>
+        <div>
+        </div>
+        <div class="friends">
+            <ul class="list-friends">
+                @foreach (var user in Model)
+                {
+                    <li class="list-users-item">
+                        <a href="/user/@user.Id">
+                            <img class="avatar-friend-image" src="@user.PicPath" />
+                            <span class="name-friend">@user.Name</span>
+                        </a>
+                        <div class="group-button-requests-answer">
+                            <form class="form-accept-request" asp-action="AcceptFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                                <span style="visibility: hidden;" name="tgIdRequester">@user.Id</span>
+                                <button class="button button-accept-request">
+                                    <span>Принять заявку</span>
+                                </button>
+                            </form>
+                            <form class="form-accept-request" asp-action="DenyFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                                <span style="visibility: hidden;" name="tgIdRequester">@user.Id</span>
+                                <button class="button button-deny-request">
+                                    <span>Отклонить заявку</span>
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

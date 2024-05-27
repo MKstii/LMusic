@@ -34,7 +34,7 @@ namespace LMusic.Controllers
             //}
 
 
-            ViewData["autorization"] = "block";
+            //ViewData["autorization"] = "block";
             //ViewData["IsAuthtorized"] = false; //_authService.ValidUser(tgUser);
 
             return View();

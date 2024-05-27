@@ -241,14 +241,7 @@
         @if (Model.UserProfileAccess == UserAccess.My)
         {
             <div class="block-change-my-playlist">
-                <button class="button-playlist-delete">
-                    <img class="icon-change-playlist" src="~/img/icon-delete.png" />
-                    <span>Удалить</span>
-                </button>
-                <button class="button-playlist-change">
-                    <img class="icon-change-playlist" src="~/img/icon-reduct.png" />
-                    <span>Редактировать</span>
-                </button>
+                
             </div>
 
         }
@@ -289,15 +282,22 @@
                     }
                     @if (Model.UserProfileAccess == UserAccess.Friend)
                     {
-                        <button class="button button-remove-friend">
-                            <span>Удалить из друзей</span>
-                        </button>
+                        // когда будет метод доделать
+                        <form asp-action="DeleteFriend" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                            <span style="visibility: hidden;" name="">@Model.TgId</span>
+                            <button class="button button-remove-friend">
+                                <span>Удалить из друзей</span>
+                            </button>
+                        </form>
                     }
                     @if (Model.UserProfileAccess == UserAccess.User)
                     {
-                        <button class="button button-add-friend">
-                            <span>Отправить заявку в друзья</span>
-                        </button>
+                        <form asp-action="SendFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                            <span style="visibility: hidden;" name="addresseTgId">@Model.TgId</span>
+                            <button class="button button-add-friend">
+                                <span>Отправить заявку в друзья</span>
+                            </button>
+                        </form>
                     }
                 </div>
             </div>
@@ -321,7 +321,9 @@
                                 @playlist.Name
                                 @if (Model.UserProfileAccess == UserAccess.My)
                                 {
-                                    <img class="button-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px">
+                                    <!-- <button class="button-for-my-playlist-change" id="@playlist.Id" data-default="@playlist.IsDefault"> -->
+                                        <img class="button-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px">
+                                    <!-- </button> -->
                                 }
                             </span>
                         </button>

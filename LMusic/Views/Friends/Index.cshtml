@@ -5,10 +5,39 @@
     ViewData["Title"] = "Друзья";
 }
 
-@foreach (var user in Model.Users)
+@* @foreach (var user in Model.Users)
 {
     <div>
         @user.Name
         @user.Id
     </div>
-}
+} *@
+
+<div class="content-wrapper">
+    <div class="block-friend">
+        <div class="block-header-friend">
+            <h1 class="header-friend">Друзья</h1>
+        </div>
+        <div class="group-header-friend">
+            <div class="user-search-result">
+                <a class="header-search-user" href="/friends/search">Глобальный поиск</a>
+            </div>
+            <div class="user-search-result">
+                <a class="header-friends-requests" href="/friends/requests">Просмотреть заявки</a>
+            </div>
+        </div>
+        <div class="friends">
+            <ul class="list-friends">
+                @foreach(var user in Model.Users)
+                {
+                    <li class="list-friends-item">
+                        <a href="/user/@user.Id">
+                            <img class="avatar-friend-image" src="@user.PicPath" />
+                            <span class="name-friend">@user.Name</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

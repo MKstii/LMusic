@@ -215,18 +215,37 @@ background.addEventListener('click', () => {
     if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
 });
 
-const buttonOpenChangePlaylist = document.querySelectorAll('.button-for-my-playlist'),
-    divChangePlaylist = document.querySelector('.block-change-my-playlist'),
-    blockChangePLaylist = document.querySelector('.block-form-change-playlist'),
+const buttonAAAA = document.querySelectorAll('.button-for-my-playlist'),
+    formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
+
+buttonAAAA.forEach(item => item.addEventListener('click', (e) => {
+    const idPlaylist = e.target.id;
+    formChangePlaylistAAA.innerHTML = '';
+    if (e.target.getAttribute('data-default')) {
+        formChangePlaylistAAA.innerHTML = '<button class="button-playlist-delete">' +
+            //'<img class="icon-change-playlist" src = "~/img/icon-delete.png" />' +
+            '<span>Удалить</span></button>';
+    }
+    formChangePlaylistAAA.innerHTML += '<button class="button-playlist-change">' +
+        //'<img class="icon-change-playlist" src = "~/img/icon-reduct.png" />' +
+        '<span>Редактировать</span></button>';
+    formChangePlaylistAAA.classList.toggle('show');
+    formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
+    formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
+}));
+
+//const buttonOpenChangePlaylist = document.querySelectorAll('.button-for-my-playlist'),
+//    divChangePlaylist = document.querySelector('.block-change-my-playlist'),
+const blockChangePLaylist = document.querySelector('.block-form-change-playlist'),
     buttonChangePlaylist = divChangePlaylist?.querySelector('.button-playlist-change');
 
-buttonOpenChangePlaylist.forEach(item => item.addEventListener('click', (e) => {
-    e.preventDefault();
+//buttonOpenChangePlaylist.forEach(item => item.addEventListener('click', (e) => {
+//    e.preventDefault();
 
-    divChangePlaylist.classList.toggle('show');
-    divChangePlaylist.style.top = e.pageY - 40 + 'px';
-    divChangePlaylist.style.left = e.pageX + 25 + 'px';
-}));
+//    divChangePlaylist.classList.toggle('show');
+//    divChangePlaylist.style.top = e.pageY - 40 + 'px';
+//    divChangePlaylist.style.left = e.pageX + 25 + 'px';
+//}));
 
 buttonChangePlaylist?.addEventListener('click', (e) => {
     e.preventDefault();
@@ -301,3 +320,12 @@ formAddMusicForm.onsubmit = function () {
     }
     oldSubmit();
 }
+
+const buttonSearchUsersss = document.querySelector('.button-search-friend');
+
+buttonSearchUsersss.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const textSearch = document.querySelector('.text-search-users');
+    window.location.href = "/friend/search?filter=" + textSearch;
+})

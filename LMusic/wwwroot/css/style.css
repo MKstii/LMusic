@@ -890,6 +890,11 @@
 
 }
 
+.button-for-my-playlist-change {
+    width: 20px;
+    height: 20px;
+}
+
 .block-button-telegram {
     text-align: right;
     width: 100%;
@@ -905,4 +910,82 @@
 .not-found {
     font-size: 16px;
     margin: 0 auto;
+}
+
+.group-header-friend {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-search-user, .header-friends-requests {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    color: black;
+}
+
+.header-search-user:hover, .header-friends-requests:hover {
+    color: black;
+}
+
+.user-search-result {
+    border: 1px solid #002F55;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.user-search-result:hover, .button-search-friend:hover {
+    box-shadow: 0px 0px 5px 3px #002F55;
+}
+
+.form-search-friend {
+    display: flex;
+    gap: 15px;
+}
+
+.form-search-friend img {
+    width: 30px;
+    height: 30px;
+}
+
+.text-search-users {
+    width: 300px;
+}
+
+.button-search-friend {
+    border: 1px solid #002F55;
+    background-color: #fff;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+
+.list-users-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.group-button-requests-answer {
+    display: flex;
+    margin-top: 7px;
+}
+
+.list-users-item:hover {
+    background-color: rgba(0, 47, 85, 0.3);
+    border-radius: 5px;
+}
+
+.list-users-item a {
+    display: flex;
+    gap: 40px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.button-deny-request {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #002F55;
 }
