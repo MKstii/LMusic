@@ -74,5 +74,17 @@ namespace LMusic.Services
         {
             return _friendRequestRegistry.GetRequestByAddresse(user, filter, page, limit);
         }
+
+        public FriendsList? GetFriendList(User user, User friend)
+        {
+            return _friendsListRegistry.GetFriendsList(user, friend);
+        }
+
+        public void DeleteFriendList(FriendsList friendList)
+        {
+            var mirrorFriendList = _friendsListRegistry.GetFriendsListMirror(friendList);
+            _friendsListRegistry.Delete(mirrorFriendList);
+            _friendsListRegistry.Delete(friendList);
+        }
     }
 }

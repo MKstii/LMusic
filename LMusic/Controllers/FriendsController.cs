@@ -195,5 +195,36 @@ namespace LMusic.Controllers
             return result;
             //return Ok(requests);
         }
+
+        [HttpPost("deleteFriend")]
+        public IActionResult DeleteFriend(string tgId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                var friend = _userService.GetUserByTgId(tgId);
+                if (friend == null)
+                {
+                    return BadRequest("Друг не найден");
+                }
+
+                var friendList = _friendService.GetFriendList(user, friend);
+                _friendService.DeleteFriendList(friendList);
+
+                return Redirect($"/user/{tgId}");
+            }
+            else 
+            {
+                return Unauthorized("Ошибка проверки пользователя");
+            }
+        }
+
     }
 }
