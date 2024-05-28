@@ -282,17 +282,16 @@
                     }
                     @if (Model.UserProfileAccess == UserAccess.Friend)
                     {
-                        // когда будет метод доделать
-                        <form asp-action="DeleteFriend" asp-controller="Friend" method="post" enctype="multipart/form-data">
-                            <span style="visibility: hidden;" name="">@Model.TgId</span>
-                            <button class="button button-remove-friend">
+                        <form asp-action="deleteFriend" asp-controller="Friends" method="post" enctype="multipart/form-data">
+                            <span style="visibility: hidden;" name="tgId">@Model.TgId</span>
+                            <button type="submit" class="button button-remove-friend">
                                 <span>Удалить из друзей</span>
                             </button>
                         </form>
                     }
                     @if (Model.UserProfileAccess == UserAccess.User)
                     {
-                        <form asp-action="SendFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                        <form asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
                             <span style="visibility: hidden;" name="addresseTgId">@Model.TgId</span>
                             <button class="button button-add-friend">
                                 <span>Отправить заявку в друзья</span>

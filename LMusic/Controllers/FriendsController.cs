@@ -82,7 +82,7 @@ namespace LMusic.Controllers
 
                 var requests = _friendService.GetRequestByAddresser(user, filter, page, limit);
                 var usersViewmodel = requests.Select(x => _friendService.GetUserViewmode_FriendsPage(x.Requester)).ToList();
-
+                ViewData["filter"] = filter;
                 return View(usersViewmodel);
             }
             else

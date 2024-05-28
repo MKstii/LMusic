@@ -22,7 +22,7 @@
             <div class="block-search-friend">
                 <form class="form-search-friend">
                     <img src="~/img/icon=search.png" />
-                    <input class="text-search-users" name="filter" type="text" placeholder="Искать пользователя" />
+                    <input class="text-search-users" name="filter" type="text" placeholder="Искать пользователя" value="@ViewData["filter"]"/>
                     <button class="button-search-friend">Искать</button>
                 </form>
             </div>
@@ -39,6 +39,24 @@
                     </li>
                 }
             </ul>
+        </div>
+        <div class="block-pagination">
+            @* если страница всего одна то не отображать все *@
+            @* @if (Model.максимальнаястраница != 1)
+            { *@
+                @if (Model.Page > 1)
+                {
+                    <a class="link-arrow-pagin" href="/friends/search?filter=@ViewData["filter"]&page=@(Model.Page - 1)"><img class="icon-arrow-pagination" src="/img/icons8-back-50.png" /></a>
+                }
+
+                <span class="page-current-count">@Model.Page</span>
+
+                @* тут добавить проверку на максимум *@
+                @* @if (Model.Page < максимум)
+                {
+                    <a class="link-arrow-pagin" href="/friends/search?filter=@ViewData["filter"]&page=@(Model.Page + 1)"><img class="icon-arrow-pagination" src="/img/icons8-стрелка-вправо-50.png" /></a>
+                }
+            } *@
         </div>
     </div>
 </div>

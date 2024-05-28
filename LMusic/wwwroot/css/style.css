@@ -989,3 +989,19 @@
     color: black;
     border: 1px solid #002F55;
 }
+
+.block-pagination {
+    display: flex;
+    gap: 20px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.icon-arrow-pagination {
+    width: 25px;
+    height: 25px;
+}
+
+.page-current-count {
+    font-weight: 700;
+}

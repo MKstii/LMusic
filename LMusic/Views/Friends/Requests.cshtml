@@ -30,15 +30,15 @@
                             <span class="name-friend">@user.Name</span>
                         </a>
                         <div class="group-button-requests-answer">
-                            <form class="form-accept-request" asp-action="AcceptFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                            <form class="form-accept-request" asp-action="acceptFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
                                 <span style="visibility: hidden;" name="tgIdRequester">@user.Id</span>
-                                <button class="button button-accept-request">
+                                <button type="submit" class="button button-accept-request">
                                     <span>Принять заявку</span>
                                 </button>
                             </form>
-                            <form class="form-accept-request" asp-action="DenyFriendRequest" asp-controller="Friend" method="post" enctype="multipart/form-data">
+                            <form class="form-accept-request" asp-action="denyFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
                                 <span style="visibility: hidden;" name="tgIdRequester">@user.Id</span>
-                                <button class="button button-deny-request">
+                                <button type="submit" class="button button-deny-request">
                                     <span>Отклонить заявку</span>
                                 </button>
                             </form>
@@ -47,5 +47,24 @@
                 }
             </ul>
         </div>
+        @* исправить когда появтся Page *@
+        @* <div class="block-pagination"> *@
+            @* если страница всего одна то не отображать все *@
+            @* @if (Model.максимальнаястраница != 1)
+            { *@
+                @* @if (Model.Page > 1)
+                {
+                    <a class="link-arrow-pagin" href="/friends/search?filter=@ViewData["filter"]&page=@(Model.Page - 1)"><img class="icon-arrow-pagination" src="/img/icons8-back-50.png" /></a>
+                }
+
+                <span class="page-current-count">@Model.Page</span> *@
+
+                @* тут добавить проверку на максимум *@
+                @* @if (Model.Page < максимум)
+                {
+                    <a class="link-arrow-pagin" href="/friends/search?filter=@ViewData["filter"]&page=@(Model.Page + 1)"><img class="icon-arrow-pagination" src="/img/icons8-стрелка-вправо-50.png" /></a>
+                }
+            } *@
+        @* </div> *@
     </div>
 </div>
