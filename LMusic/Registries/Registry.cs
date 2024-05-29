@@ -39,7 +39,7 @@ namespace LMusic.Registries
                 db.SaveChanges();
             }
         }
-        virtual public Model Find(int id)
+        virtual public Model? Find(int id)
         {
             using (ContextDataBase db = new ContextDataBase())
             {

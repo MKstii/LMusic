@@ -1,4 +1,5 @@
 ﻿using LMusic.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LMusic.Registries
 {
@@ -17,6 +18,30 @@ namespace LMusic.Registries
             {
                 var playlists = db.Playlists.Where(x => playlistUserIds.Contains(x.Id)).Where(_getAccess[access]).ToList();
                 return playlists;
+            }
+        }
+
+        public List<Music> GetMusicsByPlaylist(Playlist playlist)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<PlaylistMusic> dbSet = db.Set<PlaylistMusic>();
+                var musics = dbSet.Where(x => x.PlaylistId == playlist.Id).Include(x => x.Music).Select(x => x.Music).ToList();
+                return musics;
+            }
+        }
+
+        public Playlist? GetPlaylistById(int id, UserAccess access)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<PlaylistMusic> dbSet = db.Set<PlaylistMusic>();
+                var musics = dbSet.Where(x => x.PlaylistId == id)
+                    .Include(x => x.Playlist)
+                    .Select(x => x.Playlist)
+                    .Where(_getAccess[access])
+                    .FirstOrDefault();
+                return musics;
             }
         }
         //public Playlist GetDefaultUserPlaylist(User user)

@@ -53,10 +53,14 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-                var friends = _userService.GetUsers(filter, page, limit);
+                var (friends, total) = _userService.GetUsers(filter, page, limit);
+                var maxPage = total % limit == 0 ? total / limit : total / limit + 1;
 
                 var viewmodel = new FriendsSearchPageViewModel();
                 viewmodel.Users = friends.Select(x => _friendService.GetUserViewmode_FriendsPage(x)).ToList();
+                viewmodel.Page = page;
+                viewmodel.Limit = limit;
+                viewmodel.MaxPage = maxPage;
 
                 return View(viewmodel);
             }

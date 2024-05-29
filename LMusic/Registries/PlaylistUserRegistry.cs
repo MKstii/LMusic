@@ -24,5 +24,19 @@ namespace LMusic.Registries
                 return entity;
             }
         }
+
+        public User? GetUserOwnerByPlaylistId (int id)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<PlaylistUser> dbSet = db.Set<PlaylistUser>();
+                var entity = dbSet.Where(x => x.IsCreater == true)
+                            .Where(x => x.PlaylistId == id)
+                            .Include(x => x.User)
+                            .Select(x => x.User)
+                            .FirstOrDefault();
+                return entity;
+            }
+        }
     }
 }

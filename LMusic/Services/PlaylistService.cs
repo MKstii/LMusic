@@ -7,10 +7,10 @@ namespace LMusic.Services
 {
     public class PlaylistService : DbServiceAbstract<Playlist>
     {
-        PlaylistRegistry _playlistRegistry;
-        PlaylistMusicRegistry _playlistMusicRegistry;
-        PictureService _pictureService;
-        PlaylistUserRegistry _playlistUserRegistry;
+        private PlaylistRegistry _playlistRegistry;
+        private PlaylistMusicRegistry _playlistMusicRegistry;
+        private PictureService _pictureService;
+        private PlaylistUserRegistry _playlistUserRegistry;
         public PlaylistService() : base(new PlaylistRegistry())
         {
             _playlistRegistry = (PlaylistRegistry)_registry;
@@ -55,10 +55,34 @@ namespace LMusic.Services
         }
         
 
-        public Playlist GetDefaultUserPlaylist(User user)
+        public Playlist? GetDefaultUserPlaylist(User user)
         {
             var userPlaylist = _playlistUserRegistry.GetByUserCreater(user);
             return _playlistRegistry.Find(userPlaylist.PlaylistId);
+        }
+
+        public List<Music> GetMusicByPlaylist(Playlist playlist)
+        {
+            return _playlistRegistry.GetMusicsByPlaylist(playlist);
+        }
+
+        public Playlist? GetPlaylistById(int id, UserAccess access)
+        {
+            var userPlaylistOwner = _playlistUserRegistry.GetUserOwnerByPlaylistId(id);
+
+            if(userPlaylistOwner == null)
+            {
+                return null;
+            }
+
+            //UserAccess access = _userService.GetAccess(userPlaylistOwner, requester);
+            var playlist = _playlistRegistry.GetPlaylistById(id, access);
+            return playlist;
+        }
+
+        public User? GetPlaylistOwner(int playlistId)
+        {
+            return _playlistUserRegistry.GetUserOwnerByPlaylistId(playlistId);
         }
     }
 
