@@ -291,12 +291,17 @@
                     }
                     @if (Model.UserProfileAccess == UserAccess.User)
                     {
-                        <form asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
-                            <span style="visibility: hidden;" name="addresseTgId">@Model.TgId</span>
+                        <form method="post" src="http://127.0.0.1/sendFriendRequest?addresseTgId=@Model.TgId">
                             <button class="button button-add-friend">
                                 <span>Отправить заявку в друзья</span>
                             </button>
                         </form>
+                        @* <form asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
+                            <span style="visibility: hidden;" name="addresseTgId">@Model.TgId</span>
+                            <button class="button button-add-friend">
+                                <span>Отправить заявку в друзья</span>
+                            </button>
+                        </form> *@
                     }
                 </div>
             </div>
