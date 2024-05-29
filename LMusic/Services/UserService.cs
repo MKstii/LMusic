@@ -13,6 +13,7 @@ namespace LMusic.Services
         private PictureService _pictureService;
         private PlaylistService _playlistService;
         private MusicService _musicService;
+        private FriendService _friendService;
 
         public UserService() : base(new UserRegistry())
         {
@@ -20,6 +21,7 @@ namespace LMusic.Services
             _pictureService = new PictureService();
             _playlistService = new PlaylistService();
             _musicService = new MusicService();
+            _friendService = new FriendService();
         }
 
         public List<User> GetUsersByIds(int[] ids)
@@ -73,27 +75,33 @@ namespace LMusic.Services
 
         public UserProfileViewModel? GetUserViewModel(string userTgId, User requestSender)
         {
-            User? user;
+            User? user = _userRegisty.GetUserByTgId(userTgId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
             UserAccess access;
+
             var viewmodel = new UserProfileViewModel();
+
             if (userTgId == requestSender.TelegramId)
             {
                 user = requestSender;
                 access = UserAccess.My;
                 viewmodel.FreeSpace = user.FreeSpace;
             }
-            // сделать проверку на друзей
-            //else if ()
+            else if (_friendService.IsFriends(user, requestSender))
+            {
+                access = UserAccess.Friend;
+            }
             else
             {
                 access = UserAccess.User;
-                user = _userRegisty.GetUserByTgId(userTgId);
             }
             
-            if(user == null)
-            {
-                return null;
-            }
+
 
             viewmodel.UserProfileAccess = access;
             viewmodel.UserName = user.UserName;
