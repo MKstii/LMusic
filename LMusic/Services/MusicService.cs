@@ -126,5 +126,17 @@ namespace LMusic.Services
             //music.IsDeleted = true;
             //_musicRegistry.Update(music);
         }
+
+        public void UpdateMusic(User user, Music music, string? title, string? musician, IFormFile? musicPicture, string webRootPath)
+        {
+            if (title != null) 
+                music.Title = title;
+            if (musician != null)
+                music.Musician = musician;
+            if (musicPicture != null)
+                music.PictureId = _pictureService.CreatePicture(user, musicPicture, PictureType.Music, webRootPath).Id;
+            _musicRegistry.Update(music);
+
+        }
     }
 }

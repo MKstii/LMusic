@@ -14,6 +14,12 @@ namespace LMusic.Controllers
         private PictureService _pictureService = new PictureService();
         private FriendService _friendService = new FriendService();
         private AuthService _authService = new AuthService();
+        private IWebHostEnvironment _appEnvironment;
+
+        public MusicController(IWebHostEnvironment appEnvironment)
+        {
+            _appEnvironment = appEnvironment;
+        }
 
         // GET: MusicController
         public ActionResult Index()
@@ -222,6 +228,37 @@ namespace LMusic.Controllers
             }
         }
 
+        [HttpPost("UpdateMusic")]
+        public IActionResult UpdateMusic(int musicId, string? title, string? musician, IFormFile? musicPicture)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                Music music = _musicService.GetMusic(musicId);
+                if (_userService.GetAccess(music.User, user) == UserAccess.My)
+                {
+                    _musicService.UpdateMusic(user, music, title, musician, musicPicture, _appEnvironment.WebRootPath);
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+                else
+                    return BadRequest("Пользователь не имеет доступ к изменению песни");
+
+
+
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
 
     }
 }
