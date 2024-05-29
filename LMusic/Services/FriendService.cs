@@ -86,5 +86,11 @@ namespace LMusic.Services
             _friendsListRegistry.Delete(mirrorFriendList);
             _friendsListRegistry.Delete(friendList);
         }
+
+        public bool IsFriends(User user, User friend)
+        {
+            var friendList = _friendsListRegistry.GetFriendsList(user, friend);
+            return friendList != null;
+        }
     }
 }
