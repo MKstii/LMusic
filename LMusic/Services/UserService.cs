@@ -82,26 +82,14 @@ namespace LMusic.Services
                 return null;
             }
 
-            UserAccess access;
-
+            UserAccess access = GetAccess(user, requestSender);
             var viewmodel = new UserProfileViewModel();
 
-            if (userTgId == requestSender.TelegramId)
+            if(access == UserAccess.My)
             {
                 user = requestSender;
-                access = UserAccess.My;
                 viewmodel.FreeSpace = user.FreeSpace;
             }
-            else if (_friendService.IsFriends(user, requestSender))
-            {
-                access = UserAccess.Friend;
-            }
-            else
-            {
-                access = UserAccess.User;
-            }
-            
-
 
             viewmodel.UserProfileAccess = access;
             viewmodel.UserName = user.UserName;
@@ -112,6 +100,21 @@ namespace LMusic.Services
 
             return viewmodel;
             
+        }
+        public UserAccess GetAccess(User user, User requester)
+        {
+            if (user.Id == requester.Id)
+            {
+                return UserAccess.My;
+            }
+            else if (_friendService.IsFriends(user, requester))
+            {
+                return UserAccess.Friend;
+            }
+            else
+            {
+               return UserAccess.User;
+            }
         }
     }
 }

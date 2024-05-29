@@ -26,16 +26,18 @@ namespace LMusic.Registries
             }
         }
 
-        public List<User>? GetUsers(string filter, int page, int limit)
+        public (List<User>?, int) GetUsers(string filter, int page, int limit)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
+                
                 DbSet<User> dbSet = db.Set<User>();
-                var users = dbSet.Where(x => x.UserName.ToLower().Contains(filter))
-                    .Skip((page-1)*limit)
-                    .Take(limit)
-                    .ToList();
-                return users;
+                var users = dbSet.Where(x => x.UserName.ToLower().Contains(filter));
+                var total = users.Count();
+                var resUsers = users.Skip((page-1)*limit)
+                            .Take(limit)
+                            .ToList();
+                return (resUsers, total);
             }
         }
 

@@ -120,9 +120,6 @@ namespace LMusic.Controllers
             
         }
 
-        // ДОДЕЛАТЬ.
-        // ЧТО ДОДЕЛАТЬ ТО??!?!?!?!? ВСЕ РАБОТАЕТ
-        // Ниче не работает. При добавлении добавляй в стандартный плейлист
         [HttpPost]
         public IActionResult AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
         {
@@ -134,7 +131,7 @@ namespace LMusic.Controllers
                 {
                     var user = _userService.GetUserByTg(tgUser);
                     var music = _musicService.CreateMusic(user, title, musician, audioFile, musicPicture, _appEnvironment.WebRootPath);
-                    return Redirect("/user");
+                    return Redirect(Request.Headers["Referer"].ToString());
                 }
                 return BadRequest();
             }
