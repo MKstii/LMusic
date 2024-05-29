@@ -78,23 +78,30 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("ChangeAvatar")]
-        public IActionResult ChangeAvatar(int userId, IFormFile pictureFile)
+        [HttpPost("UpdateUser")]
+        public IActionResult UpdateUser(string nickname, Privacy? privacy, IFormFile? pictureFile)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
             if (_authService.ValidUser(tgUser))
             {
-                if (pictureFile.ContentType.Contains("image") && pictureFile != null)
+                var user = _userService.GetUserByTg(tgUser);
+
+                if(user == null)
                 {
-                    var user = _userService.GetUserByTg(tgUser);
+                    return BadRequest("Пользователь не найден");
+                }
+
+                if(pictureFile != null && pictureFile.ContentType.Contains("image"))
+                {
                     var pic = _pictureService.CreatePicture(user, pictureFile, PictureType.Avatar, _appEnvironment.WebRootPath);
                     user.PictureId = pic.Id;
-
-                    _userService.Update(user);
-                    return Ok();
                 }
-                return BadRequest();
+
+                user.UserName = nickname == null? user.UserName : nickname;
+
+                _userService.Update(user);
+                return Ok();
             }
             else
             {

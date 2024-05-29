@@ -34,7 +34,7 @@ namespace LMusic.Services
             return _userRegisty.GetUsers(filter, page, limit);
         }
 
-        public List<User> GetFriends(User user, string filter = "", int page = 1, int limit = 20)
+        public (List<User>, int) GetFriends(User user, string filter = "", int page = 1, int limit = 20)
         {
             return _userRegisty.GetFriends(user, filter, page, limit);
         }
