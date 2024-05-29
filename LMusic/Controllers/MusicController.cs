@@ -50,7 +50,10 @@ namespace LMusic.Controllers
                 switch (music.User.Privacy)
                 {
                     case Privacy.ForAll:
-                        _musicService.AddMusicToUser(music, user);
+                        if (_musicService.UserHasMusic(music, user))
+                            return BadRequest("Музыка уже добавлена");
+                        else
+                            _musicService.AddMusicToUser(music, user);
                         return Redirect(Request.Headers["Referer"].ToString());
                     case Privacy.ForFriends:
                         if (_musicService.UserHasMusic(music, user))
@@ -98,7 +101,10 @@ namespace LMusic.Controllers
                     switch (music.User.Privacy)
                     {
                         case Privacy.ForAll:
-                            _musicService.AddMusicToPlaylist(music, playlist);
+                            if (_musicService.UserHasMusic(music, user))
+                                return BadRequest("Музыка уже добавлена");
+                            else
+                                _musicService.AddMusicToPlaylist(music, playlist);
                             return Redirect(Request.Headers["Referer"].ToString());
                         case Privacy.ForFriends:
                             if (_musicService.PlaylistHasMusic(music, playlist))
