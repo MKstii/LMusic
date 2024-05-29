@@ -29,7 +29,7 @@ namespace LMusic.Services
             return _userRegisty.GetUsersByIds(ids);
         }
 
-        public List<User> GetUsers(string filter = "", int page = 1, int limit = 20)
+        public (List<User>, int) GetUsers(string filter = "", int page = 1, int limit = 20)
         {
             return _userRegisty.GetUsers(filter, page, limit);
         }
