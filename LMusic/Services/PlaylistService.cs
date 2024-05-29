@@ -1,6 +1,7 @@
 ﻿using LMusic.Models;
 using LMusic.Registries;
 using LMusic.ViewModels.User;
+using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography.X509Certificates;
 
 namespace LMusic.Services
@@ -22,7 +23,7 @@ namespace LMusic.Services
         public IEnumerable<Playlist> GetPlaylistsByUser(User user, UserAccess access)
         {
             if(user.Privacy == Privacy.ForMe) return new List<Playlist>();
-            if(user.Privacy == Privacy.ForFriends && access == UserAccess.User) return new List<Playlist>();
+            if(user.Privacy == Privacy.ForFriends || access == UserAccess.User) return new List<Playlist>();
             var playlistsUsers = _playlistUserRegistry.GetByUser(user);
             var playlistsUsersIds = playlistsUsers.Select(x => x.Id).ToList();
             return _playlistRegistry.GetPlaylists(playlistsUsersIds, access);
@@ -99,6 +100,37 @@ namespace LMusic.Services
                 PlaylistId = playlist.Id,
             };
             _playlistUserRegistry.Add(playlistUser);
+        }
+
+        public Playlist CreatePlaylist(User user, string title, IFormFile? playlistPicture, Privacy priavcy, string webRootPath)
+        {
+            var playlist = new Playlist();
+            Picture picture;
+            if(playlistPicture == null)
+            {
+                picture = _pictureService.GetDefaulPlaylistPicture();
+            }
+            else
+            {
+                picture = _pictureService.CreatePicture(user, playlistPicture, PictureType.Playlist, webRootPath);
+            }
+
+            playlist.Name = title;
+            playlist.PictureId = picture.Id;
+            playlist.Privacy = priavcy;
+            playlist.IsDefault = false;
+
+            Add(playlist);
+
+            var playlistUser = new PlaylistUser();
+            playlistUser.isDefault = false;
+            playlistUser.PlaylistId = playlist.Id;
+            playlistUser.UserId = user.Id;
+            playlistUser.IsCreater = true;
+
+            _playlistUserRegistry.Add(playlistUser);
+
+            return playlist;
         }
     }
 

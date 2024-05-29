@@ -41,16 +41,18 @@ namespace LMusic.Registries
             }
         }
 
-        public List<User>? GetFriends(User user, string filter, int page, int limit)
+        public (List<User>?, int) GetFriends(User user, string filter, int page, int limit)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
                 var friendsIds = db.FriendsLists.Where(x => x.UserId == user.Id).Select(x => x.FriendId);
-                var users = db.Users.Where(x => friendsIds.Contains(x.Id))
+                var users = db.Users.Where(x => friendsIds.Contains(x.Id));
+                var total = users.Count();
+                var resUsers = users
                     .Skip((page-1)*limit)
                     .Take(limit)
                     .ToList();
-                return users;
+                return (resUsers, total);
             }
         }
     }
