@@ -38,5 +38,15 @@ namespace LMusic.Registries
                 return entity;
             }
         }
+
+        public PlaylistUser GetByPlaylistAndUser(Playlist playlist, User user)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<PlaylistUser> dbSet = db.Set<PlaylistUser>();
+                var entity = dbSet.Where(i => i.UserId == user.Id && i.PlaylistId == playlist.Id).FirstOrDefault();
+                return entity;
+            }
+        }
     }
 }

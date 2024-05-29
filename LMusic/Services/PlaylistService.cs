@@ -84,6 +84,22 @@ namespace LMusic.Services
         {
             return _playlistUserRegistry.GetUserOwnerByPlaylistId(playlistId);
         }
+
+        public bool UserHasPlaylist(Playlist playlist, User user)
+        {
+            var result = _playlistUserRegistry.GetByPlaylistAndUser(playlist, user);
+            return result != null;
+        }
+
+        public void AddPlaylistToUser(Playlist playlist, User user)
+        {
+            PlaylistUser playlistUser = new PlaylistUser()
+            {
+                UserId = user.Id,
+                PlaylistId = playlist.Id,
+            };
+            _playlistUserRegistry.Add(playlistUser);
+        }
     }
 
     public static class PlaylistExtension
