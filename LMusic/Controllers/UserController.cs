@@ -111,23 +111,6 @@ namespace LMusic.Controllers
 
         }
 
-
-        [HttpGet("GetUserPlaylists")]
-        public IActionResult GetUserPlaylists(int userId)
-        {
-            var user = _userService.Find(userId);
-            if(user == null || user.Privacy == Privacy.ForMe)
-            {
-                return Forbid();
-            }
-            else
-            {
-                var playlists = _playlistService.GetPlaylistsByUser(user, UserAccess.My);
-                return Ok(playlists);
-            }
-            
-        }
-
         [HttpPost]
         public IActionResult AddMusic(string title,string musician, IFormFile audioFile, IFormFile? musicPicture)
         {

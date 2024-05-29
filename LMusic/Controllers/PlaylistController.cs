@@ -71,7 +71,6 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-
                 var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
                 Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
                 switch (playlistOwner.Privacy)
@@ -225,6 +224,44 @@ namespace LMusic.Controllers
                 Response.Cookies.Delete("TelegramUserHash");
                 return Unauthorized("Ошибка валидации");
             }
+        }
+
+        [HttpGet("GetUserPlaylists")]
+        public IActionResult GetUserPlaylists()
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+
+                if (user == null)
+                {
+                    Response.Cookies.Delete("TelegramUserHash");
+                    return BadRequest("Пользователь не найден");
+                }
+
+                var playlists = _playlistService.GetPlaylistsByUser(user, UserAccess.My);
+                var playlistsViewmodel = playlists.Select(x => _playlistService.GetViewModel(x, user));
+                return Ok(playlistsViewmodel);
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Unauthorized("Ошибка валидации");
+            }
+
+            //var user = _userService.Find(userId);
+            //if (user == null || user.Privacy == Privacy.ForMe)
+            //{
+            //    return Forbid();
+            //}
+            //else
+            //{
+            //    var playlists = _playlistService.GetPlaylistsByUser(user, UserAccess.My);
+            //    return Ok(playlists);
+            //}
+
         }
 
     }
