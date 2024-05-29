@@ -14,13 +14,12 @@ namespace LMusic.Models
         public string FileName { get; set; }
         public string Path { get; set; }
         public List<PlaylistMusic> Playlists { get; set; }
-        public Privacy Privacy { get; set; }
         public bool IsDeleted { get; set; }
 
         public Music() { }
 
         public Music(int id, int userId, int pictureId, string title, 
-            string musician, string path, string fileName, Privacy privacy)
+            string musician, string path, string fileName)
         {
             Id = id;
             UserId = userId;
@@ -29,7 +28,6 @@ namespace LMusic.Models
             Musician = musician;
             Path = path;
             FileName = fileName;
-            Privacy = privacy;
             IsDeleted = false;
         }
 

@@ -2,6 +2,7 @@
 using LMusic.Registries;
 using LMusic.ViewModels.User;
 using Npgsql.PostgresTypes;
+using System.Runtime.CompilerServices;
 
 namespace LMusic.Services
 {
@@ -10,13 +11,15 @@ namespace LMusic.Services
         private MusicRegistry _musicRegistry;
         private PlaylistMusicRegistry _playlistMusicRegistry;
         private PictureService _pictureService;
-        private PlaylistService _playlistService;  
+        private PlaylistService _playlistService;
+        private FriendService _friendService;
         public MusicService() : base(new MusicRegistry())
         {
             _musicRegistry = (MusicRegistry)_registry;
             _pictureService = new PictureService();
             _playlistService = new PlaylistService();
             _playlistMusicRegistry = new PlaylistMusicRegistry();
+            _friendService = new FriendService();
         }
 
         public string CreatePath(User user)
@@ -77,11 +80,28 @@ namespace LMusic.Services
             return viewmodel;
         }
 
-        public bool AddMusicToFav(int musicId)
+        public Music GetMusic(int musicId)
         {
             Music music = _musicRegistry.FindWithIncludeUser(musicId);
-            
-            return true;
+            return music;
+        }
+
+        public void AddMusicToUser(Music music, User user)
+        {
+            var playlist = _playlistService.GetDefaultUserPlaylist(user);
+            PlaylistMusic playlistMusic = new PlaylistMusic()
+            {
+                MusicId = music.Id,
+                PlaylistId = playlist.Id,
+            };
+            _playlistMusicRegistry.Add(playlistMusic);
+        }
+
+        public bool UserHasMusic(Music music, User user)
+        {
+            var playlist = _playlistService.GetDefaultUserPlaylist(user);
+            var result = _playlistMusicRegistry.GetByMusicAndPlyalist(playlist, music);
+            return result != null;
         }
     }
 }

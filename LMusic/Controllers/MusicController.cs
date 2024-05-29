@@ -8,7 +8,12 @@ namespace LMusic.Controllers
 {
     public class MusicController : Controller
     {
-        MusicService musicService = new MusicService();
+        private MusicService _musicService = new MusicService();
+        private UserService _userService = new UserService();
+        private PlaylistService _playlistService = new PlaylistService();
+        private PictureService _pictureService = new PictureService();
+        private FriendService _friendService = new FriendService();
+        private AuthService _authService = new AuthService();
 
         // GET: MusicController
         public ActionResult Index()
@@ -31,11 +36,86 @@ namespace LMusic.Controllers
         [HttpPost("AddMusicToFav")]
         public IActionResult AddMusicToFav(int musicId)
         {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
 
+                Music music = _musicService.GetMusic(musicId);
+                switch (music.User.Privacy)
+                {
+                    case Privacy.ForAll:
+                        _musicService.AddMusicToUser(music, user);
+                        return Redirect(Request.Headers["Referer"].ToString());
+                    case Privacy.ForFriends:
+                        if (_musicService.UserHasMusic(music, user))
+                            return BadRequest("Музыка уже добавлена");
+                        else if (_friendService.IsFriends(user, music.User))
+                            _musicService.AddMusicToUser(music, user);
+                        else
+                            return BadRequest("Не удалось добавить музыку");
+                        break;
+                    case Privacy.ForMe:
+                        return BadRequest("Не удалось добавить музыку");
+                    default:
+                        return BadRequest("Не удалось добавить музыку");
+                }
 
-            return Ok();
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+
         }
 
+        public IActionResult AddMusicToPlaylist(int musicId, int playlistId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                //Music music = _musicService.GetMusic(musicId);
+                //switch (music.User.Privacy)
+                //{
+                //    case Privacy.ForAll:
+                //        _musicService.AddMusicToUser(music, user);
+                //        return Redirect(Request.Headers["Referer"].ToString());
+                //    case Privacy.ForFriends:
+                //        if (_musicService.UserHasMusic(music, user))
+                //            return BadRequest("Музыка уже добавлена");
+                //        else if (_friendService.IsFriends(user, music.User))
+                //            _musicService.AddMusicToUser(music, user);
+                //        else
+                //            return BadRequest("Не удалось добавить музыку");
+                //        break;
+                //    case Privacy.ForMe:
+                //        return BadRequest("Не удалось добавить музыку");
+                //    default:
+                //        return BadRequest("Не удалось добавить музыку");
+                //}
+
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
 
     }
 }

@@ -14,5 +14,14 @@ namespace LMusic.Registries
                 return musics.ToList();
             }
         }
+
+        public PlaylistMusic GetByMusicAndPlyalist(Playlist playlist, Music music) 
+        {
+            using (var db = new ContextDataBase())
+            {
+                var result = db.PlaylistMusics.Where(x => x.PlaylistId == playlist.Id && x.MusicId == music.Id);
+                return result.FirstOrDefault();
+            }
+        }
     }
 }
