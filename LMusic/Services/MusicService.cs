@@ -89,19 +89,29 @@ namespace LMusic.Services
         public void AddMusicToUser(Music music, User user)
         {
             var playlist = _playlistService.GetDefaultUserPlaylist(user);
+            AddMusicToPlaylist(music, playlist);
+        }
+
+        public bool UserHasMusic(Music music, User user)
+        {
+            var playlist = _playlistService.GetDefaultUserPlaylist(user);
+            return PlaylistHasMusic(music, playlist);
+        }
+
+        public bool PlaylistHasMusic(Music music, Playlist playlist)
+        {
+            var result = _playlistMusicRegistry.GetByMusicAndPlyalist(playlist, music);
+            return result != null;
+        }
+
+        public void AddMusicToPlaylist(Music music, Playlist playlist)
+        {
             PlaylistMusic playlistMusic = new PlaylistMusic()
             {
                 MusicId = music.Id,
                 PlaylistId = playlist.Id,
             };
             _playlistMusicRegistry.Add(playlistMusic);
-        }
-
-        public bool UserHasMusic(Music music, User user)
-        {
-            var playlist = _playlistService.GetDefaultUserPlaylist(user);
-            var result = _playlistMusicRegistry.GetByMusicAndPlyalist(playlist, music);
-            return result != null;
         }
     }
 }

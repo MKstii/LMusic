@@ -88,25 +88,33 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-                //Music music = _musicService.GetMusic(musicId);
-                //switch (music.User.Privacy)
-                //{
-                //    case Privacy.ForAll:
-                //        _musicService.AddMusicToUser(music, user);
-                //        return Redirect(Request.Headers["Referer"].ToString());
-                //    case Privacy.ForFriends:
-                //        if (_musicService.UserHasMusic(music, user))
-                //            return BadRequest("Музыка уже добавлена");
-                //        else if (_friendService.IsFriends(user, music.User))
-                //            _musicService.AddMusicToUser(music, user);
-                //        else
-                //            return BadRequest("Не удалось добавить музыку");
-                //        break;
-                //    case Privacy.ForMe:
-                //        return BadRequest("Не удалось добавить музыку");
-                //    default:
-                //        return BadRequest("Не удалось добавить музыку");
-                //}
+
+                var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
+                if (_userService.GetAccess(playlistOwner, user) == UserAccess.My)
+                {
+                    Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
+                    Music music = _musicService.GetMusic(musicId);
+                    switch (music.User.Privacy)
+                    {
+                        case Privacy.ForAll:
+                            _musicService.AddMusicToPlaylist(music, playlist);
+                            return Redirect(Request.Headers["Referer"].ToString());
+                        case Privacy.ForFriends:
+                            if (_musicService.PlaylistHasMusic(music, playlist))
+                                return BadRequest("Музыка уже добавлена");
+                            else if (_friendService.IsFriends(user, music.User))
+                                _musicService.AddMusicToPlaylist(music, playlist);
+                            else
+                                return BadRequest("Не удалось добавить музыку");
+                            break;
+                        case Privacy.ForMe:
+                            return BadRequest("Не удалось добавить музыку");
+                        default:
+                            return BadRequest("Не удалось добавить музыку");
+                    }
+                }
+
+                
 
                 return Redirect(Request.Headers["Referer"].ToString());
             }
