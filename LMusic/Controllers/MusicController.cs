@@ -101,7 +101,7 @@ namespace LMusic.Controllers
                     switch (music.User.Privacy)
                     {
                         case Privacy.ForAll:
-                            if (_musicService.UserHasMusic(music, user))
+                            if (_musicService.PlaylistHasMusic(music, playlist))
                                 return BadRequest("Музыка уже добавлена");
                             else
                                 _musicService.AddMusicToPlaylist(music, playlist);
@@ -121,8 +121,6 @@ namespace LMusic.Controllers
                     }
                 }
 
-                
-
                 return Redirect(Request.Headers["Referer"].ToString());
             }
             else
@@ -131,6 +129,99 @@ namespace LMusic.Controllers
                 return Redirect("/home");
             }
         }
+
+
+        [HttpPost("DeleteMusicFromPlaylist")]
+        public IActionResult DeleteMusicFromPlaylist(int musicId, int playlistId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
+                if (_userService.GetAccess(playlistOwner, user) == UserAccess.My)
+                {
+                    Music music = _musicService.GetMusic(musicId);
+                    Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
+                    _musicService.DeleteMusicFromPlaylist(playlist, music);
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+                else 
+                    return BadRequest("Пользователь не имеет доступ к плейлисту");
+
+
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
+
+
+        [HttpPost("DeleteMusicFromUser")]
+        public IActionResult DeleteMusicFromUser(int musicId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                Playlist playlist = _playlistService.GetDefaultUserPlaylist(user);
+                Music music = _musicService.GetMusic(musicId);
+                _musicService.DeleteMusicFromPlaylist(playlist, music);
+                return Redirect(Request.Headers["Referer"].ToString());
+
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
+
+        [HttpPost("DeleteMusicFromUser")]
+        public IActionResult DeleteMusic(int musicId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                Music music = _musicService.GetMusic(musicId);
+                if (_userService.GetAccess(music.User, user) == UserAccess.My)
+                {
+                    _musicService.DeleteMusic(music);
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+                else
+                {
+                    return BadRequest("Пользователь не имеет доступ к удалению песни");
+                }
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
+
 
     }
 }

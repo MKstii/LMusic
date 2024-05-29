@@ -113,5 +113,18 @@ namespace LMusic.Services
             };
             _playlistMusicRegistry.Add(playlistMusic);
         }
+        public void DeleteMusicFromPlaylist(Playlist playlist, Music music)
+        {
+            var obj = _playlistMusicRegistry.GetByMusicAndPlyalist(playlist, music);
+            _playlistMusicRegistry.Delete(obj);
+        }
+
+        public void DeleteMusic(Music music)
+        {
+            _musicRegistry.Delete(music);
+            
+            //music.IsDeleted = true;
+            //_musicRegistry.Update(music);
+        }
     }
 }

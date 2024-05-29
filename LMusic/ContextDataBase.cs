@@ -14,12 +14,12 @@ namespace LMusic
         {
             optionsBuilder.UseInMemoryDatabase("LMusic");
             
-            
             // Additional.DatabaseData будут объекты, которые надо будет засунуть в базу
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<FriendRequest>()
                 .HasOne(x => x.Requester)
                 .WithMany(x => x.FriendRequestsListAsRequester)
