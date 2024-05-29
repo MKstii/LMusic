@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string PhotoPath { get; set; }
         public bool IsDefault { get; set; }
+        public bool CanEdit { get; set; }
 
     }
 }

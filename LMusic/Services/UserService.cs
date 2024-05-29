@@ -95,8 +95,19 @@ namespace LMusic.Services
             viewmodel.UserName = user.UserName;
             viewmodel.PhotoPath = _pictureService.GetUserAvatar(user).GetFullPath();
             viewmodel.TgId = user.TelegramId;
-            viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(_playlistService.GetViewModel).ToList();
-            viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(_musicService.GetViewModel).ToList();
+
+            if(user.Privacy == Privacy.ForAll
+                || user.Privacy == Privacy.ForFriends && _friendService.IsFriends(user, requestSender)
+                || user.Id == requestSender.Id)
+            {
+                viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(x => _playlistService.GetViewModel(x, user)).ToList();
+                viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(x => _musicService.GetViewModel(x, user)).ToList();
+            }
+            else
+            {
+                viewmodel.Playlists = new List<PlaylistViewmodel>();
+                viewmodel.FavoriteMusic = new List<MusicViewmodel>();
+            }
 
             return viewmodel;
             

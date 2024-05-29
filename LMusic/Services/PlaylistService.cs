@@ -22,10 +22,8 @@ namespace LMusic.Services
 
         public IEnumerable<Playlist> GetPlaylistsByUser(User user, UserAccess access)
         {
-            if(user.Privacy == Privacy.ForMe) return new List<Playlist>();
-            if(user.Privacy == Privacy.ForFriends || access == UserAccess.User) return new List<Playlist>();
             var playlistsUsers = _playlistUserRegistry.GetByUser(user);
-            var playlistsUsersIds = playlistsUsers.Select(x => x.Id).ToList();
+            var playlistsUsersIds = playlistsUsers.Select(x => x.PlaylistId).ToList();
             return _playlistRegistry.GetPlaylists(playlistsUsersIds, access);
         }
 
@@ -45,13 +43,15 @@ namespace LMusic.Services
             return newPlaylist;
         }
 
-        public PlaylistViewmodel GetViewModel(Playlist playlist)
+        public PlaylistViewmodel GetViewModel(Playlist playlist, User requester)
         {
             var viewmodel = new PlaylistViewmodel();
             viewmodel.Id = playlist.Id;
             viewmodel.Name = playlist.Name;
             viewmodel.PhotoPath = _pictureService.GetPlaylistAvatar(playlist).GetFullPath();
             viewmodel.IsDefault = playlist.IsDefault;
+            var owner = GetPlaylistOwner(playlist.Id);
+            viewmodel.CanEdit = owner.Id == requester.Id;
             return viewmodel;
         }
         
@@ -97,7 +97,7 @@ namespace LMusic.Services
             PlaylistUser playlistUser = new PlaylistUser()
             {
                 UserId = user.Id,
-                PlaylistId = playlist.Id,
+                PlaylistId = playlist.Id
             };
             _playlistUserRegistry.Add(playlistUser);
         }

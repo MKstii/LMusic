@@ -99,6 +99,7 @@ namespace LMusic.Controllers
                 }
 
                 user.UserName = nickname == null? user.UserName : nickname;
+                user.Privacy = privacy == null? user.Privacy : (Privacy)privacy;
 
                 _userService.Update(user);
                 return Ok();

@@ -1,11 +1,11 @@
 ﻿@using LMusic.Models;
 @using LMusic.ViewModels.Friends;
-@model List<UserViewmodel_FriendsPage>;
+@model FriendsSearchPageViewModel;
 @{
     ViewData["Title"] = "Заявки";
 }
 
-@foreach (var user in Model)
+@foreach (var user in Model.Users)
 {
     <div>
         @user.Name
@@ -22,7 +22,7 @@
         </div>
         <div class="friends">
             <ul class="list-friends">
-                @foreach (var user in Model)
+                @foreach (var user in Model.Users)
                 {
                     <li class="list-users-item">
                         <a href="/user/@user.Id">

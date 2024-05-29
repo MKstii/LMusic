@@ -63,13 +63,11 @@ namespace LMusic.Services
 
         public List<Music> GetFavoriteMusicByUser(User user, UserAccess access)
         {
-            if (user.Privacy == Privacy.ForMe) return new List<Music>();
-            if (user.Privacy == Privacy.ForFriends && access == UserAccess.User) return new List<Music>();
             var defaultUserPlaylist = _playlistService.GetDefaultUserPlaylist(user);
             return _playlistMusicRegistry.GetMusicByPlaylist(defaultUserPlaylist);
         }
 
-        public MusicViewmodel GetViewModel(Music music)
+        public MusicViewmodel GetViewModel(Music music, User requester)
         {
             var viewmodel = new MusicViewmodel();
             viewmodel.Title = music.Title;
@@ -77,6 +75,7 @@ namespace LMusic.Services
             viewmodel.Id = music.Id;
             viewmodel.PhotoPath = _pictureService.GetMusicAvatar(music).GetFullPath();
             viewmodel.MusicPath = music.GetFullPath();
+            viewmodel.CanEdit = music.UserId == requester.Id;
             return viewmodel;
         }
 

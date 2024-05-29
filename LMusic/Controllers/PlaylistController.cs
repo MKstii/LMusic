@@ -47,7 +47,7 @@ namespace LMusic.Controllers
 
                 var musics = _playlistService.GetMusicByPlaylist(playlist);
 
-                var result = musics.Select(x => _musicService.GetViewModel(x));
+                var result = musics.Select(x => _musicService.GetViewModel(x, user));
 
                 return Ok(result);
             }

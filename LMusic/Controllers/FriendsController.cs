@@ -88,10 +88,16 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-                var requests = _friendService.GetRequestByAddresser(user, filter, page, limit);
-                var usersViewmodel = requests.Select(x => _friendService.GetUserViewmode_FriendsPage(x.Requester)).ToList();
-                ViewData["filter"] = filter;
-                return View(usersViewmodel);
+                var (requests, total) = _friendService.GetRequestByAddresser(user, filter, page, limit);
+                var maxPage = total % limit == 0 ? total / limit : total / limit + 1;
+
+                var viewmodel = new FriendsSearchPageViewModel();
+                viewmodel.Users = requests.Select(x => _friendService.GetUserViewmode_FriendsPage(x.Requester)).ToList();
+                viewmodel.Page = page;
+                viewmodel.Limit = limit;
+                viewmodel.MaxPage = maxPage;
+
+                return View(viewmodel);
             }
             else
             {

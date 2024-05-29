@@ -26,18 +26,20 @@ namespace LMusic.Registries
             }
         }
 
-        public List<FriendRequest> GetRequestByAddresse(User user, string filter, int page, int limit)
+        public (List<FriendRequest>, int) GetRequestByAddresse(User user, string filter, int page, int limit)
         {
             using (var db = new ContextDataBase())
             {
                 var request = db.FriendRequests
                     .Include(x => x.Requester)
                     .Where(x => x.AddresseeId == user.Id)
-                    .Where(x => x.Requester.UserName.ToLower().Contains(filter))
+                    .Where(x => x.Requester.UserName.ToLower().Contains(filter));
+                int total = request.Count();
+                var resRequests = request
                     .Skip((page-1)*limit)
                     .Take(limit)
                     .ToList();
-                return request;
+                return (resRequests, total);
             }
         }
     }
