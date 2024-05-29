@@ -101,7 +101,7 @@ namespace LMusic.Controllers
                     switch (music.User.Privacy)
                     {
                         case Privacy.ForAll:
-                            if (_musicService.UserHasMusic(music, user))
+                            if (_musicService.PlaylistHasMusic(music, playlist))
                                 return BadRequest("Музыка уже добавлена");
                             else
                                 _musicService.AddMusicToPlaylist(music, playlist);
