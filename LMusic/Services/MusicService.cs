@@ -1,6 +1,7 @@
 ﻿using LMusic.Models;
 using LMusic.Registries;
 using LMusic.ViewModels.User;
+using Npgsql.PostgresTypes;
 
 namespace LMusic.Services
 {
@@ -74,6 +75,13 @@ namespace LMusic.Services
             viewmodel.PhotoPath = _pictureService.GetMusicAvatar(music).GetFullPath();
             viewmodel.MusicPath = music.GetFullPath();
             return viewmodel;
+        }
+
+        public bool AddMusicToFav(int musicId)
+        {
+            Music music = _musicRegistry.FindWithIncludeUser(musicId);
+            
+            return true;
         }
     }
 }
