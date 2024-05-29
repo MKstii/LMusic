@@ -35,10 +35,8 @@ namespace LMusic.Registries
         {
             using (ContextDataBase db = new ContextDataBase())
             {
-                DbSet<PlaylistMusic> dbSet = db.Set<PlaylistMusic>();
-                var musics = dbSet.Where(x => x.PlaylistId == id)
-                    .Include(x => x.Playlist)
-                    .Select(x => x.Playlist)
+                DbSet<Playlist> dbSet = db.Set<Playlist>();
+                var musics = dbSet.Where(x => x.Id == id)
                     .Where(_getAccess[access])
                     .FirstOrDefault();
                 return musics;

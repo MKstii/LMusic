@@ -76,6 +76,7 @@ namespace LMusic.Controllers
 
         }
 
+        [HttpPost("AddMusicToPlaylist")]
         public IActionResult AddMusicToPlaylist(int musicId, int playlistId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
