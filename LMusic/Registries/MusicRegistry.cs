@@ -15,16 +15,5 @@ namespace LMusic.Registries
                 return entity;
             }
         }
-
-        public void DeleteCascade(Music music)
-        {
-            using (ContextDataBase db = new ContextDataBase())
-            {
-                DbSet<Music> dbSet = db.Set<Music>();
-                db. (music);
-                db.SaveChanges();
-                return entity;
-            }
-        }
     }
 }

@@ -47,6 +47,13 @@ namespace LMusic.Controllers
                 return BadRequest(ex);
             }
         }
-        
+
+        [HttpGet("Logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("TelegramUserHash");
+            return Redirect("/home");
+        }
+
     }
 }

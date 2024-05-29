@@ -191,7 +191,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("DeleteMusicFromUser")]
+        [HttpPost("DeleteMusic")]
         public IActionResult DeleteMusic(int musicId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
