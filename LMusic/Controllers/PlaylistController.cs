@@ -76,12 +76,16 @@ namespace LMusic.Controllers
                     case Privacy.ForAll:
                         if (_playlistService.UserHasPlaylist(playlist, user))
                             return BadRequest("Плейлист уже добавлен");
+                        else if (playlist.IsDefault)
+                            return BadRequest("Нелзья добавить плейлист \"Избранное\"");
                         else
                            _playlistService.AddPlaylistToUser(playlist, user);
                         return Redirect(Request.Headers["Referer"].ToString());
                     case Privacy.ForFriends:
                         if (_playlistService.UserHasPlaylist(playlist, user))
                             return BadRequest("Плейлист уже добавлен");
+                        else if (playlist.IsDefault)
+                            return BadRequest("Нелзья добавить плейлист \"Избранное\"");
                         else if (_friendService.IsFriends(user, playlistOwner))
                             _playlistService.AddPlaylistToUser(playlist, user);
                         else
