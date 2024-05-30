@@ -107,6 +107,38 @@ namespace LMusic.Controllers
             }
         }
 
+        [HttpPost("/playlist/removePlaylistFromUser")]
+        public IActionResult RemovePlaylistFromUser(int playlistId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
+
+                var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
+                Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
+
+                if (!_playlistService.UserHasPlaylist(playlist, user))
+                {
+                    return BadRequest("Плейлист не найден");
+                }
+
+                _playlistService.RemovePlaylistFromUser(playlist, user);
+
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
+
         [HttpPost("/playlist/add")]
         public IActionResult Add(string title, IFormFile? playlistPicture, Privacy privacy)
         {

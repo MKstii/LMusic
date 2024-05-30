@@ -15,5 +15,15 @@ namespace LMusic.Registries
                 return entity;
             }
         }
+
+        public List<Music> GetMusicsByOwner(User user)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<Music> dbSet = db.Set<Music>();
+                var entity = dbSet.Where(x => x.UserId == user.Id).ToList();
+                return entity;
+            }
+        }
     }
 }

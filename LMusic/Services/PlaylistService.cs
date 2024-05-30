@@ -132,6 +132,12 @@ namespace LMusic.Services
 
             return playlist;
         }
+
+        public void RemovePlaylistFromUser(Playlist playlist, User user)
+        {
+            var playlistUser = _playlistUserRegistry.GetByPlaylistAndUser(playlist, user);
+            _playlistUserRegistry.Delete(playlistUser);
+        }
     }
 
     public static class PlaylistExtension

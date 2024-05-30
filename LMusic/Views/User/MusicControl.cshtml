@@ -1,0 +1,144 @@
+﻿@using LMusic.Models;
+@using LMusic.ViewModels.User;
+@model List<MusicViewmodel>;
+@{
+    ViewData["Title"] = "Профиль";
+}
+<div class="content-wrapper">
+    <div class="block-profile">
+        <div class="background"></div>
+        
+        <div class="block-music block-music-user">
+           
+            <div class="user-music">
+                @foreach (var music in Model)
+                {
+                    <div class="block-one-music">
+                        <div class="music">
+                            <div class="info-music">
+                                <audio class="audio" src="@music.MusicPath"></audio>
+                                <div class="play-music">
+                                    <img class="avatar-music" src="@music.PhotoPath" alt="Обложка песни" />
+                                </div>
+                                <div class="block-name-music">
+                                    <span>@music.Title</span>
+                                    <span>@music.Musician</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="block-current-music">
+        </div>
+
+        @* <div class="current-playlist">
+            <span class="header-current-playlist">Текущий плейлист</span>
+            <button class="shuffle current-playlist-shuffle">
+                <img class="shuffle-icon" src="/img/icon-shuffle.png" />
+                Перемешать
+            </button>
+            <div class="block-one-music">
+                <div class="music">
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
+                </div>
+            </div>
+            <div class="block-one-music">
+                <div class="music">
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
+                </div>
+            </div>
+            <div class="block-one-music">
+                <div class="music">
+                    <div class="info-music">
+                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
+                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
+                        <div class="block-name-music">
+                            <span>Название (Альбом)</span>
+                            <span>Исполнитель</span>
+                        </div>
+                    </div>
+                    <button class="block-control">
+                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.UserProfileAccess == UserAccess.My)
+        {
+            <div class="popup-change-mymusic">
+                <button class="popup-button button-delete-music">
+                    <img class="popup-image" src="~/img/icon-delete.png" />
+                    Удалить
+                </button>
+                <button class="popup-button button-delete-music-favorite">
+                    <img class="popup-image" src="~/img/icon-krestic.png" />
+                    Убрать из избранного
+                </button>
+                <button class="popup-button button-change-music">
+                    <img class="popup-image" src="~/img/icon-reduct.png" />
+                    Редактировать
+                </button>
+                <button class="popup-button button-show-addinplaylist">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить в плейлист
+                </button>
+            </div>
+        }
+
+        <div class="block-add-in-playlist">
+            <form class="form-addin-playlist">
+                <div class="block-checkbox">
+                    <input id="playlist1" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist1">Плейлист 1</label>
+                </div>
+                <div class="block-checkbox">
+                    <input id="playlist2" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist2">Плейлист 2</label>
+                </div>
+                <div class="block-checkbox">
+                    <input id="playlist3" type="radio" name="playlist" value="playlist" />
+                    <label for="playlist3">Плейлист 3</label>
+                </div>
+                <button class="button button-add-inplaylist">Добавить</button>
+            </form>
+        </div>
+
+        @if (Model.UserProfileAccess == UserAccess.User || Model.UserProfileAccess == UserAccess.Friend)
+        {
+            <div class="popup-change-friendmusic">
+                <button class="popup-button button-addin-mymusic">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить себе
+                </button>
+                <button class="popup-button button-show-addinplaylist">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить в плейлист
+                </button>
+            </div>
+        } *@
+    </div>
+</div>

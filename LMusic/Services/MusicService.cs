@@ -137,5 +137,10 @@ namespace LMusic.Services
             _musicRegistry.Update(music);
 
         }
+
+        public List<Music> GetMusicsByOwner(User user)
+        {
+            return _musicRegistry.GetMusicsByOwner(user);
+        }
     }
 }
