@@ -139,7 +139,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("/playlist/add")]
+        [HttpPost("Add")]
         public IActionResult Add(string title, IFormFile? playlistPicture, Privacy privacy)
         {
             if(title == null)

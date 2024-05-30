@@ -117,6 +117,16 @@ const buttonOpenPopupinProfile = document.querySelectorAll('.block-control'),
 
 buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
     e.preventDefault();
+    const musicid = item.querySelector('.music-my-id').innerHTML;
+    const musictitle = item.querySelector('.music-my-title').innerHTML;
+    const musicmusician = item.querySelector('.music-my-musician').innerHTML;
+
+    popupBlockChangeMusic.getElementById('musicidpopup').value = musicid;
+    popupBlockChangeMusic.getElementById('musiciddelete').value = musicid;
+    popupBlockChangeMusic.getElementById('musiciddeleteplalist').value = musicid;
+    popupBlockChangeMusic.querySelector('.music-change-idd').innerHTML = musicid;
+    popupBlockChangeMusic.querySelector('.titlemusiccc').innerHTML = musictitle;
+    popupBlockChangeMusic.querySelector('.musicianmusiccc').innerHTML = musicmusician;
 
     popupBlockChangeMusic.classList.toggle('show');
     popupBlockChangeMusic.style.top = e.pageY - 50 + 'px';
@@ -127,6 +137,21 @@ buttonOpenPopupinProfile.forEach(item => item.addEventListener('click', (e) => {
 
 popupBlockChangeMusic?.addEventListener('click', (e) => {
     if (e.target == buttonaddInPlaylist) {
+        const musicId = popupOtherMusicChange.getElementById('musicidpopup').value;
+
+        blockAddInPLaylist.getElementById('musicId').value = musicId;
+
+        const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
+            .then(response => response.json());
+        var htmlPlaylists = '';
+        for (var i = 0; i < playlists.length; i++) {
+            htmlPlaylists += '<div class="block-checkbox">' +
+                '<input id="' + playlists[i]['id'] + '" type="radio" name="playlistId" value="' + playlists[i]['id'] + '" />' +
+                '<label for="' + playlists[i]['id'] + '">' + playlists[i]['name'] + '</label></div>';
+        }
+        const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
+        divBlockCheckboxMyPlaylists.innerHTML = htmlPlaylists;
+
         blockAddInPLaylist.classList.toggle('show');
         blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
         blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
@@ -139,6 +164,9 @@ const buttonOpenPopupOtherMusic = document.querySelectorAll('.block-music-other-
     
 buttonOpenPopupOtherMusic.forEach(item => item.addEventListener('click', (e) => {
     e.preventDefault();
+    const musicid = item.querySelector('.music-id').innerHTML;
+
+    popupOtherMusicChange.getElementById('musicidpopup').value = musicid;
 
     popupOtherMusicChange.classList.toggle('show');
     popupOtherMusicChange.style.top = e.pageY - 50 + 'px';
@@ -147,6 +175,20 @@ buttonOpenPopupOtherMusic.forEach(item => item.addEventListener('click', (e) => 
 
 popupOtherMusicChange?.addEventListener('click', (e) => {
     if (e.target == buttonAddInPlayListOther) {
+        const musicid = popupOtherMusicChange.querySelector('.input-hidden-musicid');
+        blockAddInPLaylist.getElementById('musicId').value = musicid;
+
+        const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
+            .then(response => response.json());
+        var htmlPlaylists = '';
+        for (var i = 0; i < playlists.length; i++) {
+            htmlPlaylists += '<div class="block-checkbox">' +
+                '<input id="' + playlists[i]['id'] + '" type="radio" name="playlistId" value="' + playlists[i]['id'] + '" />' +
+                '<label for="' + playlists[i]['id'] + '">' + playlists[i]['name'] + '</label></div>';
+        }
+        const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
+        divBlockCheckboxMyPlaylists.innerHTML = htmlPlaylists;
+
         blockAddInPLaylist.classList.toggle('show');
         blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
         blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
@@ -220,15 +262,25 @@ const buttonAAAA = document.querySelectorAll('.button-for-my-playlist'),
 
 buttonAAAA.forEach(item => item.addEventListener('click', (e) => {
     const idPlaylist = e.target.id;
+    const titlePlaylist = e.target.dataset.title;
     formChangePlaylistAAA.innerHTML = '';
-    if (e.target.getAttribute('data-default')) {
-        formChangePlaylistAAA.innerHTML = '<button class="button-playlist-delete">' +
-            //'<img class="icon-change-playlist" src = "~/img/icon-delete.png" />' +
-            '<span>Удалить</span></button>';
+    if (e.target.getAttribute('data-change-my')) {
+        formChangePlaylistAAA.innerHTML = '<form asp-action="/playlist/delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+            '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
+            '<button type="submit">Удалить</button></form>' +
+            '<button class="button-playlist-change">' +
+            '<img class="icon-change-playlist" src="~/img/icon-reduct.png" />' +
+            '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
+            '<span>Редактировать</span>' +
+            '<span class="titleplaylist" style="visibility:hidden;">' + titlePlaylist + '</span>' +
+            '</button>';
     }
-    formChangePlaylistAAA.innerHTML += '<button class="button-playlist-change">' +
-        //'<img class="icon-change-playlist" src = "~/img/icon-reduct.png" />' +
-        '<span>Редактировать</span></button>';
+    else {
+        formChangePlaylistAAA.innerHTML = '<form asp-action="/playlist/removePlaylistFromUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
+            '<button type="submit">Удалить со своей страницы</button></form>';
+    }
+
     formChangePlaylistAAA.classList.toggle('show');
     formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
     formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
@@ -237,7 +289,7 @@ buttonAAAA.forEach(item => item.addEventListener('click', (e) => {
 //const buttonOpenChangePlaylist = document.querySelectorAll('.button-for-my-playlist'),
 //    divChangePlaylist = document.querySelector('.block-change-my-playlist'),
 const blockChangePLaylist = document.querySelector('.block-form-change-playlist'),
-    buttonChangePlaylist = divChangePlaylist?.querySelector('.button-playlist-change');
+    buttonChangePlaylist = formChangePlaylistAAA?.querySelector('.button-playlist-change');
 
 //buttonOpenChangePlaylist.forEach(item => item.addEventListener('click', (e) => {
 //    e.preventDefault();
@@ -250,6 +302,12 @@ const blockChangePLaylist = document.querySelector('.block-form-change-playlist'
 buttonChangePlaylist?.addEventListener('click', (e) => {
     e.preventDefault();
 
+    const idplaylist = buttonChangePlaylist.querySelector('.idplaylistchange').innerHTML;
+    const titleplaylist = buttonChangePlaylist.querySelector('.titleplaylist').innerHTML;
+
+    blockChangePLaylist.getElementById('id-playlist').value = idplaylist;
+    blockChangePLaylist.getElementById('title-playlist').value = titleplaylist;
+
     blockChangePLaylist.classList.add('show');
     background.classList.add('show');
     background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
@@ -261,6 +319,15 @@ const buttonChangeMusic = popupBlockChangeMusic?.querySelector('.button-change-m
 
 buttonChangeMusic?.addEventListener('click', (e) => {
     e.preventDefault();
+    const idMusic = buttonChangeMusic.querySelector('.music-change-idd').innerHTML;
+    const parentpopup = buttonChangeMusic.closest('.popup-change-mymusic');
+    const titlemusic = parentpopup.querySelector('.titlemusiccc').innerHTML;
+    const musicianmusic = parentpopup.querySelector('.musicianmusiccc').innerHTML;
+    
+
+    blockChangeMusic.getElementById('aaaaaaaid').value = idMusic;
+    blockChangeMusic.getElementById('aaaaatitle').value = titlemusic;
+    blockChangeMusic.getElementById('aaaamusic').value = musicianmusic;
 
     blockChangeMusic.classList.add('show');
     background.classList.add('show');
@@ -276,6 +343,38 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
     const threePoint = item.querySelector('.button-for-my-playlist');
 
     if (e.target != threePoint) {
+        const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
+        const namePlaylist = item.querySelector('.info-my-playlist .tiiiitle-playlist').innerHTML;
+        const idPlaylist = item.querySelector('.info-my-playlist .iiiid-playlist').innerHTML;
+
+        blockOpenPlaylist.querySelector('.title-open-playlist').innerHTML = namePlaylist;
+
+        const playlistmusic = fetch("http://127.0.0.1/playlist/" + idPlaylist)
+            .then(response => response.json());
+        var htmlPlaylists = '';
+        for (var i = 0; i < playlistmusic.length; i++) {
+            htmlPlaylists += '<div class="block-one-music"><div class="music">' +
+                '<div class="info-music">' +
+                '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
+                '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
+                '<div class="block-name-music">' +
+                '<span>' + playlistmusic[i]['title'] + '</span>' +
+                '<span>' + playlistmusic[i]['musician'] + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                '<form class="form-deleteMusicForPlaylist" asp-action="DeleteMusicFromPlaylist" asp-controller="Music" method="post" enctype="multipart/form-data">' +
+                '<input type = "hidden" name = "musicId" value = "' + playlistmusic[i]['id'] + '" />' +
+                '<input type="hidden" name="playlistId" value="' + idPlaylist + '"/>' +
+                    '<button type="submit" class="block-control-music-playlist">' +
+                        '<img class="music-contol-my-playlist" src="~/img/icon-three-tochki.png" />' +
+                    '</button>' +
+                '</form>' +
+                    '</div>' +
+                '</div>';
+        }
+        const divBlockMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
+        divBlockMusicPlaylist.innerHTML = htmlPlaylists;
+
         blockOpenPlaylist.classList.add('show');
         background.classList.add('show');
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
@@ -323,7 +422,7 @@ formAddMusicForm.onsubmit = function () {
 
 const buttonSearchUsersss = document.querySelector('.button-search-friend');
 
-buttonSearchUsersss.addEventListener('click', (e) => {
+buttonSearchUsersss?.addEventListener('click', (e) => {
     e.preventDefault();
 
     const textSearch = document.querySelector('.text-search-users');

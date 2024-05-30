@@ -648,12 +648,16 @@
 }
 
 .block-control, .block-music-other-user-control, .block-control-music-playlist {
-    width: 35px;
     height: 35px;
     border: none;
     padding: 0;
     background: none;
     margin: auto 0;
+    margin-top: 15px;
+}
+
+.block-control {
+    display: flex;
 }
 
 
