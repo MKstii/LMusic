@@ -52,6 +52,7 @@ namespace LMusic.Services
             viewmodel.IsDefault = playlist.IsDefault;
             var owner = GetPlaylistOwner(playlist.Id);
             viewmodel.CanEdit = owner.Id == requester.Id;
+            viewmodel.IsAdded = UserHasPlaylist(playlist, requester);
             return viewmodel;
         }
         
