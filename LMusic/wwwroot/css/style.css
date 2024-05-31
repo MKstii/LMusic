@@ -134,6 +134,7 @@
 
 .block-free-space {
     font-size: 18px;
+    width: 300px;
 }
 
 .block-telephone span {
@@ -377,6 +378,11 @@
 
 .button-playlist-delete:hover, .button-playlist-change:hover,
 .button-music-delete-from-playlist:hover, .button-music-add-in-playlist:hover{
+    background-color: rgba(0, 47, 85, 0.3);
+    border-radius: 5px;
+}
+
+.buttoooooooooooon:hover {
     background-color: rgba(0, 47, 85, 0.3);
     border-radius: 5px;
 }
@@ -1032,4 +1038,44 @@
 
 .aaaaaaaaaaaaaaa {
     font-size: 1px;
+}
+
+.stolbci-slov {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.ghghghghghg {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.text1-stolb1, .text2-stolb2 {
+    width: 400px;
+}
+
+.icon-logout {
+    width: 25px;
+    height: 25px;
+}
+
+.button-logout {
+    border:none;
+    background: none;
+}
+
+.button-remove-playlist-forme, .button-add-playlist-forme, .delete-playlisttttt {
+    border: none;
+    background: none;
+}
+
+.delete-playlisttttt {
+    display: flex;
+    gap: 18px;
+    width: 100%;
 }

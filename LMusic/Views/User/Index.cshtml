@@ -232,6 +232,7 @@
                     }
                     @if (Model.UserProfileAccess == UserAccess.User)
                     {
+                        <input type="hidden" class="hiddenuseridddddddddddd" value="@Model.TgId"/>
                         <form class="add-from-friends-my" asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
                             
                         </form> 
@@ -246,7 +247,7 @@
             @if(Model.UserProfileAccess == UserAccess.My)
             {
                 <form asp-action="Logout" asp-controller="Auth" method="get" enctype="multipart/form-data">
-                    <button type="submit">Выход</button>
+                    <button type="submit" class="button-logout"><img class="icon-logout" src="/img/icons8-выход-50.png" /></button>
                 </form>
             }
         </div>
@@ -314,10 +315,10 @@
                     }
                 </div>
                 <div class="block-shuffle">
-                    <button class="shuffle">
+                    @* <button class="shuffle">
                         <img class="shuffle-icon" src="/img/icon-shuffle.png" />
                         Перемешать
-                    </button>
+                    </button> *@
                     @if (Model.UserProfileAccess == UserAccess.My)
                     {
                         <div class="block-mymusic-favorite">
@@ -380,58 +381,7 @@
         <div class="block-current-music">
         </div>
 
-        <div class="current-playlist">
-            <span class="header-current-playlist">Текущий плейлист</span>
-            <button class="shuffle current-playlist-shuffle">
-                <img class="shuffle-icon" src="/img/icon-shuffle.png" />
-                Перемешать
-            </button>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-        </div>
+        
 
         @if (Model.UserProfileAccess == UserAccess.My)
         {

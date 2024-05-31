@@ -240,7 +240,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("HasFriendRequest")]
+        [HttpGet("HasFriendRequest")]
         public IActionResult HasFriendRequest(string addresseTgId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
@@ -250,7 +250,7 @@ namespace LMusic.Controllers
                 var requester = _userService.GetUserByTg(tgUser);
                 var addressee = _userService.GetUserByTgId(addresseTgId);
 
-                return Ok(_friendService.HasRequest(addressee, requester));
+                return Ok(_friendService.HasRequest(requester, addressee));
 
             }
             else

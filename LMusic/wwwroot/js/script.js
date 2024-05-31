@@ -41,7 +41,7 @@ function showSettingsProfile() {
 
     function closeSettings(e) {
         const formSettings = document.querySelector('.block-settings'),
-            blockPlaylist = document.querySelector('.current-playlist'),
+            //blockPlaylist = document.querySelector('.current-playlist'),
             blockChangePlaylist = document.querySelector('.block-form-change-playlist'),
             blockChangeMusic = document.querySelector('.block-form-change-music'),
             blockOpenPlaylist = document.querySelector('.block-open-playlist'),
@@ -52,7 +52,7 @@ function showSettingsProfile() {
 
         if (formSettings?.classList.contains('show')) formSettingProfile.classList.remove('show');
 
-        if (blockPlaylist.classList.contains('show')) blockPlaylist.classList.remove('show');
+        //if (blockPlaylist.classList.contains('show')) blockPlaylist.classList.remove('show');
 
         if (blockChangePlaylist?.classList.contains('show')) blockChangePlaylist.classList.remove('show');
 
@@ -67,6 +67,7 @@ function showSettingsProfile() {
 }
 
 showSettingsProfile();
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 // тут чисто все события на появление радактирования формы, удаления и т.д.
@@ -86,14 +87,36 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             currentAvatar = mus.querySelector('.avatar-music'),
             blockCurrentMusic = document.querySelector('.block-current-music');
 
-        blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${currentAvatar.src}" />
-    <audio class="current-audio" src="${currentAudio.src}" controls controlsList="nodownload noplaybackrate"></audio>
+
+        const arrayMusicsAllMy = document.querySelectorAll('.block-one-music');
+        let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
+            return el.querySelector('.audio').src == currentAudio.src;
+        });
+
+        let arrayNeedMusic = [];
+        for (var i in arrayMusicsAllMy) {
+            if (i >= indexCurrentMusic) {
+                const avatarSrc = arrayMusicsAllMy[i].querySelector('.avatar-music').src;
+                const musicSrc = arrayMusicsAllMy[i].querySelector('.audio').src;
+                arrayNeedMusic.push([avatarSrc, musicSrc]);
+            }
+        };
+
+        let index = indexCurrentMusic;
+        blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
+    <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
     <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
-    <button><img class="icon-control icon-shuffle-music" src="/img/icon-shuffle.png" /></button>
     <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
     <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
-
-        blockCurrentMusic.querySelector('.current-audio').play();
+        const currentLineAudio = blockCurrentMusic.querySelector('.current-audio');
+        currentLineAudio.play();
+        currentLineAudio.onended = function () {
+            index++;
+            if (index > arrayNeedMusic.length) index = 0;
+            currentLineAudio.src = arrayNeedMusic[index][1];
+            blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+            currentLineAudio.play();
+        }
         blockCurrentMusic.classList.add('display-flex');
     }
     else if (e.target == threePoint) {
@@ -241,20 +264,6 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-function showCurrentPlaylist() {
-    const currentSong = document.querySelector('.block-current-music'),
-        background = document.querySelector('.background'),
-        blockPlaylist = document.querySelector('.current-playlist');
-
-    currentSong.addEventListener('click', () => {
-        background.classList.add('show');
-        background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
-        background.style.height = `${document.documentElement.offsetHeight}px`;
-        blockPlaylist.classList.add('show');
-    });
-}
-
-showCurrentPlaylist();
 
 const buttonOpenPopupinProfile = document.querySelectorAll('.block-control');
     //popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
@@ -316,7 +325,7 @@ background.addEventListener('click', () => {
 
     if (formAddMusic.classList.contains('show')) formAddMusic.classList.remove('show');
 
-    if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
+    //if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
 });
     
 const buttonImageOpenPlaylist = document.querySelectorAll('.playlist'),
@@ -348,20 +357,78 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
                         '<span>' + playlistmusic[i]['musician'] + '</span>' +
                         '</div>' +
                         '</div>' +
-                        '<form class="form-deleteMusicForPlaylist" asp-action="DeleteMusicFromPlaylist" asp-controller="Music" method="post" enctype="multipart/form-data">' +
-                        '<input type = "hidden" name = "musicId" value = "' + playlistmusic[i]['id'] + '" />' +
-                        '<input type="hidden" name="playlistId" value="' + idPlaylist + '"/>' +
                         '<button type="submit" class="block-control-music-playlist">' +
-                        '<img class="music-contol-my-playlist" src="/img/icon-three-tochki.png" />' +
+                        '<input type = "hidden" class="musicId" name="musicId" value = "' + playlistmusic[i]['id'] + '" />' +
+                        '<input type="hidden" class="playlistId" name="playlistId" value="' + idPlaylist + '"/>' +
+                        '<img class="music-contol-my-playlist" src="/img/icon-krestic.png" />' +
                         '</button>' +
-                        '</form>' +
                         '</div>' +
                         '</div>';
                 }
                 divMusicPlaylist.innerHTML = htmlPlaylists;
+
+                blockOpenPlaylist.classList.add('show');
+
+                const blockMusic = blockOpenPlaylist.querySelectorAll('.block-one-music');
+                blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
+                    const threePoint = mus.querySelector('.music-contol-my-playlist');
+
+                    if (e.target != threePoint) {
+                        const currentAudio = mus.querySelector('.audio'),
+                            currentAvatar = mus.querySelector('.avatar-music'),
+                            blockCurrentMusic = document.querySelector('.block-current-music');
+
+                        const arrayMusicsAllMy = blockOpenPlaylist.querySelectorAll('.block-one-music');
+                        let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
+                            return el.querySelector('.audio').src == currentAudio.src;
+                        });
+
+                        let arrayNeedMusic = [];
+                        for (var i in arrayMusicsAllMy) {
+                            if (i >= indexCurrentMusic) {
+                                const avatarSrc = arrayMusicsAllMy[i].querySelector('.avatar-music').src;
+                                const musicSrc = arrayMusicsAllMy[i].querySelector('.audio').src;
+                                arrayNeedMusic.push([avatarSrc, musicSrc]);
+                            }
+                        }
+
+                        let index = indexCurrentMusic;
+                        blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
+                            <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
+                            <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
+                            <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
+                            <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
+
+                        const buttonLoop = blockCurrentMusic.querySelector('.icon-loop-music');
+                        buttonLoop.addEventListener('click', (e) => {
+                            blockCurrentMusic.querySelector('.audio').loop = !blockCurrentMusic.querySelector('.audio').loop;
+                        })
+
+
+                        const currentLineAudio = blockCurrentMusic.querySelector('.current-audio');
+                        currentLineAudio.play();
+
+                        currentLineAudio.onended = function () {
+                            index++;
+                            if (index > arrayNeedMusic.length) index = 0;
+                            currentLineAudio.src = arrayNeedMusic[index][1];
+                            blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                            currentLineAudio.play();
+                        }
+                        blockCurrentMusic.classList.add('display-flex');
+                    } else {
+                        const musicId = mus.querySelector('.musicId').value;
+                        const playlistId = mus.querySelector('.playlistId').value;
+
+                        fetch("http://127.0.0.1/DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
+                            method: "POST"
+                        });
+
+                        location.reload();
+                    }
+                }));
             });
 
-        blockOpenPlaylist.classList.add('show');
         background.classList.add('show');
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
         background.style.height = `${document.documentElement.offsetHeight}px`;
@@ -374,8 +441,8 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
 
         formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
             '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
-            '<button type="submit" class="delete-playlisttttt">Удалить</button></form>' +
-            '<button class="button-playlist-change">' +
+            '<button type="submit" class="delete-playlisttttt buttoooooooooooon"><img src="/img/icon-delete.png" width="20px" height="20px"/>Удалить</button></form>' +
+            '<button class="button-playlist-change buttoooooooooooon">' +
             '<img class="icon-change-playlist" src="/img/icon-reduct.png" />' +
             '<span>Редактировать</span>' +
             '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
@@ -476,40 +543,24 @@ buttonAddInPlaylistAA?.addEventListener('click', (e) => {
 });
 
 // у юзера отоюражать либо заявка отправлена либо отправить заявку
-const formAddRequests = document.querySelector('.add-from-friends-my');
-const resultt = fetch()
-    .then(response => response.json())
-    .then(isHas => {
-        if (isFavorite) {
-            innertTextpopup = '<button type="submit" class="popup-button button-remove-mymusic">' +
-                '<img class="popup-image" src="/img/icon-plus.png" />' +
-                'Удалить из избранного' +
-                '<input id = "musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="' + musicid + '" />' +
-                '</button>';
-        } else {
-            innertTextpopup = '<button type="submit" class="popup-button button-addin-mymusic">' +
-                '<input id="musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="" />' +
-                '<img class="popup-image" src="/img/icon-plus.png" />' +
-                'Добавить себе' +
-                '</button>';
-        }
-        innertTextpopup += '<button class="popup-button button-show-addinplaylist">' +
-            '<img class="popup-image" src = "/img/icon-plus.png" />' +
-            'Добавить в плейлист' +
-            '</button>';
-        popupOtherMusicChange.innerHTML = innertTextpopup;
-    })
+if (document.querySelector('.add-from-friends-my')) {
+    const formAddRequests = document.querySelector('.add-from-friends-my');
+    const tgIsUser = formAddRequests?.closest('.block-number-space').querySelector('.hiddenuseridddddddddddd').value;
+    let htmlValues = '';
 
-let htmlValues = '';
-if (true) {
-    htmlValues = '<span>Заявка отправлена</span>';
-} else {
-    htmlValues = '<input type="hidden" name="addresseTgId" value="@Model.TgId">' +
-        '<button class="button button-add-friend">' +
-        '<span>Отправить заявку в друзья</span></button>';
+    const resultt = fetch("http://127.0.0.1/HasFriendRequest?addresseTgId=" + tgIsUser)
+        .then(response => response.json())
+        .then(isHas => {
+            if (isHas) {
+                htmlValues = '<span>Заявка отправлена</span>';
+            } else {
+                htmlValues = '<input type="hidden" name="addresseTgId" value="' + tgIsUser + '">' +
+                    '<button class="button button-add-friend">' +
+                    '<span>Отправить заявку в друзья</span></button>';
+            }
+            formAddRequests.innerHTML = htmlValues;
+        })
 }
-
-formAddRequests.innerHTML = htmlValues;
 
 const formAddMusicForm = document.querySelector('.form-add-music');
 let oldSubmit = formAddMusicForm.onsubmit || function () { };
