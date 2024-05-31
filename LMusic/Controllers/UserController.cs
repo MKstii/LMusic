@@ -126,7 +126,8 @@ namespace LMusic.Controllers
                 user.Privacy = privacy == null? user.Privacy : (Privacy)privacy;
 
                 _userService.Update(user);
-                return Ok(Request.Headers["Referer"].ToString());
+
+                return Redirect(Request.Headers["Referer"].ToString());
             }
             else
             {
