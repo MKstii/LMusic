@@ -255,9 +255,38 @@ namespace LMusic.Controllers
                 }
                 else
                     return BadRequest("Пользователь не имеет доступ к изменению песни");
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Redirect("/home");
+            }
+        }
 
+        [HttpGet("IsMusicInFavorite")]
+        public IActionResult UpdateMusic(int musicId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+                if (user == null)
+                {
+                    return Redirect("/home");
+                }
 
+                Music music = _musicService.GetMusic(musicId);
+                Playlist defaultPlaylist = _playlistService.GetDefaultUserPlaylist(user);
 
+                if(defaultPlaylist == null)
+                {
+                    return BadRequest();
+                }
+
+                var isInFavorite = _musicService.PlaylistHasMusic(music, defaultPlaylist);
+
+                return Ok(isInFavorite);
             }
             else
             {
