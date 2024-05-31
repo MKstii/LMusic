@@ -14,8 +14,8 @@ namespace LMusic.Additional
 
         public void Init()
         {
-            picRegistry.Add(Pictures);
-            userRegistry.Add(Users);
+            //picRegistry.Add(Pictures);
+            //userRegistry.Add(Users);
             //friendRequestRegistry.Add(FriendRequests);
             //friendsListRegistry.Add(FriendsLists);
             //musicRegistry.Add(Musics);

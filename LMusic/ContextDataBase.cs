@@ -12,7 +12,9 @@ namespace LMusic
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("LMusic");
+            //optionsBuilder.UseInMemoryDatabase("LMusic");
+            optionsBuilder.UseNpgsql("Host=mks-server.tplinkdns.com;Port=5432;Database=LMusic;Username=mksti;Password=mks");
+            
             
             // Additional.DatabaseData будут объекты, которые надо будет засунуть в базу
         }
