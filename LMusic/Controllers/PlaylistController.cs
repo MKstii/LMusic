@@ -73,6 +73,8 @@ namespace LMusic.Controllers
 
                 var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
                 Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
+                    if (_userService.GetAccess(playlistOwner, user) == UserAccess.My)
+                        return BadRequest("Пользователь не может добавть к себе свой же плейлист");
                 switch (playlistOwner.Privacy)
                 {
                     case Privacy.ForAll:

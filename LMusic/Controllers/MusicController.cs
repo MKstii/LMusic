@@ -104,6 +104,8 @@ namespace LMusic.Controllers
                 {
                     Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
                     Music music = _musicService.GetMusic(musicId);
+                    if (_userService.GetAccess(music.User, user) == UserAccess.My && !_musicService.PlaylistHasMusic(music, playlist))
+                        return Redirect(Request.Headers["Referer"].ToString());
                     switch (music.User.Privacy)
                     {
                         case Privacy.ForAll:
@@ -184,8 +186,9 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-                Playlist playlist = _playlistService.GetDefaultUserPlaylist(user);
+     
                 Music music = _musicService.GetMusic(musicId);
+                Playlist playlist = _playlistService.GetDefaultUserPlaylist(user);
                 _musicService.DeleteMusicFromPlaylist(playlist, music);
                 return Redirect(Request.Headers["Referer"].ToString());
 
