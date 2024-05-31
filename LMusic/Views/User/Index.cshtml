@@ -57,11 +57,11 @@
                     <div class="main-info-change">
                         <div class="image-profile-change">
                             <label for="image">Изменить фото профиля</label>
-                            <input class="file-image" type="file" id="image" name="playlistPicture" accept=".jpg, .jpeg, .png" value="@Model.PhotoPath" />
+                            <input class="file-image" type="file" name="pictureFile" id="image" name="playlistPicture" accept=".jpg, .jpeg, .png" value="@Model.PhotoPath" />
                         </div>
                         <div class="nickname-profile-change">
                             <label for="nickname">Изменить никнейм:</label>
-                            <input class="current-nickname-profile" type="text" id="nickname" value="@Model.UserName"/>
+                            <input class="current-nickname-profile" type="text" name="nickname" id="nickname" value="@Model.UserName"/>
                         </div>
                     </div>
                     <div class="settings-privacy">
@@ -186,12 +186,7 @@
         @if (Model.UserProfileAccess == UserAccess.My)
         {
             <div class="block-change-my-playlist">
-                <button class="button-playlist-change">
-                    <img class="icon-change-playlist" src="~/img/icon-reduct.png" />
-                    <span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>
-                    <span>Редактировать</span>
-                    <span class="titleplaylistchange" style="visibility:hidden"></span>
-                </button>
+                
             </div>
 
         }
@@ -278,18 +273,30 @@
                                 <span class="info-my-playlist">
                                     <span class="tiiiitle-playlist">@playlist.Name</span>
                                     <span class="iiiid-playlist" style="visibility:hidden;">@playlist.Id</span>
-                                    @if (Model.UserProfileAccess == UserAccess.My)
+                                    @if (Model.UserProfileAccess == UserAccess.User)
                                     {
-                                        @if (playlist.CanEdit)
+                                        @if(playlist.CanEdit)
                                         {
-                                            <img class="button-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px" data-change-my="@playlist.CanEdit" id="@playlist.Id" data-title="@playlist.Name">
-                                        }
-                                        else
+                                            <button class="button-for-my-playlist">
+                                                <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
+                                                <span class="playlist-my-title" style="visibility:hidden;">@playlist.Name</span>
+                                                <img class="image-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px">
+                                            </button>
+                                        } else
                                         {
-                                            <img class="button-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px" id="@playlist.Id">
+                                            <button class="button-for-other-playlist">
+                                                <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
+                                                <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" />
+                                            </button>
                                         }
                                     }
-
+                                    @if (Model.UserProfileAccess == UserAccess.Friend || Model.UserProfileAccess == UserAccess.User)
+                                    {
+                                        <button class="button-for-other-playlist">
+                                            <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
+                                            <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" />
+                                        </button>
+                                    }
                                 </span>
                             </button>
                         }
@@ -347,12 +354,22 @@
                             </div>
                             @if (Model.UserProfileAccess == UserAccess.My)
                             {
-                                <button class="block-control">
-                                    <span class="music-my-id" style="visibility:hidden;">@music.Id</span>
-                                    <span class="music-my-title" style="visibility:hidden;">@music.Title</span>
-                                    <span class="music-my-musician" style="visibility:hidden;">@music.Musician</span>
-                                    <img class="music-contol" src="~/img/icon-three-tochki.png" />
-                                </button>
+                                @if (music.CanEdit)
+                                {
+                                    <button class="block-control">
+                                        <span class="music-my-id" style="visibility:hidden;">@music.Id</span>
+                                        <span class="music-my-title" style="visibility:hidden;">@music.Title</span>
+                                        <span class="music-my-musician" style="visibility:hidden;">@music.Musician</span>
+                                        <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                                    </button>
+                                } else
+                                {
+                                    <button class="block-music-other-user-control">
+                                        <span class="music-id" style="visibility:hidden;">@music.Id</span>
+                                        <img class="music-other-user-control" src="~/img/icon-three-tochki.png" />
+                                    </button>
+                                }
+
                             }
                             @if (Model.UserProfileAccess == UserAccess.Friend || Model.UserProfileAccess == UserAccess.User)
                             {
@@ -468,21 +485,9 @@
             </form>
         </div>
 
-        @if (Model.UserProfileAccess == UserAccess.User || Model.UserProfileAccess == UserAccess.Friend)
-        {
-            <div class="popup-change-friendmusic">
-                <form asp-action="AddMusicToFav" asp-controller="Music" method="post" enctype="multipart/form-data">
-                    <input id="musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="" />
-                    <button type="submit" class="popup-button button-addin-mymusic">
-                        <img class="popup-image" src="~/img/icon-plus.png" />
-                        Добавить себе
-                    </button>
-                </form>
-                <button class="popup-button button-show-addinplaylist">
-                    <img class="popup-image" src="~/img/icon-plus.png" />
-                    Добавить в плейлист
-                </button>
-            </div>
+        <div class="popup-change-friendmusic">
+                
+        </div>
             @* <form asp-action="AddMusicToFav" asp-controller="Music" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="musicId" value="" />
                 <button type="submit" class="popup-button button-addin-mymusic">
@@ -494,6 +499,5 @@
                 <img class="popup-image" src="~/img/icon-plus.png" />
                 Добавить в плейлист
             </button> *@
-        }
     </div>
 </div>
