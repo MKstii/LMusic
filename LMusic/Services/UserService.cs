@@ -100,8 +100,8 @@ namespace LMusic.Services
                 || user.Privacy == Privacy.ForFriends && _friendService.IsFriends(user, requestSender)
                 || user.Id == requestSender.Id)
             {
-                viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(x => _playlistService.GetViewModel(x, user)).ToList();
-                viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(x => _musicService.GetViewModel(x, user)).ToList();
+                viewmodel.Playlists = _playlistService.GetPlaylistsByUser(user, access).Select(x => _playlistService.GetViewModel(x, requestSender)).ToList();
+                viewmodel.FavoriteMusic = _musicService.GetFavoriteMusicByUser(user, access).Select(x => _musicService.GetViewModel(x, requestSender)).ToList();
             }
             else
             {
