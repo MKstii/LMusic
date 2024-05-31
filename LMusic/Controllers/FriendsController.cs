@@ -240,5 +240,24 @@ namespace LMusic.Controllers
             }
         }
 
+        [HttpPost("HasFriendRequest")]
+        public IActionResult HasFriendRequest(string addresseTgId)
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var requester = _userService.GetUserByTg(tgUser);
+                var addressee = _userService.GetUserByTgId(addresseTgId);
+
+                return Ok(_friendService.HasRequest(addressee, requester));
+
+            }
+            else
+            {
+                return Unauthorized("Ошибка проверки пользователя");
+            }
+        }
+
     }
 }
