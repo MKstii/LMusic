@@ -264,7 +264,7 @@ namespace LMusic.Controllers
         }
 
         [HttpGet("IsMusicInFavorite")]
-        public IActionResult UpdateMusic(int musicId)
+        public IActionResult IsMusicInFavorite(int musicId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
             var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);

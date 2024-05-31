@@ -50,19 +50,19 @@ function showSettingsProfile() {
 
         background.classList.remove('show');
 
-        if (formSettings.classList.contains('show')) formSettingProfile.classList.remove('show');
+        if (formSettings?.classList.contains('show')) formSettingProfile.classList.remove('show');
 
         if (blockPlaylist.classList.contains('show')) blockPlaylist.classList.remove('show');
 
-        if (blockChangePlaylist.classList.contains('show')) blockChangePlaylist.classList.remove('show');
+        if (blockChangePlaylist?.classList.contains('show')) blockChangePlaylist.classList.remove('show');
 
-        if (blockChangeMusic.classList.contains('show')) blockChangeMusic.classList.remove('show');
+        if (blockChangeMusic?.classList.contains('show')) blockChangeMusic.classList.remove('show');
 
-        if (blockOpenPlaylist.classList.contains('show')) blockOpenPlaylist.classList.remove('show');
+        if (blockOpenPlaylist?.classList.contains('show')) blockOpenPlaylist.classList.remove('show');
 
-        if (blockOpenMusicInPlaylist.classList.contains('show')) blockOpenMusicInPlaylist.classList.remove('show');
+        if (blockOpenMusicInPlaylist?.classList.contains('show')) blockOpenMusicInPlaylist.classList.remove('show');
 
-        if (blockAddInPLaylist.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
+        if (blockAddInPLaylist?.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
     }
 }
 
@@ -72,7 +72,8 @@ showSettingsProfile();
 // тут чисто все события на появление радактирования формы, удаления и т.д.
 const blockMusic = document.querySelectorAll('.block-one-music'),
     popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
-    blockAddInPLaylist = document.querySelector('.block-add-in-playlist');
+    blockAddInPLaylist = document.querySelector('.block-add-in-playlist'),
+    popupOtherMusicChange = document.querySelector('.popup-change-friendmusic');
 
 blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
     const threePoint = mus.querySelector('.music-contol'),
@@ -153,11 +154,88 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                     }
                     divBlockCheckboxMyPlaylists.innerHTML = htmlPlaylists;
                 });
-            
+
             blockAddInPLaylist.classList.toggle('show');
             blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
             blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
         });
+    }
+    else if (e.target = threePointOther) {
+        const parentMusicUserOther = threePointOther.closest('.block-music-other-user-control');
+        e.preventDefault();
+
+        const musicid = parentMusicUserOther.querySelector('.music-id').innerHTML;
+        const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
+            .then(response => response.json())
+            .then(isFavorite => {
+                let innertTextpopup = '';
+                if (isFavorite) {
+                    innertTextpopup = '<button type="submit" class="popup-button button-remove-mymusic">' +
+                        '<img class="popup-image" src="/img/icon-plus.png" />' +
+                        'Удалить из избранного' +
+                        '<input id = "musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="' + musicid + '" />' +
+                        '</button>';
+                } else {
+                    innertTextpopup = '<button type="submit" class="popup-button button-addin-mymusic">' +
+                        '<input id="musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="" />' +
+                        '<img class="popup-image" src="/img/icon-plus.png" />' +
+                        'Добавить себе' +
+                        '</button>';
+                }
+                innertTextpopup += '<button class="popup-button button-show-addinplaylist">' +
+                    '<img class="popup-image" src = "/img/icon-plus.png" />' +
+                    'Добавить в плейлист' +
+                    '</button>';
+                popupOtherMusicChange.innerHTML = innertTextpopup;
+                popupOtherMusicChange.querySelector('.input-hidden-musicid').value = musicid;
+
+                buttonaddInPlaylistOther = popupOtherMusicChange.querySelector('.button-show-addinplaylist');
+
+                buttonaddInPlaylistOther?.addEventListener('click', (e) => {
+                    blockAddInPLaylist.querySelector('.musicId').value = musicid;
+
+                    const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
+                    var htmlPlaylists = '';
+
+                    const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
+                        .then(response => response.json())
+                        .then(playlist => {
+
+                            for (var i = 0; i < playlist.length; i++) {
+                                htmlPlaylists += '<div class="block-checkbox">' +
+                                    '<input id="' + playlist[i]['id'] + '" type="radio" name="playlistId" value="' + playlist[i]['id'] + '" />' +
+                                    '<label for="' + playlist[i]['id'] + '">' + playlist[i]['name'] + '</label></div>';
+                            }
+                            divBlockCheckboxMyPlaylists.innerHTML = htmlPlaylists;
+                        });
+
+                    blockAddInPLaylist.classList.toggle('show');
+                    blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
+                    blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
+                });
+
+                const buttonDelete = popupOtherMusicChange.querySelector('.button-remove-mymusic');
+                buttonDelete?.addEventListener('click', (e) => {
+                    fetch("http://127.0.0.1/DeleteMusicFromUser?musicId=" + musicid, {
+                        method: "POST"
+                    });
+
+                    location.reload();
+                });
+
+                const buttonAdd = popupOtherMusicChange.querySelector('.button-addin-mymusic');
+                buttonAdd?.addEventListener('click', (e) => {
+                    fetch("http://127.0.0.1/AddMusicToFav?musicId=" + musicid, {
+                        method: "POST"
+                    });
+
+                    location.reload();
+                });
+            });
+
+        popupOtherMusicChange.classList.toggle('show');
+        popupOtherMusicChange.style.top = e.pageY - 50 + 'px';
+        popupOtherMusicChange.style.left = e.pageX - 280 + 'px';
     }
 }));
 
@@ -180,53 +258,12 @@ showCurrentPlaylist();
 
 const buttonOpenPopupinProfile = document.querySelectorAll('.block-control');
     //popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
-    
-    
-
-const buttonOpenPopupOtherMusic = document.querySelectorAll('.block-music-other-user-control'),
-    popupOtherMusicChange = document.querySelector('.popup-change-friendmusic'),
-    buttonAddInPlayListOther = popupOtherMusicChange?.querySelector('.button-show-addinplaylist');
-    
-buttonOpenPopupOtherMusic.forEach(item => item.addEventListener('click', (e) => {
-    e.preventDefault();
-    const musicid = item.querySelector('.music-id').innerHTML;
-
-    popupOtherMusicChange.getElementById('musicidpopup').value = musicid;
-
-    popupOtherMusicChange.classList.toggle('show');
-    popupOtherMusicChange.style.top = e.pageY - 50 + 'px';
-    popupOtherMusicChange.style.left = e.pageX - 280 + 'px';
-}));
-
-popupOtherMusicChange?.addEventListener('click', (e) => {
-    if (e.target == buttonAddInPlayListOther) {
-        const musicid = popupOtherMusicChange.querySelector('.input-hidden-musicid');
-        blockAddInPLaylist.getElementById('musicId').value = musicid;
-
-        const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
-            .then(response => response.json());
-        var htmlPlaylists = '';
-        for (var i = 0; i < playlists.length; i++) {
-            htmlPlaylists += '<div class="block-checkbox">' +
-                '<input id="' + playlists[i]['id'] + '" type="radio" name="playlistId" value="' + playlists[i]['id'] + '" />' +
-                '<label for="' + playlists[i]['id'] + '">' + playlists[i]['name'] + '</label></div>';
-        }
-        const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
-        divBlockCheckboxMyPlaylists.innerHTML = htmlPlaylists;
-
-        blockAddInPLaylist.classList.toggle('show');
-        blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
-        blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
-    }
-});
-
-
 
 const blockFilterMusic = document.querySelector('.block-mymusic-favorite'),
     filterMyMusic = document.querySelector('.my-music-filter'),
     filetFavoriteMusic = document.querySelector('.favor-music-filter');
 
-blockFilterMusic.addEventListener('click', (e) => {
+blockFilterMusic?.addEventListener('click', (e) => {
     if (e.target == filterMyMusic) {
         filterMyMusic.classList.add('current-filter');
         filetFavoriteMusic.classList.remove('current-filter');
@@ -262,17 +299,17 @@ buttonOpenFormAddMusic?.addEventListener('click', (e) => {
     background.style.height = `${document.documentElement.offsetHeight}px`;
 });
 
-const playlists = document.querySelectorAll('.playlist'),
-    playlistOpen = document.querySelector('.current-playlist');
+//const playlists = document.querySelectorAll('.playlist'),
+//    playlistOpen = document.querySelector('.current-playlist');
 
-playlists.forEach(item => item.addEventListener('click', () => {
-    e.preventDefault();
+//playlists.forEach(item => item.addEventListener('click', (e) => {
+//    e.preventDefault();
 
-    playlistOpen.classList.add('show');
-    background.classList.add('show');
-    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
-    background.style.height = `${document.documentElement.offsetHeight}px`;
-}));
+//    playlistOpen.classList.add('show');
+//    background.classList.add('show');
+//    background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+//    background.style.height = `${document.documentElement.offsetHeight}px`;
+//}));
 
 background.addEventListener('click', () => {
     formAddPlaylist.classList.remove('show');
@@ -281,74 +318,16 @@ background.addEventListener('click', () => {
 
     if (playlistOpen.classList.contains('show')) playlistOpen.classList.remove('show');
 });
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// тут отображение блока что удалить редактировать или добавить к себе или удалить и отображение формы редактирования
-
-const buttonAAAA = document.querySelectorAll('.button-for-my-playlist'),
-    formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
-
-buttonAAAA.forEach(item => item.addEventListener('click', (e) => {
-    const idPlaylist = e.target.id;
-    const titlePlaylist = e.target.dataset.title;
-    formChangePlaylistAAA.innerHTML = '';
-    if (e.target.getAttribute('data-change-my')) {
-        formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
-            '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
-            '<button type="submit" class="delete-playlisttttt">Удалить</button></form>' +
-            '<button class="button-playlist-change">' +
-            '<img class="icon-change-playlist" src="/img/icon-reduct.png" />' +
-            '<span>Редактировать</span>' +
-            '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
-            '<span class="titleplaylist" style="visibility:hidden;">' + titlePlaylist + '</span>' +
-            '</button>';
-
-        const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
-        buttonDelete.addEventListener('click', (e) => {
-            fetch("http://127.0.0.1/Delete?id=" + idPlaylist, {
-                method: "POST"
-            });
-        });
-
-        buttonChangePlaylist = formChangePlaylistAAA.querySelector('.button-playlist-change');
-        const blockChangePLaylist = document.querySelector('.block-form-change-playlist');
-
-        buttonChangePlaylist.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            const idplaylist = buttonChangePlaylist.querySelector('.idplaylistchange').innerHTML;
-            const titleplaylist = buttonChangePlaylist.querySelector('.titleplaylist').innerHTML;
-
-            blockChangePLaylist.querySelector('.id-playlist').value = idplaylist;
-            blockChangePLaylist.querySelector('.title-playlist').value = titleplaylist;
-
-            blockChangePLaylist.classList.add('show');
-            background.classList.add('show');
-            background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
-            background.style.height = `${document.documentElement.offsetHeight}px`;
-        });
-    }
-    else {
-        formChangePlaylistAAA.innerHTML = '<form asp-action="/playlist/removePlaylistFromUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
-            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
-            '<button type="submit">Удалить со своей страницы</button></form>';
-    }
-
-    formChangePlaylistAAA.classList.toggle('show');
-    formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
-    formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
-}));
-
-////////////////////////////////////////////////////////////////////////////////////
     
 const buttonImageOpenPlaylist = document.querySelectorAll('.playlist'),
     blockOpenPlaylist = document.querySelector('.block-open-playlist');
 
 buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
     e.preventDefault();
-    const threePoint = item.querySelector('.button-for-my-playlist');
+    const threePoint = item.querySelector('.button-for-my-playlist'),
+        threePointOther = item.querySelector('.button-for-other-playlist');
 
-    if (e.target != threePoint) {
+    if (e.target != threePoint && e.target != threePointOther) {
         const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
         const namePlaylist = item.querySelector('.info-my-playlist .tiiiitle-playlist').innerHTML;
         const idPlaylist = item.querySelector('.info-my-playlist .iiiid-playlist').innerHTML;
@@ -386,6 +365,64 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
         background.classList.add('show');
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
         background.style.height = `${document.documentElement.offsetHeight}px`;
+    } else if (e.target == threePoint) {
+        const formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
+
+        const idPlaylist = threePoint.querySelector('.playlist-my-id').innerHTML;
+        const titlePlaylist = threePoint.querySelector('.playlist-my-title').innerHTML;
+
+        formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+            '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
+            '<button type="submit" class="delete-playlisttttt">Удалить</button></form>' +
+            '<button class="button-playlist-change">' +
+            '<img class="icon-change-playlist" src="/img/icon-reduct.png" />' +
+            '<span>Редактировать</span>' +
+            '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
+            '<span class="titleplaylist" style="visibility:hidden;">' + titlePlaylist + '</span>' +
+            '</button>';
+
+        const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
+        buttonDelete.addEventListener('click', (e) => {
+            fetch("http://127.0.0.1/Delete?id=" + idPlaylist, {
+                method: "POST"
+            });
+        });
+
+        buttonChangePlaylist = formChangePlaylistAAA.querySelector('.button-playlist-change');
+        const blockChangePLaylist = document.querySelector('.block-form-change-playlist');
+
+        buttonChangePlaylist.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const idplaylist = buttonChangePlaylist.querySelector('.idplaylistchange').innerHTML;
+            const titleplaylist = buttonChangePlaylist.querySelector('.titleplaylist').innerHTML;
+
+            blockChangePLaylist.querySelector('.id-playlist').value = idplaylist;
+            blockChangePLaylist.querySelector('.title-playlist').value = titleplaylist;
+
+            blockChangePLaylist.classList.add('show');
+            background.classList.add('show');
+            background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+            background.style.height = `${document.documentElement.offsetHeight}px`;
+        });
+
+        formChangePlaylistAAA.classList.toggle('show');
+        formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
+        formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
+    } else if (e.target == threePointOther) {
+        const idPlaylist = threePointOther.querySelector('.playlist-my-id').innerHTML;
+
+
+
+
+
+        formChangePlaylistAAA.innerHTML = '<form asp-action="AddPlaylistToUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
+            '<button type="submit">Добавить на свою страницу</button></form>'
+
+        formChangePlaylistAAA.innerHTML = '<form asp-action="RemovePlaylistFromUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
+            '<button type="submit">Удалить со своей страницы</button></form>';
     }
 }));
 

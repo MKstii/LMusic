@@ -515,6 +515,8 @@
     text-decoration: none;
     color: black;
     font-weight: 500;
+    width: 130px;
+    text-align: center;
 }
 
 .current-filter {
@@ -657,6 +659,10 @@
     background: none;
     margin: auto 0;
     margin-top: 15px;
+}
+
+.block-music-other-user-control {
+    margin-top: 5px;
 }
 
 .block-control-music-playlist {

@@ -58,7 +58,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("/playlist/addPlaylistToUser")]
+        [HttpPost("AddPlaylistToUser")]
         public IActionResult AddPlaylistToUser(int playlistId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
@@ -109,7 +109,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("/playlist/removePlaylistFromUser")]
+        [HttpPost("RemovePlaylistFromUser")]
         public IActionResult RemovePlaylistFromUser(int playlistId)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
