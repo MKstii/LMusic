@@ -105,7 +105,10 @@ namespace LMusic.Controllers
                     Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
                     Music music = _musicService.GetMusic(musicId);
                     if (_userService.GetAccess(music.User, user) == UserAccess.My && !_musicService.PlaylistHasMusic(music, playlist))
+                    {
+                        _musicService.AddMusicToPlaylist(music, playlist);
                         return Redirect(Request.Headers["Referer"].ToString());
+                    }
                     switch (music.User.Privacy)
                     {
                         case Privacy.ForAll:
