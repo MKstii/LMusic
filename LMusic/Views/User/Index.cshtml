@@ -183,13 +183,9 @@
             </div>
         }
 
-        @if (Model.UserProfileAccess == UserAccess.My)
-        {
-            <div class="block-change-my-playlist">
+        <div class="block-change-my-playlist">
                 
-            </div>
-
-        }
+        </div>
 
         @if (Model.UserProfileAccess == UserAccess.My)
         {
@@ -236,11 +232,8 @@
                     }
                     @if (Model.UserProfileAccess == UserAccess.User)
                     {
-                        <form asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="addresseTgId" value="@Model.TgId">
-                            <button class="button button-add-friend">
-                                <span>Отправить заявку в друзья</span> 
-                            </button>
+                        <form class="add-from-friends-my" asp-action="sendFriendRequest" asp-controller="Friends" method="post" enctype="multipart/form-data">
+                            
                         </form> 
                     }
                 </div>
@@ -273,29 +266,29 @@
                                 <span class="info-my-playlist">
                                     <span class="tiiiitle-playlist">@playlist.Name</span>
                                     <span class="iiiid-playlist" style="visibility:hidden;">@playlist.Id</span>
-                                    @if (Model.UserProfileAccess == UserAccess.User)
+                                    @if (Model.UserProfileAccess == UserAccess.My)
                                     {
                                         @if(playlist.CanEdit)
                                         {
-                                            <button class="button-for-my-playlist">
-                                                <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
-                                                <span class="playlist-my-title" style="visibility:hidden;">@playlist.Name</span>
+                                            <span class="button-for-my-playlist">
+                                                <input type="hidden" class="playlist-my-id" value="@playlist.Id" />
+                                                <input type="hidden" class="playlist-my-title" value="@playlist.Name" />
                                                 <img class="image-for-my-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px">
-                                            </button>
+                                            </span>
                                         } else
                                         {
-                                            <button class="button-for-other-playlist">
-                                                <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
-                                                <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" />
-                                            </button>
+                                            <span class="button-for-other-playlist">
+                                                <input type="hidden" class="playlist-my-id" value="@playlist.Id" />
+                                                <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px"/>
+                                            </span>
                                         }
                                     }
                                     @if (Model.UserProfileAccess == UserAccess.Friend || Model.UserProfileAccess == UserAccess.User)
                                     {
-                                        <button class="button-for-other-playlist">
-                                            <span class="playlist-my-id" style="visibility:hidden;">@playlist.Id</span>
-                                            <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" />
-                                        </button>
+                                        <span class="button-for-other-playlist">
+                                            <input type="hidden" class="playlist-my-id" value="@playlist.Id" />
+                                            <img class="image-for-other-playlist" src="~/img/icon-three-tochki.png" width="20px" height="20px"  />
+                                        </span>
                                     }
                                 </span>
                             </button>

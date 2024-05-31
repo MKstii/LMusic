@@ -912,6 +912,13 @@
     height: 20px;
 }
 
+.button-for-my-playlist, .button-for-other-playlist {
+    border: none;
+    background: none;
+    width: 20px;
+    height: 20px;
+}
+
 .block-button-telegram {
     text-align: right;
     width: 100%;

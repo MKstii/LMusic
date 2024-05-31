@@ -324,8 +324,8 @@ const buttonImageOpenPlaylist = document.querySelectorAll('.playlist'),
 
 buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
     e.preventDefault();
-    const threePoint = item.querySelector('.button-for-my-playlist'),
-        threePointOther = item.querySelector('.button-for-other-playlist');
+    const threePoint = item.querySelector('.image-for-my-playlist'),
+        threePointOther = item.querySelector('.image-for-other-playlist');
 
     if (e.target != threePoint && e.target != threePointOther) {
         const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
@@ -366,10 +366,11 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
         background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
         background.style.height = `${document.documentElement.offsetHeight}px`;
     } else if (e.target == threePoint) {
+        const parentBlockA = threePoint.closest('.button-for-my-playlist');
         const formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
 
-        const idPlaylist = threePoint.querySelector('.playlist-my-id').innerHTML;
-        const titlePlaylist = threePoint.querySelector('.playlist-my-title').innerHTML;
+        const idPlaylist = parentBlockA.querySelector('.playlist-my-id').value;
+        const titlePlaylist = parentBlockA.querySelector('.playlist-my-title').value;
 
         formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
             '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
@@ -410,19 +411,44 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
         formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
         formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
     } else if (e.target == threePointOther) {
-        const idPlaylist = threePointOther.querySelector('.playlist-my-id').innerHTML;
+        const parentBlock = threePointOther.closest('.button-for-other-playlist');
 
+        const formChangePlaylistBBB = document.querySelector('.block-change-my-playlist');
+        const idPlaylist = parentBlock.querySelector('.playlist-my-id').value;
 
+        const otherPlaylist = fetch("http://127.0.0.1/UserHasPlaylist?playlistId=" + idPlaylist)
+            .then(response => response.json())
+            .then(isMy => {
+                let innertTextpopup = '';
+                if (isMy) {
+                    innertTextpopup = '<button type="submit" class="button-remove-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Удалить со своей страницы</button>';
+                } else {
+                    innertTextpopup = '<button type="submit" class="button-add-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Добавить на свою страницу</button>';
+                }
+                formChangePlaylistBBB.innerHTML = innertTextpopup;
 
+                const buttonRemoveOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-remove-playlist-forme');
+                buttonRemoveOtherPlaylistForMe?.addEventListener('click', (e) => {
+                    fetch("http://127.0.0.1/RemovePlaylistFromUser?playlistId=" + idPlaylist, {
+                        method: "POST"
+                    });
 
+                    window.location.href = window.location.href;
+                });
 
-        formChangePlaylistAAA.innerHTML = '<form asp-action="AddPlaylistToUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
-            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
-            '<button type="submit">Добавить на свою страницу</button></form>'
+                const buttonAddOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-add-playlist-forme');
+                buttonAddOtherPlaylistForMe?.addEventListener('click', (e) => {
+                    fetch("http://127.0.0.1/AddPlaylistToUser?playlistId=" + idPlaylist, {
+                        method: "POST"
+                    });
 
-        formChangePlaylistAAA.innerHTML = '<form asp-action="RemovePlaylistFromUser" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
-            '<input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />' +
-            '<button type="submit">Удалить со своей страницы</button></form>';
+                    location.reload();
+                });
+            });
+
+        formChangePlaylistBBB.classList.toggle('show');
+        formChangePlaylistBBB.style.top = e.pageY - 40 + 'px';
+        formChangePlaylistBBB.style.left = e.pageX + 25 + 'px';
     }
 }));
 
@@ -448,6 +474,42 @@ buttonAddInPlaylistAA?.addEventListener('click', (e) => {
     blockAddInPLaylist.style.top = e.pageY - 100 + 'px';
     blockAddInPLaylist.style.left = e.pageX - 400 + 'px';
 });
+
+// у юзера отоюражать либо заявка отправлена либо отправить заявку
+const formAddRequests = document.querySelector('.add-from-friends-my');
+const resultt = fetch()
+    .then(response => response.json())
+    .then(isHas => {
+        if (isFavorite) {
+            innertTextpopup = '<button type="submit" class="popup-button button-remove-mymusic">' +
+                '<img class="popup-image" src="/img/icon-plus.png" />' +
+                'Удалить из избранного' +
+                '<input id = "musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="' + musicid + '" />' +
+                '</button>';
+        } else {
+            innertTextpopup = '<button type="submit" class="popup-button button-addin-mymusic">' +
+                '<input id="musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="" />' +
+                '<img class="popup-image" src="/img/icon-plus.png" />' +
+                'Добавить себе' +
+                '</button>';
+        }
+        innertTextpopup += '<button class="popup-button button-show-addinplaylist">' +
+            '<img class="popup-image" src = "/img/icon-plus.png" />' +
+            'Добавить в плейлист' +
+            '</button>';
+        popupOtherMusicChange.innerHTML = innertTextpopup;
+    })
+
+let htmlValues = '';
+if (true) {
+    htmlValues = '<span>Заявка отправлена</span>';
+} else {
+    htmlValues = '<input type="hidden" name="addresseTgId" value="@Model.TgId">' +
+        '<button class="button button-add-friend">' +
+        '<span>Отправить заявку в друзья</span></button>';
+}
+
+formAddRequests.innerHTML = htmlValues;
 
 const formAddMusicForm = document.querySelector('.form-add-music');
 let oldSubmit = formAddMusicForm.onsubmit || function () { };
