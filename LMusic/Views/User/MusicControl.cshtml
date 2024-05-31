@@ -2,14 +2,27 @@
 @using LMusic.ViewModels.User;
 @model List<MusicViewmodel>;
 @{
-    ViewData["Title"] = "Профиль";
+    ViewData["Title"] = "Загруженная музыка";
 }
 <div class="content-wrapper">
     <div class="block-profile">
         <div class="background"></div>
         
         <div class="block-music block-music-user">
-           
+            <div class="block-shuffle">
+                <button class="shuffle">
+                    <img class="shuffle-icon" src="/img/icon-shuffle.png" />
+                    Перемешать
+                </button>
+                <div class="block-mymusic-favorite">
+                    <a class="my-music-filter" href="/user">
+                        Избранное
+                    </a>
+                    <a class="current-filter favor-music-filter" href="/user/musicControl">
+                        Загруженное
+                    </a>
+                </div>
+            </div>
             <div class="user-music">
                 @foreach (var music in Model)
                 {
@@ -25,6 +38,12 @@
                                     <span>@music.Musician</span>
                                 </div>
                             </div>
+                            <button class="block-control">
+                                <span class="music-my-id" style="visibility:hidden;">@music.Id</span>
+                                <span class="music-my-title" style="visibility:hidden;">@music.Title</span>
+                                <span class="music-my-musician" style="visibility:hidden;">@music.Musician</span>
+                                <img class="music-contol" src="~/img/icon-three-tochki.png" />
+                            </button>
                         </div>
                     </div>
                 }
@@ -34,111 +53,63 @@
         <div class="block-current-music">
         </div>
 
-        @* <div class="current-playlist">
-            <span class="header-current-playlist">Текущий плейлист</span>
-            <button class="shuffle current-playlist-shuffle">
-                <img class="shuffle-icon" src="/img/icon-shuffle.png" />
-                Перемешать
-            </button>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-            <div class="block-one-music">
-                <div class="music">
-                    <div class="info-music">
-                        <audio class="audio" src="~/audio/ANNA_ASTI_-_Po_baram_74376135.mp3"></audio>
-                        <button class="play-music"><img class="avatar-music" src="~/img/playlist-avatar.jpg" /></button>
-                        <div class="block-name-music">
-                            <span>Название (Альбом)</span>
-                            <span>Исполнитель</span>
-                        </div>
-                    </div>
-                    <button class="block-control">
-                        <img class="icon-remove-iz-playlist" src="~/img/icon-remove-iz-playlist.png" />
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        @if (Model.UserProfileAccess == UserAccess.My)
-        {
-            <div class="popup-change-mymusic">
-                <button class="popup-button button-delete-music">
+        <div class="popup-change-mymusic">
+            <input type="hidden" id="musicidpopup" class="aaaaaaaaaaaaaaa musicidpopup" />
+            <input type="hidden" class="aaaaaaaaaaaaaaa titlemusiccc" />
+            <input type="hidden" class="aaaaaaaaaaaaaaa musicianmusiccc" />
+            <form class="form-delete-music" asp-action="DeleteMusic" asp-controller="Music" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="musiciddelete" class="aaaaaaaaaaaaaaa musiciddelete" name="musicId" value="" />
+                <button type="submit" class="popup-button button-delete-music">
                     <img class="popup-image" src="~/img/icon-delete.png" />
                     Удалить
                 </button>
-                <button class="popup-button button-delete-music-favorite">
+            </form>
+
+            <form class="form-delete-music" asp-action="DeleteMusicFromUser" asp-controller="Music" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="musiciddeleteplalist" class="aaaaaaaaaaaaaaa musiciddeleteplalist" name="musicId" value="" />
+                <button type="submit" class="popup-button button-delete-music-favorite">
                     <img class="popup-image" src="~/img/icon-krestic.png" />
                     Убрать из избранного
                 </button>
-                <button class="popup-button button-change-music">
-                    <img class="popup-image" src="~/img/icon-reduct.png" />
-                    Редактировать
-                </button>
-                <button class="popup-button button-show-addinplaylist">
-                    <img class="popup-image" src="~/img/icon-plus.png" />
-                    Добавить в плейлист
-                </button>
-            </div>
-        }
+            </form>
+
+            <button class="popup-button button-change-music">
+                <img class="popup-image" src="~/img/icon-reduct.png" />
+                Редактировать
+                <span class="aaaaaaaaaaaaaaa music-change-idd" style="visibility:hidden;"></span>
+            </button>
+
+            <button class="popup-button button-show-addinplaylist">
+                <img class="popup-image" src="~/img/icon-plus.png" />
+                Добавить в плейлист
+            </button>
+        </div>
 
         <div class="block-add-in-playlist">
-            <form class="form-addin-playlist">
-                <div class="block-checkbox">
-                    <input id="playlist1" type="radio" name="playlist" value="playlist" />
-                    <label for="playlist1">Плейлист 1</label>
+            <form class="form-addin-playlist" asp-action="AddMusicToPlaylist" asp-controller="Music" method="post" enctype="multipart/form-data">
+                <input class="musicId" id="musicId" type="hidden" name="musicId" value="" />
+                <div class="block-checkbox-my-playlists">
                 </div>
-                <div class="block-checkbox">
-                    <input id="playlist2" type="radio" name="playlist" value="playlist" />
-                    <label for="playlist2">Плейлист 2</label>
-                </div>
-                <div class="block-checkbox">
-                    <input id="playlist3" type="radio" name="playlist" value="playlist" />
-                    <label for="playlist3">Плейлист 3</label>
-                </div>
-                <button class="button button-add-inplaylist">Добавить</button>
+                <button type="submit" class="button button-add-inplaylist">Добавить</button>
             </form>
         </div>
 
-        @if (Model.UserProfileAccess == UserAccess.User || Model.UserProfileAccess == UserAccess.Friend)
-        {
-            <div class="popup-change-friendmusic">
-                <button class="popup-button button-addin-mymusic">
-                    <img class="popup-image" src="~/img/icon-plus.png" />
-                    Добавить себе
-                </button>
-                <button class="popup-button button-show-addinplaylist">
-                    <img class="popup-image" src="~/img/icon-plus.png" />
-                    Добавить в плейлист
-                </button>
-            </div>
-        } *@
+        <div class="block-form-change-music">
+            <span>Редактировать песню</span>
+            <form class="form-change-music" asp-action="UpdateMusic" asp-controller="Music" method="post" enctype="multipart/form-data">
+                <div class="block-input-change-name">
+                    <input id="aaaaaaaid" class="aaaaaaaid" type="hidden" name="musicId" value="" />
+                    <input id="aaaaatitle" class="aaaaatitle input-name-change-music" type="text" name="title" value="" />
+                    <input id="aaaamusic" class="aaaamusic input-songs-change-music" type="text" name="musician" value="" />
+                </div>
+                <div class="block-file-change-music">
+                    <div class="file-change-item-music">
+                        <label for="file-photo">Выберите фото трека</label>
+                        <input type="file" id="file-photo" name="musicPicture" value="" accept=".jpg, .jpeg, .png" />
+                    </div>
+                </div>
+                <button type="submit" class="button button-change-music">Сохранить</button>
+            </form>
+        </div>
     </div>
 </div>

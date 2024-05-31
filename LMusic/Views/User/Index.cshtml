@@ -53,7 +53,7 @@
         @if (Model.UserProfileAccess == UserAccess.My)
         {
             <div class="block-settings">
-                <form class="form-settings" asp-action="UpdateUser" asp-controller="User" method="post" enctype="multipart/form-data">
+                <form class="form-settings form-settings-user-change" asp-action="UpdateUser" asp-controller="User" method="post" enctype="multipart/form-data">
                     <div class="main-info-change">
                         <div class="image-profile-change">
                             <label for="image">Изменить фото профиля</label>
@@ -148,9 +148,9 @@
                 <span>Редактировать песню</span>
                 <form class="form-change-music" asp-action="UpdateMusic" asp-controller="Music" method="post" enctype="multipart/form-data">
                     <div class="block-input-change-name">
-                        <input id="aaaaaaaid" type="hidden" name="musicId" value=""/>
-                        <input id="aaaaatitle" class="input-name-change-music" type="text" name="title" value="" />
-                        <input id="aaaamusic" class="input-songs-change-music" type="text" name="musician" value="" />
+                        <input id="aaaaaaaid" class="aaaaaaaid" type="hidden" name="musicId" value="" />
+                        <input id="aaaaatitle" class="aaaaatitle input-name-change-music" type="text" name="title" value="" />
+                        <input id="aaaamusic" class="aaaamusic input-songs-change-music" type="text" name="musician" value="" />
                     </div>
                     <div class="block-file-change-music">
                         <div class="file-change-item-music">
@@ -167,10 +167,10 @@
         {
             <div class="block-form-change-playlist">
                 <span>Редактировать плейлист</span>
-                <form class="form-change-playlist" asp-action="/playlist/update" asp-controller="Playlist" method="post" enctype="multipart/form-data">
-                    <input id="id-playlist" type="hidden" name="id" value=""/>
+                <form class="form-change-playlist" asp-action="Update" asp-controller="Playlist" method="post" enctype="multipart/form-data">
+                    <input id="id-playlist" class="id-playlist" type="hidden" name="id" value="" />
                     <div class="block-input-name-playlist">
-                        <input id="title-playlist" class="input-name-change-playlist" type="text" placeholder="Название" name="title" value=""/>
+                        <input id="title-playlist" class="title-playlist input-name-change-playlist" type="text" placeholder="Название" name="title" value=""/>
                     </div>
                     <div class="block-file-playlist">
                         <div class="file-item-playlist">
@@ -318,14 +318,17 @@
                         <img class="shuffle-icon" src="/img/icon-shuffle.png" />
                         Перемешать
                     </button>
-                    <div class="block-mymusic-favorite">
-                        <button class="current-filter my-music-filter">
-                            Моя музыка
-                        </button>
-                        <button class="favor-music-filter">
-                            Избранное
-                        </button>
-                    </div>
+                    @if (Model.UserProfileAccess == UserAccess.My)
+                    {
+                        <div class="block-mymusic-favorite">
+                            <a class="current-filter my-music-filter" href="/user">
+                                Избранное
+                            </a>
+                            <a class="favor-music-filter" href="/user/musicControl">
+                                Загруженное
+                            </a>
+                        </div>
+                    }
                 </div>
 
                 @foreach (var music in Model.FavoriteMusic)
@@ -423,11 +426,11 @@
         @if (Model.UserProfileAccess == UserAccess.My)
         {
             <div class="popup-change-mymusic">
-                <input id="musicidpopup" />
-                <span class="titlemusiccc" style="visibility:hidden;"></span>
-                <span class="musicianmusiccc" style="visibility:hidden;"></span>
+                <input type="hidden" id="musicidpopup" class="aaaaaaaaaaaaaaa musicidpopup" />
+                <input type="hidden" class="aaaaaaaaaaaaaaa titlemusiccc" />
+                <input type="hidden" class="aaaaaaaaaaaaaaa musicianmusiccc" />
                 <form class="form-delete-music" asp-action="DeleteMusic" asp-controller="Music" method="post" enctype="multipart/form-data">
-                    <input id="musiciddelete" name="musicId" value=""/>
+                    <input type="hidden" id="musiciddelete" class="aaaaaaaaaaaaaaa musiciddelete" name="musicId" value="" />
                     <button type="submit" class="popup-button button-delete-music">
                         <img class="popup-image" src="~/img/icon-delete.png" />
                         Удалить
@@ -435,7 +438,7 @@
                 </form>
 
                 <form class="form-delete-music" asp-action="DeleteMusicFromUser" asp-controller="Music" method="post" enctype="multipart/form-data">
-                    <input id="musiciddeleteplalist" name="musicId" value="" />
+                    <input type="hidden" id="musiciddeleteplalist" class="aaaaaaaaaaaaaaa musiciddeleteplalist" name="musicId" value="" />
                     <button type="submit" class="popup-button button-delete-music-favorite">
                         <img class="popup-image" src="~/img/icon-krestic.png" />
                         Убрать из избранного
@@ -443,9 +446,9 @@
                 </form>
 
                 <button class="popup-button button-change-music">
-                    <span class="music-change-idd"></span>
                     <img class="popup-image" src="~/img/icon-reduct.png" />
                     Редактировать
+                    <span class="aaaaaaaaaaaaaaa music-change-idd" style="visibility:hidden;"></span>
                 </button>
 
                 <button class="popup-button button-show-addinplaylist">
@@ -457,15 +460,9 @@
 
         <div class="block-add-in-playlist">
             <form class="form-addin-playlist" asp-action="AddMusicToPlaylist" asp-controller="Music" method="post" enctype="multipart/form-data">
-                <input id="musicId" type="hidden" name="musicId" value="" />
+                <input class="musicId" id="musicId" type="hidden" name="musicId" value="" />
                 <div class="block-checkbox-my-playlists">
-                @foreach(var playlist in Model.Playlists)
-                {
-                    <div class="block-checkbox">
-                        <input id="playlist1" type="radio" name="playlistId" value="@playlist.Id" />
-                        <label for="playlist1">@playlist.Name</label>
-                    </div>
-                }
+
                 </div>
                 <button type="submit" class="button button-add-inplaylist">Добавить</button>
             </form>

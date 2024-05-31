@@ -170,7 +170,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("/playlist/delete")]
+        [HttpPost("Delete")]
         public IActionResult Delete(int id)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
@@ -210,7 +210,7 @@ namespace LMusic.Controllers
             }
         }
 
-        [HttpPost("/playlist/update")]
+        [HttpPost("Update")]
         public IActionResult Update(int id, string title, IFormFile? playlistPicture, Privacy? privacy)
         {
             var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
@@ -274,8 +274,8 @@ namespace LMusic.Controllers
                 }
 
                 var playlists = _playlistService.GetPlaylistsByUser(user, UserAccess.My);
-                var playlistsViewmodel = playlists.Select(x => _playlistService.GetViewModel(x, user));
-                return Ok(playlistsViewmodel);
+                //var playlistsViewmodel = playlists.Select(x => _playlistService.GetViewModel(x, user));
+                return Ok(playlists);
             }
             else
             {
