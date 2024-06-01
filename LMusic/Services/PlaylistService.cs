@@ -150,6 +150,8 @@ namespace LMusic.Services
         public bool IsCreater(Playlist playlist, User user)
         {
             var result = _playlistUserRegistry.GetByPlaylistAndUser(playlist, user);
+            if (result == null)
+                return false;
             return result.IsCreater;
         }
     }
