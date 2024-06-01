@@ -5,12 +5,22 @@ namespace LMusic.Registries
 {
     public class PlaylistUserRegistry : Registry<PlaylistUser>
     {
-        public PlaylistUser GetByUserCreater(User user)
+        public PlaylistUser GetByUserDefaultCreater(User user)
         {
             using (ContextDataBase db = new ContextDataBase())
             {
                 DbSet<PlaylistUser> dbSet = db.Set<PlaylistUser>();
                 var entity = dbSet.Where(i => i.UserId == user.Id && i.IsCreater == true && i.isDefault).FirstOrDefault();
+                return entity;
+            }
+        }
+
+        public List<PlaylistUser> GetByUserCreater(User user)
+        {
+            using (ContextDataBase db = new ContextDataBase())
+            {
+                DbSet<PlaylistUser> dbSet = db.Set<PlaylistUser>();
+                var entity = dbSet.Where(i => i.UserId == user.Id && i.IsCreater == true).ToList();
                 return entity;
             }
         }

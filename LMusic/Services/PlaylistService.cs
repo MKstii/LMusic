@@ -27,6 +27,13 @@ namespace LMusic.Services
             return _playlistRegistry.GetPlaylists(playlistsUsersIds, access);
         }
 
+        public IEnumerable<Playlist> GetPlaylistsCreater(User user, UserAccess access)
+        {
+            var playlistsUsers = _playlistUserRegistry.GetByUserCreater(user);
+            var playlistsUsersIds = playlistsUsers.Select(x => x.PlaylistId).ToList();
+            return _playlistRegistry.GetPlaylists(playlistsUsersIds, access);
+        }
+
         public Playlist CreateDefaultPlaylistByUser(User user)
         {
             var DefaultPict = _pictureService.GetDefaulPlaylistPicture();
@@ -59,7 +66,7 @@ namespace LMusic.Services
 
         public Playlist? GetDefaultUserPlaylist(User user)
         {
-            var userPlaylist = _playlistUserRegistry.GetByUserCreater(user);
+            var userPlaylist = _playlistUserRegistry.GetByUserDefaultCreater(user);
             return _playlistRegistry.Find(userPlaylist.PlaylistId);
         }
 

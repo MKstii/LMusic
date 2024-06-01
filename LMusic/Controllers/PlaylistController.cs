@@ -321,8 +321,32 @@ namespace LMusic.Controllers
                 Response.Cookies.Delete("TelegramUserHash");
                 return Unauthorized("Ошибка валидации");
             }
+        }
 
-  
+        [HttpGet("GetMyPlaylists")]
+        public IActionResult GetMyPlaylists()
+        {
+            var tgUserJson = Request.Cookies["TelegramUserHash"] != null ? Request.Cookies["TelegramUserHash"] : null;
+            var tgUser = _userService.ConvertJsonToTgUser(tgUserJson);
+            if (_authService.ValidUser(tgUser))
+            {
+                var user = _userService.GetUserByTg(tgUser);
+
+                if (user == null)
+                {
+                    Response.Cookies.Delete("TelegramUserHash");
+                    return BadRequest("Пользователь не найден");
+                }
+
+                var playlists = _playlistService.GetPlaylistsCreater(user, UserAccess.My);
+                return Ok(playlists);
+            }
+            else
+            {
+                Response.Cookies.Delete("TelegramUserHash");
+                return Unauthorized("Ошибка валидации");
+            }
+
 
         }
 
