@@ -1,5 +1,5 @@
 ﻿const divCountRequests = document.querySelector('.ddddddddd');
-const cooooount = fetch("http://127.0.0.1/GetFriendsRequestCount")
+const cooooount = fetch("https://mks-server.tplinkdns.com/GetFriendsRequestCount")
     .then(requests => requests.json())
     .then(count => {
         if (count > 0) {
@@ -180,7 +180,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             popupBlockChangeMysicMYYYYYYYYY.querySelector('.titlemusiccc').value = musictitle;
             popupBlockChangeMysicMYYYYYYYYY.querySelector('.musicianmusiccc').value = musicmusician;
 
-            const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
+            const musicInFavorite = fetch("https://mks-server.tplinkdns.com/IsMusicInFavorite?musicId=" + musicid)
                 .then(response => response.json())
                 .then(isFavorite => {
                     const FORMAA = popupBlockChangeMysicMYYYYYYYYY.querySelector('.form-add-music');
@@ -238,7 +238,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
             var htmlPlaylists = '';
 
-            const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
+            const playlists = fetch("https://mks-server.tplinkdns.com/GetMyPlaylists")
                 .then(response => response.json())
                 .then(playlists => {
 
@@ -260,7 +260,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         e.preventDefault();
 
         const musicid = parentMusicUserOther.querySelector('.music-id').innerHTML;
-        const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
+        const musicInFavorite = fetch("https://mks-server.tplinkdns.com/IsMusicInFavorite?musicId=" + musicid)
             .then(response => response.json())
             .then(isFavorite => {
                 let innertTextpopup = '';
@@ -292,7 +292,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                     const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
                     var htmlPlaylists = '';
 
-                    const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
+                    const playlists = fetch("https://mks-server.tplinkdns.com/GetMyPlaylists")
                         .then(response => response.json())
                         .then(playlist => {
 
@@ -311,7 +311,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonDelete = popupOtherMusicChange.querySelector('.button-remove-mymusic');
                 buttonDelete?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/DeleteMusicFromUser?musicId=" + musicid, {
+                    fetch("https://mks-server.tplinkdns.com/DeleteMusicFromUser?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -320,7 +320,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonAdd = popupOtherMusicChange.querySelector('.button-addin-mymusic');
                 buttonAdd?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/AddMusicToFav?musicId=" + musicid, {
+                    fetch("https://mks-server.tplinkdns.com/AddMusicToFav?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -425,7 +425,7 @@ async function AAAAAAAA() {
 
             let isMy = await isMyPlaylist(idPlaylist);
 
-            const playlistmusic = fetch("http://127.0.0.1/playlist/" + idPlaylist)
+            const playlistmusic = fetch("https://mks-server.tplinkdns.com/playlist/" + idPlaylist)
                 .then(response => response.json())
                 .then(playlistmusic => {
                     
@@ -532,7 +532,7 @@ async function AAAAAAAA() {
                                 const musicId = mus.querySelector('.musicId').value;
                                 const playlistId = mus.querySelector('.playlistId').value;
 
-                                fetch("http://127.0.0.1/DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
+                                fetch("https://mks-server.tplinkdns.com/DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
                                     method: "POST"
                                 });
 
@@ -566,7 +566,7 @@ async function AAAAAAAA() {
 
             const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
             buttonDelete.addEventListener('click', (e) => {
-                fetch("http://127.0.0.1/Delete?id=" + idPlaylist, {
+                fetch("https://mks-server.tplinkdns.com/Delete?id=" + idPlaylist, {
                     method: "POST"
                 });
             });
@@ -598,7 +598,7 @@ async function AAAAAAAA() {
             const formChangePlaylistBBB = document.querySelector('.block-change-my-playlist');
             const idPlaylist = parentBlock.querySelector('.playlist-my-id').value;
 
-            const otherPlaylist = fetch("http://127.0.0.1/UserHasPlaylist?playlistId=" + idPlaylist)
+            const otherPlaylist = fetch("https://mks-server.tplinkdns.com/UserHasPlaylist?playlistId=" + idPlaylist)
                 .then(response => response.json())
                 .then(isMy => {
                     let innertTextpopup = '';
@@ -611,7 +611,7 @@ async function AAAAAAAA() {
 
                     const buttonRemoveOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-remove-playlist-forme');
                     buttonRemoveOtherPlaylistForMe?.addEventListener('click', (e) => {
-                        fetch("http://127.0.0.1/RemovePlaylistFromUser?playlistId=" + idPlaylist, {
+                        fetch("https://mks-server.tplinkdns.com/RemovePlaylistFromUser?playlistId=" + idPlaylist, {
                             method: "POST"
                         });
 
@@ -620,7 +620,7 @@ async function AAAAAAAA() {
 
                     const buttonAddOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-add-playlist-forme');
                     buttonAddOtherPlaylistForMe?.addEventListener('click', (e) => {
-                        fetch("http://127.0.0.1/AddPlaylistToUser?playlistId=" + idPlaylist, {
+                        fetch("https://mks-server.tplinkdns.com/AddPlaylistToUser?playlistId=" + idPlaylist, {
                             method: "POST"
                         });
 
@@ -638,7 +638,7 @@ async function AAAAAAAA() {
 AAAAAAAA();
 
 async function isMyPlaylist(idPlaylist) {
-    const d = await fetch("http://127.0.0.1/IsMyPlaylist?playlistId=" + idPlaylist);
+    const d = await fetch("https://mks-server.tplinkdns.com/IsMyPlaylist?playlistId=" + idPlaylist);
     return await d.json();
 }
 
@@ -671,7 +671,7 @@ if (document.querySelector('.add-from-friends-my')) {
     const tgIsUser = formAddRequests?.closest('.block-number-space').querySelector('.hiddenuseridddddddddddd').value;
     let htmlValues = '';
 
-    const resultt = fetch("http://127.0.0.1/HasFriendRequest?addresseTgId=" + tgIsUser)
+    const resultt = fetch("https://mks-server.tplinkdns.com/HasFriendRequest?addresseTgId=" + tgIsUser)
         .then(response => response.json())
         .then(isHas => {
             if (isHas) {
