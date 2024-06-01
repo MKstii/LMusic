@@ -10,6 +10,7 @@ namespace LMusic.ViewModels.User
         public string TgId { get; set; }
         public List<PlaylistViewmodel> Playlists { get; set; }
         public List<MusicViewmodel> FavoriteMusic { get; set; }
+        public Privacy Privacy { get; set; }
         public UserAccess UserProfileAccess { get; set; }
     }
 

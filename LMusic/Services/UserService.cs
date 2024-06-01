@@ -95,6 +95,7 @@ namespace LMusic.Services
             viewmodel.UserName = user.UserName;
             viewmodel.PhotoPath = _pictureService.GetUserAvatar(user).GetFullPath();
             viewmodel.TgId = user.TelegramId;
+            viewmodel.Privacy = user.Privacy;
 
             if(user.Privacy == Privacy.ForAll
                 || user.Privacy == Privacy.ForFriends && _friendService.IsFriends(user, requestSender)

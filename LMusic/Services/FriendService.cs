@@ -70,7 +70,7 @@ namespace LMusic.Services
             return friendList;
         }
 
-        public (List<FriendRequest>, int) GetRequestByAddresser(User user, string filter, int page, int limit)
+        public (List<FriendRequest>, int) GetRequestByAddresser(User user, string filter = "", int page = 1, int limit = 99999999)
         {
             return _friendRequestRegistry.GetRequestByAddresse(user, filter, page, limit);
         }
