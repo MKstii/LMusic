@@ -98,11 +98,20 @@ namespace LMusic.Controllers
                     return Redirect("/home");
                 }
 
-
                 var playlistOwner = _playlistService.GetPlaylistOwner(playlistId);
+
+                if(playlistOwner == null)
+                {
+                    return BadRequest("Пользователь или плейлист не найден");
+                }
+
                 if (_userService.GetAccess(playlistOwner, user) == UserAccess.My)
                 {
                     Playlist playlist = _playlistService.GetPlaylistById(playlistId, UserAccess.My);
+                    if(playlist == null)
+                    {
+                        return BadRequest("Плейлист не найден");
+                    }
                     Music music = _musicService.GetMusic(musicId);
                     if (_userService.GetAccess(music.User, user) == UserAccess.My && !_musicService.PlaylistHasMusic(music, playlist))
                     {
