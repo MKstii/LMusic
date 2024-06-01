@@ -1,4 +1,6 @@
-﻿const iconMenu = document.querySelector('.icon-menu'),
+﻿const URL = "http://127.0.0.1/";
+
+const iconMenu = document.querySelector('.icon-menu'),
     navigation = document.querySelector('.page-sidebar'),
     sideItemSpan = navigation.querySelectorAll('.menu-link span'),
     bodyContent = document.querySelector('.content-wrapper'),
@@ -186,7 +188,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
             var htmlPlaylists = '';
 
-            const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
+            const playlists = fetch(URL + "GetMyPlaylists")
                 .then(response => response.json())
                 .then(playlists => {
 
@@ -208,7 +210,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         e.preventDefault();
 
         const musicid = parentMusicUserOther.querySelector('.music-id').innerHTML;
-        const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
+        const musicInFavorite = fetch(URL + "IsMusicInFavorite?musicId=" + musicid)
             .then(response => response.json())
             .then(isFavorite => {
                 let innertTextpopup = '';
@@ -240,7 +242,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                     const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
                     var htmlPlaylists = '';
 
-                    const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
+                    const playlists = fetch(URL + "GetMyPlaylists")
                         .then(response => response.json())
                         .then(playlist => {
 
@@ -259,7 +261,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonDelete = popupOtherMusicChange.querySelector('.button-remove-mymusic');
                 buttonDelete?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/DeleteMusicFromUser?musicId=" + musicid, {
+                    fetch(URL + "DeleteMusicFromUser?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -268,7 +270,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonAdd = popupOtherMusicChange.querySelector('.button-addin-mymusic');
                 buttonAdd?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/AddMusicToFav?musicId=" + musicid, {
+                    fetch(URL + "AddMusicToFav?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -351,207 +353,241 @@ background.addEventListener('click', () => {
 const buttonImageOpenPlaylist = document.querySelectorAll('.playlist'),
     blockOpenPlaylist = document.querySelector('.block-open-playlist');
 
-buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
-    e.preventDefault();
-    const threePoint = item.querySelector('.image-for-my-playlist'),
-        threePointOther = item.querySelector('.image-for-other-playlist');
+async function AAAAAAAA() {
+    
 
-    if (e.target != threePoint && e.target != threePointOther) {
-        const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
-        const namePlaylist = item.querySelector('.info-my-playlist .tiiiitle-playlist').innerHTML;
-        const idPlaylist = item.querySelector('.info-my-playlist .iiiid-playlist').innerHTML;
+    buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const threePoint = item.querySelector('.image-for-my-playlist'),
+            threePointOther = item.querySelector('.image-for-other-playlist');
 
-        blockOpenPlaylist.querySelector('.title-open-playlist').innerHTML = namePlaylist;
-        var htmlPlaylists = '';
+        if (e.target != threePoint && e.target != threePointOther) {
+            const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
+            const namePlaylist = item.querySelector('.info-my-playlist .tiiiitle-playlist').innerHTML;
+            const imagePlaylistSrc = item.querySelector('.playlist-avatar').src;
+            const idPlaylist = item.querySelector('.info-my-playlist .iiiid-playlist').innerHTML;
 
-        const playlistmusic = fetch("http://127.0.0.1/playlist/" + idPlaylist)
-            .then(response => response.json())
-            .then(playlistmusic => {
-                for (var i = 0; i < playlistmusic.length; i++) {
-                    htmlPlaylists += '<div class="block-one-music"><div class="music">' +
-                        '<div class="info-music">' +
-                        '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
-                        '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
-                        '<div class="block-name-music">' +
-                        '<span>' + playlistmusic[i]['title'] + '</span>' +
-                        '<span>' + playlistmusic[i]['musician'] + '</span>' +
-                        '</div>' +
-                        '</div>' +
-                        '<button type="submit" class="block-control-music-playlist">' +
-                        '<input type = "hidden" class="musicId" name="musicId" value = "' + playlistmusic[i]['id'] + '" />' +
-                        '<input type="hidden" class="playlistId" name="playlistId" value="' + idPlaylist + '"/>' +
-                        '<img class="music-contol-my-playlist" src="/img/icon-krestic.png" />' +
-                        '</button>' +
-                        '</div>' +
-                        '</div>';
-                }
-                divMusicPlaylist.innerHTML = htmlPlaylists;
+            blockOpenPlaylist.querySelector('.title-open-playlist').innerHTML = namePlaylist;
+            blockOpenPlaylist.querySelector('.avatar-playlist').src = imagePlaylistSrc;
 
-                blockOpenPlaylist.classList.add('show');
+            var htmlPlaylists = '';
 
-                const blockMusic = blockOpenPlaylist.querySelectorAll('.block-one-music');
-                blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
-                    const threePoint = mus.querySelector('.music-contol-my-playlist');
+            let isMy = await isMyPlaylist(idPlaylist);
 
-                    if (e.target != threePoint) {
-                        const currentAudio = mus.querySelector('.audio'),
-                            currentAvatar = mus.querySelector('.avatar-music'),
-                            blockCurrentMusic = document.querySelector('.block-current-music');
+            const playlistmusic = fetch(URL + "playlist/" + idPlaylist)
+                .then(response => response.json())
+                .then(playlistmusic => {
+                    
 
-                        const arrayMusicsAllMy = blockOpenPlaylist.querySelectorAll('.block-one-music');
-                        let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
-                            return el.querySelector('.audio').src == currentAudio.src;
-                        });
-
-                        let arrayNeedMusic = [];
-                        for (var i in arrayMusicsAllMy) {
-                            if (i >= indexCurrentMusic) {
-                                const avatarSrc = arrayMusicsAllMy[i].querySelector('.avatar-music').src;
-                                const musicSrc = arrayMusicsAllMy[i].querySelector('.audio').src;
-                                arrayNeedMusic.push([avatarSrc, musicSrc]);
-                            }
+                    for (var i = 0; i < playlistmusic.length; i++) {
+                        
+                        if (!isMy) {
+                            htmlPlaylists += '<div class="block-one-music"><div class="music">' +
+                                '<div class="info-music">' +
+                                '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
+                                '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
+                                '<div class="block-name-music">' +
+                                '<span>' + playlistmusic[i]['title'] + '</span>' +
+                                '<span>' + playlistmusic[i]['musician'] + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        } else {
+                            htmlPlaylists += '<div class="block-one-music"><div class="music">' +
+                                '<div class="info-music">' +
+                                '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
+                                '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
+                                '<div class="block-name-music">' +
+                                '<span>' + playlistmusic[i]['title'] + '</span>' +
+                                '<span>' + playlistmusic[i]['musician'] + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<button type="submit" class="block-control-music-playlist">' +
+                                '<input type = "hidden" class="musicId" name="musicId" value = "' + playlistmusic[i]['id'] + '" />' +
+                                '<input type="hidden" class="playlistId" name="playlistId" value="' + idPlaylist + '"/>' +
+                                '<img class="music-contol-my-playlist" src="/img/icon-krestic.png" />' +
+                                '</button>' +
+                                '</div>' +
+                                '</div>';
                         }
 
-                        let index = indexCurrentMusic;
-                        blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
+                        divMusicPlaylist.innerHTML = htmlPlaylists;
+
+                        const blockMusic = blockOpenPlaylist.querySelectorAll('.block-one-music');
+                        blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
+                            const threePoint = mus.querySelector('.music-contol-my-playlist');
+
+                            if (e.target != threePoint) {
+                                const currentAudio = mus.querySelector('.audio'),
+                                    currentAvatar = mus.querySelector('.avatar-music'),
+                                    blockCurrentMusic = document.querySelector('.block-current-music');
+
+                                const arrayMusicsAllMy = blockOpenPlaylist.querySelectorAll('.block-one-music');
+                                let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
+                                    return el.querySelector('.audio').src == currentAudio.src;
+                                });
+
+                                let arrayNeedMusic = [];
+                                for (var i in arrayMusicsAllMy) {
+                                    if (i >= indexCurrentMusic) {
+                                        const avatarSrc = arrayMusicsAllMy[i].querySelector('.avatar-music').src;
+                                        const musicSrc = arrayMusicsAllMy[i].querySelector('.audio').src;
+                                        arrayNeedMusic.push([avatarSrc, musicSrc]);
+                                    }
+                                }
+
+                                let index = indexCurrentMusic;
+                                blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
                             <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
                             <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
                             <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
                             <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
 
-                        const buttonPrevAudio = blockCurrentMusic.querySelector('.icon-last-music');
-                        const buttonNextAudio = blockCurrentMusic.querySelector('.icon-next-music');
+                                const buttonPrevAudio = blockCurrentMusic.querySelector('.icon-last-music');
+                                const buttonNextAudio = blockCurrentMusic.querySelector('.icon-next-music');
 
-                        blockCurrentMusic.addEventListener('click', (e) => {
-                            if (e.target == buttonPrevAudio) {
-                                index = index - 1;
-                                if (index < 0) index = 0;
-                                currentLineAudio.src = arrayNeedMusic[index][1];
-                                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                blockCurrentMusic.addEventListener('click', (e) => {
+                                    if (e.target == buttonPrevAudio) {
+                                        index = index - 1;
+                                        if (index < 0) index = 0;
+                                        currentLineAudio.src = arrayNeedMusic[index][1];
+                                        blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                        currentLineAudio.play();
+                                    } else if (e.target == buttonNextAudio) {
+                                        index = index + 1;
+                                        if (index > arrayNeedMusic.length - 1) index = 0;
+                                        currentLineAudio.src = arrayNeedMusic[index][1];
+                                        blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                        currentLineAudio.play();
+                                    }
+                                })
+
+
+                                const currentLineAudio = blockCurrentMusic.querySelector('.current-audio');
                                 currentLineAudio.play();
-                            } else if (e.target == buttonNextAudio) {
-                                index = index + 1;
-                                if (index > arrayNeedMusic.length - 1) index = 0;
-                                currentLineAudio.src = arrayNeedMusic[index][1];
-                                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
-                                currentLineAudio.play();
+
+                                currentLineAudio.onended = function () {
+                                    index++;
+                                    if (index > arrayNeedMusic.length) index = 0;
+                                    currentLineAudio.src = arrayNeedMusic[index][1];
+                                    blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                    currentLineAudio.play();
+                                }
+                                blockCurrentMusic.classList.add('display-flex');
+                            } else {
+                                const musicId = mus.querySelector('.musicId').value;
+                                const playlistId = mus.querySelector('.playlistId').value;
+
+                                fetch(URL + "DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
+                                    method: "POST"
+                                });
+
+                                location.reload();
                             }
-                        })
+                        }))
 
+                    }
+                });
 
-                        const currentLineAudio = blockCurrentMusic.querySelector('.current-audio');
-                        currentLineAudio.play();
+            blockOpenPlaylist.classList.add('show');
+            background.classList.add('show');
+            background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+            background.style.height = `${document.documentElement.offsetHeight}px`;
+        } else if (e.target == threePoint) {
+            const parentBlockA = threePoint.closest('.button-for-my-playlist');
+            const formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
 
-                        currentLineAudio.onended = function () {
-                            index++;
-                            if (index > arrayNeedMusic.length) index = 0;
-                            currentLineAudio.src = arrayNeedMusic[index][1];
-                            blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
-                            currentLineAudio.play();
-                        }
-                        blockCurrentMusic.classList.add('display-flex');
+            const idPlaylist = parentBlockA.querySelector('.playlist-my-id').value;
+            const titlePlaylist = parentBlockA.querySelector('.playlist-my-title').value;
+
+            formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
+                '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
+                '<button type="submit" class="delete-playlisttttt buttoooooooooooon"><img src="/img/icon-delete.png" width="20px" height="20px"/>Удалить</button></form>' +
+                '<button class="button-playlist-change buttoooooooooooon">' +
+                '<img class="icon-change-playlist" src="/img/icon-reduct.png" />' +
+                '<span>Редактировать</span>' +
+                '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
+                '<span class="titleplaylist" style="visibility:hidden;">' + titlePlaylist + '</span>' +
+                '</button>';
+
+            const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
+            buttonDelete.addEventListener('click', (e) => {
+                fetch(URL + "Delete?id=" + idPlaylist, {
+                    method: "POST"
+                });
+            });
+
+            buttonChangePlaylist = formChangePlaylistAAA.querySelector('.button-playlist-change');
+            const blockChangePLaylist = document.querySelector('.block-form-change-playlist');
+
+            buttonChangePlaylist.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const idplaylist = buttonChangePlaylist.querySelector('.idplaylistchange').innerHTML;
+                const titleplaylist = buttonChangePlaylist.querySelector('.titleplaylist').innerHTML;
+
+                blockChangePLaylist.querySelector('.id-playlist').value = idplaylist;
+                blockChangePLaylist.querySelector('.title-playlist').value = titleplaylist;
+
+                blockChangePLaylist.classList.add('show');
+                background.classList.add('show');
+                background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
+                background.style.height = `${document.documentElement.offsetHeight}px`;
+            });
+
+            formChangePlaylistAAA.classList.toggle('show');
+            formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
+            formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
+        } else if (e.target == threePointOther) {
+            const parentBlock = threePointOther.closest('.button-for-other-playlist');
+
+            const formChangePlaylistBBB = document.querySelector('.block-change-my-playlist');
+            const idPlaylist = parentBlock.querySelector('.playlist-my-id').value;
+
+            const otherPlaylist = fetch(URL + "UserHasPlaylist?playlistId=" + idPlaylist)
+                .then(response => response.json())
+                .then(isMy => {
+                    let innertTextpopup = '';
+                    if (isMy) {
+                        innertTextpopup = '<button type="submit" class="button-remove-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Удалить со своей страницы</button>';
                     } else {
-                        const musicId = mus.querySelector('.musicId').value;
-                        const playlistId = mus.querySelector('.playlistId').value;
+                        innertTextpopup = '<button type="submit" class="button-add-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Добавить на свою страницу</button>';
+                    }
+                    formChangePlaylistBBB.innerHTML = innertTextpopup;
 
-                        fetch("http://127.0.0.1/DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
+                    const buttonRemoveOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-remove-playlist-forme');
+                    buttonRemoveOtherPlaylistForMe?.addEventListener('click', (e) => {
+                        fetch(URL + "RemovePlaylistFromUser?playlistId=" + idPlaylist, {
+                            method: "POST"
+                        });
+
+                        window.location.href = window.location.href;
+                    });
+
+                    const buttonAddOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-add-playlist-forme');
+                    buttonAddOtherPlaylistForMe?.addEventListener('click', (e) => {
+                        fetch(URL + "AddPlaylistToUser?playlistId=" + idPlaylist, {
                             method: "POST"
                         });
 
                         location.reload();
-                    }
-                }));
-            });
-
-        background.classList.add('show');
-        background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
-        background.style.height = `${document.documentElement.offsetHeight}px`;
-    } else if (e.target == threePoint) {
-        const parentBlockA = threePoint.closest('.button-for-my-playlist');
-        const formChangePlaylistAAA = document.querySelector('.block-change-my-playlist');
-
-        const idPlaylist = parentBlockA.querySelector('.playlist-my-id').value;
-        const titlePlaylist = parentBlockA.querySelector('.playlist-my-title').value;
-
-        formChangePlaylistAAA.innerHTML = '<form asp-action="Delete" asp-controller="Playlist" method="post" enctype="multipart/form-data">' +
-            '<input type = "hidden" name = "id" value = "' + idPlaylist + '" />' +
-            '<button type="submit" class="delete-playlisttttt buttoooooooooooon"><img src="/img/icon-delete.png" width="20px" height="20px"/>Удалить</button></form>' +
-            '<button class="button-playlist-change buttoooooooooooon">' +
-            '<img class="icon-change-playlist" src="/img/icon-reduct.png" />' +
-            '<span>Редактировать</span>' +
-            '<span class="idplaylistchange" style="visibility:hidden;">' + idPlaylist + '</span>' +
-            '<span class="titleplaylist" style="visibility:hidden;">' + titlePlaylist + '</span>' +
-            '</button>';
-
-        const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
-        buttonDelete.addEventListener('click', (e) => {
-            fetch("http://127.0.0.1/Delete?id=" + idPlaylist, {
-                method: "POST"
-            });
-        });
-
-        buttonChangePlaylist = formChangePlaylistAAA.querySelector('.button-playlist-change');
-        const blockChangePLaylist = document.querySelector('.block-form-change-playlist');
-
-        buttonChangePlaylist.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            const idplaylist = buttonChangePlaylist.querySelector('.idplaylistchange').innerHTML;
-            const titleplaylist = buttonChangePlaylist.querySelector('.titleplaylist').innerHTML;
-
-            blockChangePLaylist.querySelector('.id-playlist').value = idplaylist;
-            blockChangePLaylist.querySelector('.title-playlist').value = titleplaylist;
-
-            blockChangePLaylist.classList.add('show');
-            background.classList.add('show');
-            background.style.width = `${document.documentElement.clientWidth + navigation.style.width}px`;
-            background.style.height = `${document.documentElement.offsetHeight}px`;
-        });
-
-        formChangePlaylistAAA.classList.toggle('show');
-        formChangePlaylistAAA.style.top = e.pageY - 40 + 'px';
-        formChangePlaylistAAA.style.left = e.pageX + 25 + 'px';
-    } else if (e.target == threePointOther) {
-        const parentBlock = threePointOther.closest('.button-for-other-playlist');
-
-        const formChangePlaylistBBB = document.querySelector('.block-change-my-playlist');
-        const idPlaylist = parentBlock.querySelector('.playlist-my-id').value;
-
-        const otherPlaylist = fetch("http://127.0.0.1/UserHasPlaylist?playlistId=" + idPlaylist)
-            .then(response => response.json())
-            .then(isMy => {
-                let innertTextpopup = '';
-                if (isMy) {
-                    innertTextpopup = '<button type="submit" class="button-remove-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Удалить со своей страницы</button>';
-                } else {
-                    innertTextpopup = '<button type="submit" class="button-add-playlist-forme"><input type = "hidden" name = "playlistId" value = "' + idPlaylist + '" />Добавить на свою страницу</button>';
-                }
-                formChangePlaylistBBB.innerHTML = innertTextpopup;
-
-                const buttonRemoveOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-remove-playlist-forme');
-                buttonRemoveOtherPlaylistForMe?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/RemovePlaylistFromUser?playlistId=" + idPlaylist, {
-                        method: "POST"
                     });
-
-                    window.location.href = window.location.href;
                 });
 
-                const buttonAddOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-add-playlist-forme');
-                buttonAddOtherPlaylistForMe?.addEventListener('click', (e) => {
-                    fetch("http://127.0.0.1/AddPlaylistToUser?playlistId=" + idPlaylist, {
-                        method: "POST"
-                    });
+            formChangePlaylistBBB.classList.toggle('show');
+            formChangePlaylistBBB.style.top = e.pageY - 40 + 'px';
+            formChangePlaylistBBB.style.left = e.pageX + 25 + 'px';
+        }
+    }));
+}
 
-                    location.reload();
-                });
-            });
+AAAAAAAA();
 
-        formChangePlaylistBBB.classList.toggle('show');
-        formChangePlaylistBBB.style.top = e.pageY - 40 + 'px';
-        formChangePlaylistBBB.style.left = e.pageX + 25 + 'px';
-    }
-}));
+async function isMyPlaylist(idPlaylist) {
+    const d = await fetch(URL + "IsMyPlaylist?playlistId=" + idPlaylist);
+    return await d.json();
+}
 
 const buttonChangeMusicPlaylist = blockOpenPlaylist?.querySelectorAll('.block-control-music-playlist'),
     blockChangeMusicPlaylist = document.querySelector('.block-change-music-playlist');
@@ -582,7 +618,7 @@ if (document.querySelector('.add-from-friends-my')) {
     const tgIsUser = formAddRequests?.closest('.block-number-space').querySelector('.hiddenuseridddddddddddd').value;
     let htmlValues = '';
 
-    const resultt = fetch("http://127.0.0.1/HasFriendRequest?addresseTgId=" + tgIsUser)
+    const resultt = fetch(URL + "HasFriendRequest?addresseTgId=" + tgIsUser)
         .then(response => response.json())
         .then(isHas => {
             if (isHas) {
