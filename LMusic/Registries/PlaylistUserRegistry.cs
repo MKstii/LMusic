@@ -20,7 +20,7 @@ namespace LMusic.Registries
             using (ContextDataBase db = new ContextDataBase())
             {
                 DbSet<PlaylistUser> dbSet = db.Set<PlaylistUser>();
-                var entity = dbSet.Where(i => i.UserId == user.Id && i.IsCreater == true).ToList();
+                var entity = dbSet.Where(i => i.UserId == user.Id && i.IsCreater && !i.isDefault).ToList();
                 return entity;
             }
         }
