@@ -92,6 +92,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
             return el.querySelector('.audio').src == currentAudio.src;
         });
+        const startIndex = indexCurrentMusic;
 
         let arrayNeedMusic = [];
         for (var i in arrayMusicsAllMy) {
@@ -102,17 +103,36 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             }
         };
 
-        let index = indexCurrentMusic;
+        let index = 0;
         blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
     <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
-    <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
     <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
     <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
         const currentLineAudio = blockCurrentMusic.querySelector('.current-audio');
         currentLineAudio.play();
+
+        const buttonPrevAudio = blockCurrentMusic.querySelector('.icon-last-music');
+        const buttonNextAudio = blockCurrentMusic.querySelector('.icon-next-music');
+
+        blockCurrentMusic.addEventListener('click', (e) => {
+            if (e.target == buttonPrevAudio) {
+                index = index - 1;
+                if (index < 0) index = 0;
+                currentLineAudio.src = arrayNeedMusic[index][1];
+                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                currentLineAudio.play();
+            } else if (e.target == buttonNextAudio) {
+                index = index + 1;
+                if (index > arrayNeedMusic.length - 1) index = 0;
+                currentLineAudio.src = arrayNeedMusic[index][1];
+                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                currentLineAudio.play();
+            }
+        })
+
         currentLineAudio.onended = function () {
             index++;
-            if (index > arrayNeedMusic.length) index = 0;
+            if (index > arrayNeedMusic.length - 1) index = 0;
             currentLineAudio.src = arrayNeedMusic[index][1];
             blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
             currentLineAudio.play();
@@ -166,7 +186,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
             var htmlPlaylists = '';
 
-            const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
+            const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
                 .then(response => response.json())
                 .then(playlists => {
 
@@ -194,8 +214,8 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                 let innertTextpopup = '';
                 if (isFavorite) {
                     innertTextpopup = '<button type="submit" class="popup-button button-remove-mymusic">' +
-                        '<img class="popup-image" src="/img/icon-plus.png" />' +
-                        'Удалить из избранного' +
+                        '<img class="popup-image" src="/img/icon-krestic.png"" />' +
+                        'Убрать из избранного' +
                         '<input id = "musicidpopup" class="input-hidden-musicid" type="hidden" name="musicId" value="' + musicid + '" />' +
                         '</button>';
                 } else {
@@ -220,7 +240,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                     const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
                     var htmlPlaylists = '';
 
-                    const playlists = fetch("http://127.0.0.1/GetUserPlaylists")
+                    const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
                         .then(response => response.json())
                         .then(playlist => {
 
@@ -399,9 +419,23 @@ buttonImageOpenPlaylist.forEach(item => item.addEventListener('click', (e) => {
                             <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
                             <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
 
-                        const buttonLoop = blockCurrentMusic.querySelector('.icon-loop-music');
-                        buttonLoop.addEventListener('click', (e) => {
-                            blockCurrentMusic.querySelector('.audio').loop = !blockCurrentMusic.querySelector('.audio').loop;
+                        const buttonPrevAudio = blockCurrentMusic.querySelector('.icon-last-music');
+                        const buttonNextAudio = blockCurrentMusic.querySelector('.icon-next-music');
+
+                        blockCurrentMusic.addEventListener('click', (e) => {
+                            if (e.target == buttonPrevAudio) {
+                                index = index - 1;
+                                if (index < 0) index = 0;
+                                currentLineAudio.src = arrayNeedMusic[index][1];
+                                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                currentLineAudio.play();
+                            } else if (e.target == buttonNextAudio) {
+                                index = index + 1;
+                                if (index > arrayNeedMusic.length - 1) index = 0;
+                                currentLineAudio.src = arrayNeedMusic[index][1];
+                                blockCurrentMusic.querySelector('.current-music-avatar').src = arrayNeedMusic[index][0];
+                                currentLineAudio.play();
+                            }
                         })
 
 
