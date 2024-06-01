@@ -146,6 +146,12 @@ namespace LMusic.Services
             var playlistUser = _playlistUserRegistry.GetByPlaylistAndUser(playlist, user);
             _playlistUserRegistry.Delete(playlistUser);
         }
+
+        public bool IsCreater(Playlist playlist, User user)
+        {
+            var result = _playlistUserRegistry.GetByPlaylistAndUser(playlist, user);
+            return result.IsCreater;
+        }
     }
 
     public static class PlaylistExtension
