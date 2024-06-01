@@ -84,6 +84,7 @@ showSettingsProfile();
 // тут чисто все события на появление радактирования формы, удаления и т.д.
 const blockMusic = document.querySelectorAll('.block-one-music'),
     popupBlockChangeMusic = document.querySelector('.popup-change-mymusic'),
+    popupBlockChangeMysicMYYYYYYYYY = document.querySelector('.popup-change-mymusic-MYYYYYY'),
     blockAddInPLaylist = document.querySelector('.block-add-in-playlist'),
     popupOtherMusicChange = document.querySelector('.popup-change-friendmusic');
 
@@ -158,24 +159,57 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         const musicid = parentBlockControl.querySelector('.music-my-id').innerHTML;
         const musictitle = parentBlockControl.querySelector('.music-my-title').innerHTML;
         const musicmusician = parentBlockControl.querySelector('.music-my-musician').innerHTML;
+        if (popupBlockChangeMusic) {
+            popupBlockChangeMusic.querySelector('.musicidpopup').value = musicid;
+            popupBlockChangeMusic.querySelector('.musiciddelete').value = musicid;
+            popupBlockChangeMusic.querySelector('.musiciddeleteplalist').value = musicid;
+            popupBlockChangeMusic.querySelector('.music-change-idd').innerHTML = musicid;
+            popupBlockChangeMusic.querySelector('.titlemusiccc').value = musictitle;
+            popupBlockChangeMusic.querySelector('.musicianmusiccc').value = musicmusician;
 
-        popupBlockChangeMusic.querySelector('.musicidpopup').value = musicid;
-        popupBlockChangeMusic.querySelector('.musiciddelete').value = musicid;
-        popupBlockChangeMusic.querySelector('.musiciddeleteplalist').value = musicid;
-        popupBlockChangeMusic.querySelector('.music-change-idd').innerHTML = musicid;
-        popupBlockChangeMusic.querySelector('.titlemusiccc').value = musictitle;
-        popupBlockChangeMusic.querySelector('.musicianmusiccc').value = musicmusician;
+            popupBlockChangeMusic.classList.toggle('show');
+            popupBlockChangeMusic.style.top = e.pageY - 50 + 'px';
+            popupBlockChangeMusic.style.left = e.pageX - 280 + 'px';
+        }
+        
 
-        popupBlockChangeMusic.classList.toggle('show');
-        popupBlockChangeMusic.style.top = e.pageY - 50 + 'px';
-        popupBlockChangeMusic.style.left = e.pageX - 280 + 'px';
+        if (popupBlockChangeMysicMYYYYYYYYY) {
+            popupBlockChangeMysicMYYYYYYYYY.querySelector('.musicidpopup').value = musicid;
+            popupBlockChangeMysicMYYYYYYYYY.querySelector('.musiciddelete').value = musicid;
+            popupBlockChangeMysicMYYYYYYYYY.querySelector('.music-change-idd').innerHTML = musicid;
+            popupBlockChangeMysicMYYYYYYYYY.querySelector('.titlemusiccc').value = musictitle;
+            popupBlockChangeMysicMYYYYYYYYY.querySelector('.musicianmusiccc').value = musicmusician;
+
+            const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
+                .then(response => response.json())
+                .then(isFavorite => {
+                    const FORMAA = popupBlockChangeMysicMYYYYYYYYY.querySelector('.form-add-music');
+                    if (!isFavorite) {
+                        FORMAA.innerHTML = `<input type="hidden" id="musicidaddplalist" class="aaaaaaaaaaaaaaa musiciddeleteplalist" name="musicId" value="${musicid}" />
+                <button type="submit" class="popup-button button-delete-music-favorite">
+                    <img class="popup-image" src="~/img/icon-plus.png" />
+                    Добавить в избранное
+                </button>`;
+                    } else {
+                        FORMAA.innerHTML = '';
+                    }
+                });
+
+            popupBlockChangeMysicMYYYYYYYYY.classList.toggle('show');
+            popupBlockChangeMysicMYYYYYYYYY.style.top = e.pageY - 50 + 'px';
+            popupBlockChangeMysicMYYYYYYYYY.style.left = e.pageX - 280 + 'px';
+        }
+        
+        
+
+        
 
         if (blockAddInPLaylist.classList.contains('show')) blockAddInPLaylist.classList.remove('show');
 
-        const buttonChangeMusic = popupBlockChangeMusic.querySelector('.button-change-music'),
+        const buttonChangeMusic = popupBlockChangeMusic?.querySelector('.button-change-music'),
             blockChangeMusic = document.querySelector('.block-form-change-music');
 
-        buttonChangeMusic.addEventListener('click', (e) => {
+        buttonChangeMusic?.addEventListener('click', (e) => {
             e.preventDefault();
             const idMusic = buttonChangeMusic.querySelector('.music-change-idd').innerHTML;
             const titlemusic = popupBlockChangeMusic.querySelector('.titlemusiccc').value;
@@ -191,7 +225,12 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             background.style.height = `${document.documentElement.offsetHeight}px`;
         });
 
-        buttonaddInPlaylist = popupBlockChangeMusic.querySelector('.button-show-addinplaylist');
+        if (popupBlockChangeMusic) {
+            buttonaddInPlaylist = popupBlockChangeMusic.querySelector('.button-show-addinplaylist');
+        } else if (popupBlockChangeMysicMYYYYYYYYY) {
+            buttonaddInPlaylist = popupBlockChangeMysicMYYYYYYYYY.querySelector('.button-show-addinplaylist');
+        }
+        
 
         buttonaddInPlaylist.addEventListener('click', (e) => {
             blockAddInPLaylist.querySelector('.musicId').value = musicid;
@@ -374,6 +413,7 @@ async function AAAAAAAA() {
 
         if (e.target != threePoint && e.target != threePointOther) {
             const divMusicPlaylist = blockOpenPlaylist.querySelector('.playlist-music');
+            divMusicPlaylist.innerHTML = '';
             const namePlaylist = item.querySelector('.info-my-playlist .tiiiitle-playlist').innerHTML;
             const imagePlaylistSrc = item.querySelector('.playlist-avatar').src;
             const idPlaylist = item.querySelector('.info-my-playlist .iiiid-playlist').innerHTML;

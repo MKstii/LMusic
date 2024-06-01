@@ -690,7 +690,7 @@
     height: 20px;
 }
 
-.popup-change-mymusic, .block-add-in-playlist, .popup-change-friendmusic {
+.popup-change-mymusic, .block-add-in-playlist, .popup-change-friendmusic, .popup-change-mymusic-MYYYYYY {
     background-color: #fff;
     display: flex;
     flex-direction: column;

@@ -53,7 +53,7 @@
         <div class="block-current-music">
         </div>
 
-        <div class="popup-change-mymusic">
+        <div class="popup-change-mymusic-MYYYYYY">
             <input type="hidden" id="musicidpopup" class="aaaaaaaaaaaaaaa musicidpopup" />
             <input type="hidden" class="aaaaaaaaaaaaaaa titlemusiccc" />
             <input type="hidden" class="aaaaaaaaaaaaaaa musicianmusiccc" />
@@ -65,12 +65,8 @@
                 </button>
             </form>
 
-            <form class="form-delete-music" asp-action="AddMusicToFav" asp-controller="Music" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="musiciddeleteplalist" class="aaaaaaaaaaaaaaa musiciddeleteplalist" name="musicId" value="" />
-                <button type="submit" class="popup-button button-delete-music-favorite">
-                    <img class="popup-image" src="~/img/icon-plus.png" />
-                    Добавить в избранное
-                </button>
+            <form class="form-add-music" asp-action="AddMusicToFav" asp-controller="Music" method="post" enctype="multipart/form-data">
+                
             </form>
 
             <button class="popup-button button-change-music">
