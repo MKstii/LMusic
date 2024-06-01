@@ -1,4 +1,13 @@
-﻿const URL = "http://127.0.0.1/";
+﻿const divCountRequests = document.querySelector('.ddddddddd');
+const cooooount = fetch("http://127.0.0.1/GetFriendsRequestCount")
+    .then(requests => requests.json())
+    .then(count => {
+        if (count > 0) {
+            divCountRequests.innerHTML = `<div class="count-requestststs">
+                                <span>${count}</span>
+                                </div>`;
+        }
+    })
 
 const iconMenu = document.querySelector('.icon-menu'),
     navigation = document.querySelector('.page-sidebar'),
@@ -87,6 +96,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
     if (e.target != threePoint && e.target != threePointOther && e.target != threePointPlaylist && e.target != buttonViewChangeMusicMy) {
         const currentAudio = mus.querySelector('.audio'),
             currentAvatar = mus.querySelector('.avatar-music'),
+            titleeee = mus.querySelector('.HHHHHHHHHHHHH').innerHTML;
             blockCurrentMusic = document.querySelector('.block-current-music');
 
 
@@ -107,6 +117,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
         let index = 0;
         blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
+        <span class="title-musssiiiiicccc">${titleeee}</span>
     <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
     <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
     <button><img class="icon-control icon-next-music" src="/img/icon-next-music.png" /></button>`;
@@ -188,7 +199,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
             const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
             var htmlPlaylists = '';
 
-            const playlists = fetch(URL + "GetMyPlaylists")
+            const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
                 .then(response => response.json())
                 .then(playlists => {
 
@@ -210,7 +221,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
         e.preventDefault();
 
         const musicid = parentMusicUserOther.querySelector('.music-id').innerHTML;
-        const musicInFavorite = fetch(URL + "IsMusicInFavorite?musicId=" + musicid)
+        const musicInFavorite = fetch("http://127.0.0.1/IsMusicInFavorite?musicId=" + musicid)
             .then(response => response.json())
             .then(isFavorite => {
                 let innertTextpopup = '';
@@ -242,7 +253,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
                     const divBlockCheckboxMyPlaylists = blockAddInPLaylist.querySelector('.block-checkbox-my-playlists');
                     var htmlPlaylists = '';
 
-                    const playlists = fetch(URL + "GetMyPlaylists")
+                    const playlists = fetch("http://127.0.0.1/GetMyPlaylists")
                         .then(response => response.json())
                         .then(playlist => {
 
@@ -261,7 +272,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonDelete = popupOtherMusicChange.querySelector('.button-remove-mymusic');
                 buttonDelete?.addEventListener('click', (e) => {
-                    fetch(URL + "DeleteMusicFromUser?musicId=" + musicid, {
+                    fetch("http://127.0.0.1/DeleteMusicFromUser?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -270,7 +281,7 @@ blockMusic.forEach(mus => mus.addEventListener('click', (e) => {
 
                 const buttonAdd = popupOtherMusicChange.querySelector('.button-addin-mymusic');
                 buttonAdd?.addEventListener('click', (e) => {
-                    fetch(URL + "AddMusicToFav?musicId=" + musicid, {
+                    fetch("http://127.0.0.1/AddMusicToFav?musicId=" + musicid, {
                         method: "POST"
                     });
 
@@ -374,7 +385,7 @@ async function AAAAAAAA() {
 
             let isMy = await isMyPlaylist(idPlaylist);
 
-            const playlistmusic = fetch(URL + "playlist/" + idPlaylist)
+            const playlistmusic = fetch("http://127.0.0.1/playlist/" + idPlaylist)
                 .then(response => response.json())
                 .then(playlistmusic => {
                     
@@ -387,7 +398,7 @@ async function AAAAAAAA() {
                                 '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
                                 '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
                                 '<div class="block-name-music">' +
-                                '<span>' + playlistmusic[i]['title'] + '</span>' +
+                                '<span class="HHHHHHHHHHHHH">' + playlistmusic[i]['title'] + '</span>' +
                                 '<span>' + playlistmusic[i]['musician'] + '</span>' +
                                 '</div>' +
                                 '</div>' +
@@ -399,7 +410,7 @@ async function AAAAAAAA() {
                                 '<audio class="audio" src="' + playlistmusic[i]['musicPath'] + '"></audio>' +
                                 '<button class="play-music"><img class="avatar-music" src="' + playlistmusic[i]['photoPath'] + '" /></button>' +
                                 '<div class="block-name-music">' +
-                                '<span>' + playlistmusic[i]['title'] + '</span>' +
+                                '<span class="HHHHHHHHHHHHH">' + playlistmusic[i]['title'] + '</span>' +
                                 '<span>' + playlistmusic[i]['musician'] + '</span>' +
                                 '</div>' +
                                 '</div>' +
@@ -421,7 +432,8 @@ async function AAAAAAAA() {
                             if (e.target != threePoint) {
                                 const currentAudio = mus.querySelector('.audio'),
                                     currentAvatar = mus.querySelector('.avatar-music'),
-                                    blockCurrentMusic = document.querySelector('.block-current-music');
+                                    blockCurrentMusic = document.querySelector('.block-current-music'),
+                                    titleeee = mus.querySelector('.HHHHHHHHHHHHH').innerHTML;
 
                                 const arrayMusicsAllMy = blockOpenPlaylist.querySelectorAll('.block-one-music');
                                 let indexCurrentMusic = Array.from(arrayMusicsAllMy).findIndex(el => {
@@ -439,6 +451,7 @@ async function AAAAAAAA() {
 
                                 let index = indexCurrentMusic;
                                 blockCurrentMusic.innerHTML = `<img class="current-music-avatar" src="${arrayNeedMusic[index][0]}" />
+                                <span class="title-musssiiiiicccc">${titleeee}</span>
                             <audio class="current-audio" src="${arrayNeedMusic[index][1]}" controls controlsList="nodownload noplaybackrate"></audio>
                             <button><img class="icon-control icon-loop-music" src="/img/icon-povtor.png" /></button>
                             <button><img class="icon-control icon-last-music" src="/img/icon-last-music.png" /></button>
@@ -479,7 +492,7 @@ async function AAAAAAAA() {
                                 const musicId = mus.querySelector('.musicId').value;
                                 const playlistId = mus.querySelector('.playlistId').value;
 
-                                fetch(URL + "DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
+                                fetch("http://127.0.0.1/DeleteMusicFromPlaylist?musicId=" + musicId + "&playlistId=" + playlistId, {
                                     method: "POST"
                                 });
 
@@ -513,7 +526,7 @@ async function AAAAAAAA() {
 
             const buttonDelete = formChangePlaylistAAA.querySelector('.delete-playlisttttt');
             buttonDelete.addEventListener('click', (e) => {
-                fetch(URL + "Delete?id=" + idPlaylist, {
+                fetch("http://127.0.0.1/Delete?id=" + idPlaylist, {
                     method: "POST"
                 });
             });
@@ -545,7 +558,7 @@ async function AAAAAAAA() {
             const formChangePlaylistBBB = document.querySelector('.block-change-my-playlist');
             const idPlaylist = parentBlock.querySelector('.playlist-my-id').value;
 
-            const otherPlaylist = fetch(URL + "UserHasPlaylist?playlistId=" + idPlaylist)
+            const otherPlaylist = fetch("http://127.0.0.1/UserHasPlaylist?playlistId=" + idPlaylist)
                 .then(response => response.json())
                 .then(isMy => {
                     let innertTextpopup = '';
@@ -558,7 +571,7 @@ async function AAAAAAAA() {
 
                     const buttonRemoveOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-remove-playlist-forme');
                     buttonRemoveOtherPlaylistForMe?.addEventListener('click', (e) => {
-                        fetch(URL + "RemovePlaylistFromUser?playlistId=" + idPlaylist, {
+                        fetch("http://127.0.0.1/RemovePlaylistFromUser?playlistId=" + idPlaylist, {
                             method: "POST"
                         });
 
@@ -567,7 +580,7 @@ async function AAAAAAAA() {
 
                     const buttonAddOtherPlaylistForMe = formChangePlaylistBBB.querySelector('.button-add-playlist-forme');
                     buttonAddOtherPlaylistForMe?.addEventListener('click', (e) => {
-                        fetch(URL + "AddPlaylistToUser?playlistId=" + idPlaylist, {
+                        fetch("http://127.0.0.1/AddPlaylistToUser?playlistId=" + idPlaylist, {
                             method: "POST"
                         });
 
@@ -585,7 +598,7 @@ async function AAAAAAAA() {
 AAAAAAAA();
 
 async function isMyPlaylist(idPlaylist) {
-    const d = await fetch(URL + "IsMyPlaylist?playlistId=" + idPlaylist);
+    const d = await fetch("http://127.0.0.1/IsMyPlaylist?playlistId=" + idPlaylist);
     return await d.json();
 }
 
@@ -618,7 +631,7 @@ if (document.querySelector('.add-from-friends-my')) {
     const tgIsUser = formAddRequests?.closest('.block-number-space').querySelector('.hiddenuseridddddddddddd').value;
     let htmlValues = '';
 
-    const resultt = fetch(URL + "HasFriendRequest?addresseTgId=" + tgIsUser)
+    const resultt = fetch("http://127.0.0.1/HasFriendRequest?addresseTgId=" + tgIsUser)
         .then(response => response.json())
         .then(isHas => {
             if (isHas) {

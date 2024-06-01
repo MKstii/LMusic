@@ -237,6 +237,30 @@
                             
                         </form> 
                     }
+                    @if (Model.UserProfileAccess == UserAccess.Friend)
+                    {
+                        @if (Model.Privacy == Privacy.ForMe)
+                        {
+                            <div class="block-free-space show">
+                                <span>Профиль пользователя закрыт</span>
+                            </div>
+                        }
+                    }
+                    else if (Model.UserProfileAccess == UserAccess.User)
+                    {
+                        @if (Model.Privacy == Privacy.ForMe)
+                        {
+                            <div class="block-free-space show">
+                                <span>Профиль пользователя закрыт</span>
+                            </div>
+                        }
+                        else if (Model.Privacy == Privacy.ForFriends)
+                        {
+                            <div class="block-free-space show">
+                                <span>Профиль доступен только друзьям</span>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
             @if (Model.UserProfileAccess == UserAccess.My)
@@ -342,7 +366,7 @@
                                     <img class="avatar-music" src="@music.PhotoPath" alt="Обложка песни" />
                                 </div>
                                 <div class="block-name-music">
-                                    <span>@music.Title</span>
+                                    <span class="HHHHHHHHHHHHH">@music.Title</span>
                                     <span>@music.Musician</span>
                                 </div>
                             </div>

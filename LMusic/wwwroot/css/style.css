@@ -1079,3 +1079,27 @@
     gap: 18px;
     width: 100%;
 }
+
+.title-musssiiiiicccc {
+    margin-top: 13px;
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+.count-requestststs {
+    position: absolute;
+    left: 44px;
+    top: 200px;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+.count-requestststs span {
+    position: relative;
+    top: -4px;
+    font-size: 14px;
+}
